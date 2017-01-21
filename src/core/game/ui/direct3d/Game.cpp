@@ -83,6 +83,16 @@ void Game::Initialize(IUnknown* window, int width, int height, float dpi, DXGI_M
 #endif
 
 	initSoundEngine();
+
+	FILE *file = NULL;
+	if ((file = fopen("random_data.dat", "rb")) == NULL)
+#if defined(_DEBUG)
+		OutputDebugStringW(L"Could not open specified file\n");
+#endif
+	else
+#if defined(_DEBUG)
+		OutputDebugStringW(L"File opened successfully\n");
+#endif
 }
 
 void Game::OnNewAudioDevice()

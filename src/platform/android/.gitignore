@@ -1,0 +1,12 @@
+# Android Studio
+build/
+obj/
+.idea/
+.gradle/
+local.properties
+*.iml
+*.lock
+*.bin
+*.so
+assets/
+raw/

@@ -1,0 +1,111 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        noctisgames {
+            keyAlias 'noctisgames'
+            keyPassword 'NG_PASS'
+            storeFile file('../keystore.jks')
+            storePassword 'NG_PASS'
+        }
+    }
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.noctisgames.dante"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "0.0.1"
+        signingConfig signingConfigs.noctisgames
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs = [] // disable the automatic ndk-build call, which would ignore our Android.mk
+    }
+    // call regular ndk-build(.cmd) script from app directory
+    task ndkBuild(type: Exec) {
+        workingDir file('src/main')
+        commandLine getNdkBuildCmd()
+    }
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn ndkBuild
+    }
+    task cleanNative(type: Exec) {
+        workingDir file('src/main')
+        commandLine getNdkBuildCmd(), 'clean'
+    }
+    clean.dependsOn cleanNative
+
+    task copyShaders(type: Copy)
+    copyShaders {
+        description = 'Copies shaders into project assets'
+        from '../../../../src/core/framework/ui/opengl/shader'
+        from '../../../../src/core/game/ui/opengl/shader'
+        into 'src/main/assets'
+        include('*.vsh')
+        include('*.fsh')
+    }
+
+    task copyTextures(type: Copy)
+    copyTextures {
+        description = 'Copies textures from root assets into project assets'
+        from '../../../../assets/textures'
+        into 'src/main/assets'
+        include('*.png')
+    }
+
+    task copySounds(type: Copy)
+    copySounds {
+        description = 'Copies music and sounds from root assets into project assets'
+        from '../../../../assets/music'
+        from '../../../../assets/sounds'
+        into 'src/main/res/raw'
+        include('*.wav')
+    }
+
+    preBuild.dependsOn(copyShaders)
+    preBuild.dependsOn(copyTextures)
+    preBuild.dependsOn(copySounds)
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.scottyab:secure-preferences-lib:0.1.3'
+}
+
+def getNdkDir() {
+    if (System.env.ANDROID_NDK_ROOT != null)
+        return System.env.ANDROID_NDK_ROOT
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def ndkdir = properties.getProperty('ndk.dir', null)
+    if (ndkdir == null) {
+        ndkdir = "~/android-ndk-r10e" // for buddybuild
+    }
+
+    return ndkdir
+}
+
+def getNdkBuildCmd() {
+    def ndkbuild = getNdkDir() + "/ndk-build"
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        ndkbuild += ".cmd"
+    }
+
+    return ndkbuild
+}

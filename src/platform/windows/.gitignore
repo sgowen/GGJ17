@@ -1,0 +1,16 @@
+# Visual Studio
+*.ipch
+*.user
+*.*sdf
+*.suo
+ARM/
+Debug/
+Release/
+LevelEditor/
+Generated Files/
+BundleArtifacts/
+AppPackages/
+*VC.opendb
+*.dds
+*VC.db
+.vs/

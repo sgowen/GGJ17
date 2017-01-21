@@ -219,6 +219,8 @@
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\DummyGpuProgramWrapper.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\Font.h" />
+    <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.h" />
+    <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEventType.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\GpuProgramWrapper.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\GpuProgramWrapperFactory.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\GpuTextureDataWrapper.h" />
@@ -315,6 +317,7 @@
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\DummyGpuProgramWrapper.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\Font.cpp" />
+    <ClCompile Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\GpuProgramWrapper.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\GpuProgramWrapperFactory.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\InputManager.cpp" />

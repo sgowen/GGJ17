@@ -106,6 +106,8 @@
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\IDeviceHelper.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\direct3d\portable\Direct3DDeviceHelper.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.h" />
+    <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.h" />
+    <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEventType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\core\framework\util\windows\pch.cpp" />
@@ -178,6 +180,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\direct3d\portable\Direct3DDeviceHelper.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.cpp" />
+    <ClCompile Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

@@ -78,27 +78,38 @@ void MainScreen::update(float deltaTime)
 {
     m_fStateTime += deltaTime;
     
-    INPUT_MANAGER->processTouchEvents();
+    INPUT_MANAGER->processGamePadEvents();
     
-    std::vector<TouchEvent*> touchEvents = INPUT_MANAGER->getTouchEvents();
+    std::vector<GamePadEvent*> gpEvents = INPUT_MANAGER->getGamePadEvents();
 
-    for (std::vector<TouchEvent*>::iterator i = touchEvents.begin(); i != touchEvents.end(); i++)
+    for (std::vector<GamePadEvent*>::iterator i = gpEvents.begin(); i != gpEvents.end(); i++)
     {
-        Vector2D& touchPoint = TOUCH_CONVERTER->touchToWorld(*(*i));
-        
-        switch ((*i)->getTouchType())
+		int playerIndex = (*i)->getPlayerIndex();
+		float x = (*i)->getX();
+		float y = (*i)->getY();
+		switch ((*i)->getType())
         {
-            case DOWN:
+            case STICK_LEFT:
             {
+				updatePlayerCoords(playerIndex, x, y);
                 continue;
             }
-            case DRAGGED:
+            case STICK_RIGHT:
             {
+				updatePlayerCoords(playerIndex, x, y);
                 continue;
             }
-            case UP:
+            case TRIGGER:
             {
-                SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_DEMO);
+				int storeHeatSoundId = playerIndex * 10000;
+				storeHeatSoundId += SOUND_STORE_HEAT * 1000;
+				storeHeatSoundId += x * 100;
+                SOUND_MANAGER->addSoundIdToPlayQueue(storeHeatSoundId);
+
+				int releaseHeatSoundId = playerIndex * 10000;
+				releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
+				releaseHeatSoundId += x * 100;
+				SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
                 return;
             }
             default:

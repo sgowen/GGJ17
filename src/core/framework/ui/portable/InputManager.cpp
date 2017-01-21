@@ -38,15 +38,32 @@ std::vector<TouchEvent*>& InputManager::getTouchEvents()
     return m_touchEvents;
 }
 
+void InputManager::onGamePadInput(GamePad_Event_Type type, int playerIndex, float x, float y)
+{
+	addGamePadEventForType(type, playerIndex, x, y);
+}
+
+void InputManager::processGamePadEvents()
+{
+	m_gamePadEvents.clear();
+	m_gamePadEvents.swap(m_gamePadEventsBuffer);
+	m_gamePadEventsBuffer.clear();
+}
+
+std::vector<GamePadEvent*>& InputManager::getGamePadEvents()
+{
+	return m_gamePadEvents;
+}
+
 #pragma mark private
 
 TouchEvent* InputManager::newTouchEvent()
 {
-    TouchEvent* touchEvent = m_touchEventsPool.at(m_iPoolIndex++);
+    TouchEvent* touchEvent = m_touchEventsPool.at(m_iTouchPoolIndex++);
     
-    if (m_iPoolIndex >= STARTING_TOUCH_EVENT_POOL_SIZE)
+    if (m_iTouchPoolIndex >= STARTING_TOUCH_EVENT_POOL_SIZE)
     {
-        m_iPoolIndex = 0;
+        m_iTouchPoolIndex = 0;
     }
     
     return touchEvent;
@@ -64,10 +81,38 @@ void InputManager::addTouchEventForType(Touch_Type type, float x, float y)
 	m_isPressed = type == DOWN || type == DRAGGED;
 }
 
-InputManager::InputManager() : m_iPoolIndex(0), m_isPressed(false)
+GamePadEvent* InputManager::newGamePadEvent()
+{
+	GamePadEvent* gamePadEvent = m_gamePadEventsPool.at(m_iGamePadPoolIndex++);
+
+	if (m_iGamePadPoolIndex >= STARTING_TOUCH_EVENT_POOL_SIZE)
+	{
+		m_iGamePadPoolIndex = 0;
+	}
+
+	return gamePadEvent;
+}
+
+void InputManager::addGamePadEventForType(GamePad_Event_Type type, int playerIndex, float x, float y)
+{
+	GamePadEvent* gamePadEvent = newGamePadEvent();
+	gamePadEvent->setType(type);
+	gamePadEvent->setPlayerIndex(playerIndex);
+	gamePadEvent->setX(x);
+	gamePadEvent->setY(y);
+
+	m_gamePadEventsBuffer.push_back(gamePadEvent);
+}
+
+InputManager::InputManager() : m_iTouchPoolIndex(0), m_iGamePadPoolIndex(0), m_isPressed(false)
 {
     for (int i = 0; i < STARTING_TOUCH_EVENT_POOL_SIZE; i++)
     {
         m_touchEventsPool.push_back(new TouchEvent(0, 0, Touch_Type::DOWN));
     }
+
+	for (int i = 0; i < STARTING_TOUCH_EVENT_POOL_SIZE; i++)
+	{
+		m_gamePadEventsPool.push_back(new GamePadEvent(0, 0, 0, GamePad_Event_Type::STICK_LEFT));
+	}
 }

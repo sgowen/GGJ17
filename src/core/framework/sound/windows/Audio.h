@@ -371,7 +371,7 @@ namespace DirectX
 
         virtual ~SoundEffect();
 
-        void __cdecl Play();
+        void __cdecl Play(float volume = 1.0f);
         void __cdecl Play(float volume, float pitch, float pan);
 
         std::unique_ptr<SoundEffectInstance> __cdecl CreateInstance( SOUND_EFFECT_INSTANCE_FLAGS flags = SoundEffectInstance_Default );

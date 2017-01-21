@@ -10,6 +10,7 @@
 #define __noctisgames__InputManager__
 
 #include "TouchEvent.h"
+#include "GamePadEvent.h"
 
 #include <vector>
 
@@ -28,18 +29,32 @@ public:
     void processTouchEvents();
     
     std::vector<TouchEvent*>& getTouchEvents();
+
+	void onGamePadInput(GamePad_Event_Type type, int playerIndex, float x, float y);
+
+	void processGamePadEvents();
+
+	std::vector<GamePadEvent*>& getGamePadEvents();
     
 private:
     std::vector<TouchEvent*> m_touchEvents;
     std::vector<TouchEvent*> m_touchEventsPool;
     std::vector<TouchEvent*> m_touchEventsBuffer;
+	std::vector<GamePadEvent*> m_gamePadEvents;
+	std::vector<GamePadEvent*> m_gamePadEventsPool;
+	std::vector<GamePadEvent*> m_gamePadEventsBuffer;
     
-    int m_iPoolIndex;
+    int m_iTouchPoolIndex;
+	int m_iGamePadPoolIndex;
 	bool m_isPressed;
     
     TouchEvent* newTouchEvent();
     
     void addTouchEventForType(Touch_Type type, float x, float y);
+
+	GamePadEvent* newGamePadEvent();
+
+	void addGamePadEventForType(GamePad_Event_Type type, int playerIndex, float x, float y);
     
     // ctor, copy ctor, and assignment should be private in a Singleton
     InputManager();

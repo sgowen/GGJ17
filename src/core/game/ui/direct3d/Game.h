@@ -66,6 +66,7 @@ private:
 	std::unique_ptr<DirectX::AudioEngine> m_audEngine;
 
 	std::vector<std::unique_ptr<DirectX::SoundEffect>> m_sounds;
+	std::vector<std::unique_ptr<DirectX::SoundEffectInstance>> m_activeSounds;
 
 	std::unique_ptr<DirectX::SoundEffect> m_music;
 	std::unique_ptr<DirectX::SoundEffectInstance> m_musicLoop;
@@ -91,12 +92,14 @@ private:
 	void handleMusic();
 	void playSound(int soundId, bool isLooping);
 	void playSound(int soundId);
+	void playMultiSound(int playerIndex, int soundId, float volume);
 	void stopSound(int soundId);
 	void stopAllSounds();
 	void stopAllLoopingSounds();
 
 	void initSoundEngine();
 	void loadSound(const wchar_t* waveFileName);
+	void loadMultiSound(const wchar_t* waveFileName);
 	void loadMusic(const wchar_t* waveFileName);
 
 	inline float ConvertPixelsToDips(int pixels) const

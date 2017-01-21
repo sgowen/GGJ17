@@ -10,6 +10,7 @@
 #include "MusicConstants.h"
 #include "SoundConstants.h"
 #include "macros.h"
+#include "GamePadEventType.h"
 
 extern void ExitGame();
 
@@ -31,6 +32,11 @@ Game::~Game()
 	}
 
 	m_musicLoop.reset();
+
+	for (std::vector<std::unique_ptr<DirectX::SoundEffectInstance>>::iterator i = m_activeSounds.begin(); i != m_activeSounds.end(); i++)
+	{
+		(*i).reset();
+	}
 
 	delete m_screen;
 
@@ -145,7 +151,15 @@ void Game::Update(DX::StepTimer const& timer)
 				// B was down last frame, it just went up this frame
 			}
 
-			m_screen->updatePlayerCoords(i, gamePadState.thumbSticks.leftX / 5, gamePadState.thumbSticks.leftY / 5);
+			INPUT_MANAGER->onGamePadInput(STICK_LEFT, i, gamePadState.thumbSticks.leftX / 10, gamePadState.thumbSticks.leftY / 10);
+			INPUT_MANAGER->onGamePadInput(STICK_RIGHT, i, gamePadState.thumbSticks.leftX / 10, gamePadState.thumbSticks.rightY / 10);
+			INPUT_MANAGER->onGamePadInput(TRIGGER, i, gamePadState.triggers.left, gamePadState.triggers.right);
+
+			if (m_buttons.leftTrigger == GamePad::ButtonStateTracker::PRESSED
+				|| m_buttons.leftTrigger == GamePad::ButtonStateTracker::HELD)
+			{
+				
+			}
 		}
 	}
 
@@ -435,10 +449,26 @@ void Game::OnDeviceRestored()
 #pragma region Audio
 void Game::handleSound()
 {
+	short rawSoundId;
+	short playerIndex;
 	short soundId;
-	while ((soundId = SOUND_MANAGER->getCurrentSoundId()) > SOUND_NONE)
+	while ((rawSoundId = SOUND_MANAGER->getCurrentSoundId()) > SOUND_NONE)
 	{
-		playSound(soundId);
+		playerIndex = 0;
+		while (rawSoundId >= 10000)
+		{
+			rawSoundId -= 10000;
+			playerIndex++;
+		}
+
+		soundId = 0;
+		while (rawSoundId >= 1000)
+		{
+			rawSoundId -= 1000;
+			soundId++;
+		}
+
+		playMultiSound(playerIndex, soundId, (rawSoundId / 100.0f));
 	}
 }
 
@@ -506,6 +536,22 @@ void Game::playSound(int soundId)
 	m_sounds.at(soundId - 1)->Play();
 }
 
+void Game::playMultiSound(int playerIndex, int soundId, float volume)
+{
+	int finalIndex = soundId - 1 + playerIndex;
+	if (finalIndex < m_activeSounds.size())
+	{
+		if (m_activeSounds.at(finalIndex)->GetState() == PLAYING)
+		{
+			m_activeSounds.at(finalIndex)->SetVolume(volume);
+		}
+		else
+		{
+			m_activeSounds.at(finalIndex)->Play(volume);
+		}
+	}
+}
+
 void Game::stopSound(int soundId)
 {
 	// TODO
@@ -530,12 +576,23 @@ void Game::initSoundEngine()
 	m_audEngine = std::make_unique<AudioEngine>(eflags);
 	m_retryAudio = false;
 
-	loadSound(L"sound_demo.wav");
+	loadMultiSound(L"sound_store.wav");
+	loadMultiSound(L"sound_release.wav");
 }
 
 void Game::loadSound(const wchar_t* waveFileName)
 {
 	m_sounds.push_back(std::make_unique<SoundEffect>(m_audEngine.get(), waveFileName));
+}
+
+void Game::loadMultiSound(const wchar_t* waveFileName)
+{
+	std::unique_ptr<DirectX::SoundEffect> se = std::make_unique<SoundEffect>(m_audEngine.get(), waveFileName);
+	m_activeSounds.push_back(se->CreateInstance());
+	m_activeSounds.push_back(se->CreateInstance());
+	m_activeSounds.push_back(se->CreateInstance());
+	m_activeSounds.push_back(se->CreateInstance());
+	m_sounds.push_back(se);
 }
 
 void Game::loadMusic(const wchar_t* waveFileName)

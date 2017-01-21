@@ -462,9 +462,9 @@ SoundEffect::~SoundEffect()
 
 
 // Public methods.
-void SoundEffect::Play()
+void SoundEffect::Play(float volume)
 {
-    pImpl->Play( 1.f, 0.f, 0.f );
+    pImpl->Play(volume, 0.f, 0.f );
 }
 
 

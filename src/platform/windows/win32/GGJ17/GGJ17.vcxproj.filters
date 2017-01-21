@@ -189,6 +189,9 @@
     <Image Include="directx.ico">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\assets\textures\main.png">
+      <Filter>Assets\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest">
@@ -202,11 +205,6 @@
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\TexturePixelShader.hlsl" />
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\TextureVertexShader.hlsl" />
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\ColorPixelShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="..\..\..\..\..\assets\textures\demo.png">
-      <Filter>Assets\textures</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Media Include="music_demo.wav">

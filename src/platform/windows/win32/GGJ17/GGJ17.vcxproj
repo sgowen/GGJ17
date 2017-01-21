@@ -350,7 +350,7 @@
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\..\..\..\..\assets\textures\demo.png">
+    <CustomBuild Include="..\..\..\..\..\assets\textures\main.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -362,26 +362,18 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\3rdparty\Texconv\texconv.exe -m 1 -nologo -srgb -f BC3_UNORM %(Identity)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Converting to DDS %(Identity)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).dds</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </AdditionalInputs>
       <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</TreatOutputAsContent>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\3rdparty\Texconv\texconv.exe -m 1 -nologo -srgb -f BC3_UNORM %(Identity)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Converting to DDS %(Identity)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).dds</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </AdditionalInputs>
       <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</TreatOutputAsContent>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\..\3rdparty\Texconv\texconv.exe -m 1 -nologo -srgb -f BC3_UNORM %(Identity)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Converting to DDS %(Identity)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).dds</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </AdditionalInputs>
       <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatOutputAsContent>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\..\3rdparty\Texconv\texconv.exe -m 1 -nologo -srgb -f BC3_UNORM %(Identity)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Converting to DDS %(Identity)</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).dds</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </AdditionalInputs>
       <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</TreatOutputAsContent>
     </CustomBuild>
     <Image Include="directx.ico" />

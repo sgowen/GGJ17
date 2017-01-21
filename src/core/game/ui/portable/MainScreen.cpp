@@ -101,15 +101,21 @@ void MainScreen::update(float deltaTime)
             }
             case TRIGGER:
             {
-				int storeHeatSoundId = playerIndex * 10000;
-				storeHeatSoundId += SOUND_STORE_HEAT * 1000;
-				storeHeatSoundId += x * 100;
-                SOUND_MANAGER->addSoundIdToPlayQueue(storeHeatSoundId);
+				if (x > 0)
+				{
+					int storeHeatSoundId = playerIndex * 10000;
+					storeHeatSoundId += SOUND_STORE_HEAT * 1000;
+					storeHeatSoundId += x * 100;
+					SOUND_MANAGER->addSoundIdToPlayQueue(storeHeatSoundId);
+				}
 
-				int releaseHeatSoundId = playerIndex * 10000;
-				releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
-				releaseHeatSoundId += x * 100;
-				SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
+				if (y > 0)
+				{
+					int releaseHeatSoundId = playerIndex * 10000;
+					releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
+					releaseHeatSoundId += y * 100;
+					SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
+				}
                 return;
             }
             default:

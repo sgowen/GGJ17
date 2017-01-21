@@ -212,7 +212,10 @@
     <Media Include="music_demo.wav">
       <Filter>Assets\music</Filter>
     </Media>
-    <Media Include="sound_demo.wav">
+    <Media Include="sound_release.wav">
+      <Filter>Assets\sounds</Filter>
+    </Media>
+    <Media Include="sound_store.wav">
       <Filter>Assets\sounds</Filter>
     </Media>
   </ItemGroup>

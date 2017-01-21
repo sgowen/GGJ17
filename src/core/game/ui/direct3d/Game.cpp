@@ -538,7 +538,7 @@ void Game::playSound(int soundId)
 
 void Game::playMultiSound(int playerIndex, int soundId, float volume)
 {
-	int finalIndex = soundId - 1 + playerIndex;
+	int finalIndex = (soundId - 1) * 4 + playerIndex;
 	if (finalIndex < m_activeSounds.size())
 	{
 		if (m_activeSounds.at(finalIndex)->GetState() == PLAYING)
@@ -547,7 +547,8 @@ void Game::playMultiSound(int playerIndex, int soundId, float volume)
 		}
 		else
 		{
-			m_activeSounds.at(finalIndex)->Play(volume);
+			m_activeSounds.at(finalIndex)->Play();
+			m_activeSounds.at(finalIndex)->SetVolume(volume);
 		}
 	}
 }
@@ -587,12 +588,11 @@ void Game::loadSound(const wchar_t* waveFileName)
 
 void Game::loadMultiSound(const wchar_t* waveFileName)
 {
-	std::unique_ptr<DirectX::SoundEffect> se = std::make_unique<SoundEffect>(m_audEngine.get(), waveFileName);
-	m_activeSounds.push_back(se->CreateInstance());
-	m_activeSounds.push_back(se->CreateInstance());
-	m_activeSounds.push_back(se->CreateInstance());
-	m_activeSounds.push_back(se->CreateInstance());
-	m_sounds.push_back(se);
+	m_sounds.push_back(std::make_unique<SoundEffect>(m_audEngine.get(), waveFileName));
+	m_activeSounds.push_back(m_sounds.back()->CreateInstance());
+	m_activeSounds.push_back(m_sounds.back()->CreateInstance());
+	m_activeSounds.push_back(m_sounds.back()->CreateInstance());
+	m_activeSounds.push_back(m_sounds.back()->CreateInstance());
 }
 
 void Game::loadMusic(const wchar_t* waveFileName)

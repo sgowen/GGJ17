@@ -310,4 +310,124 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
     INPUT_MANAGER->onTouch(UP, pos.x, pos.y);
 }
 
+- (void)keyDown:(NSEvent *)event
+{
+    if (!_screen)
+    {
+        return;
+    }
+    
+    if ([event modifierFlags] & NSNumericPadKeyMask)
+    {
+        // arrow keys have this mask
+        NSString *theArrow = [event charactersIgnoringModifiers];
+        
+        unichar keyChar = 0;
+        
+        if ([theArrow length] == 0)
+        {
+            return; // reject dead keys
+        }
+        
+        if ([theArrow length] == 1)
+        {
+            keyChar = [theArrow characterAtIndex:0];
+            
+            if (keyChar == NSLeftArrowFunctionKey)
+            {
+                INPUT_MANAGER->onGamePadInput(STICK_RIGHT, 0, -1, 0);
+                
+                [[self window] invalidateCursorRectsForView:self];
+                
+                return;
+            }
+            
+            if (keyChar == NSUpArrowFunctionKey)
+            {
+                INPUT_MANAGER->onGamePadInput(STICK_RIGHT, 0, 0, 1);
+                
+                [[self window] invalidateCursorRectsForView:self];
+                
+                return;
+            }
+            
+            if (keyChar == NSRightArrowFunctionKey)
+            {
+                INPUT_MANAGER->onGamePadInput(STICK_RIGHT, 0, 1, 0);
+                
+                [[self window] invalidateCursorRectsForView:self];
+                
+                return;
+            }
+            
+            if (keyChar == NSDownArrowFunctionKey)
+            {
+                INPUT_MANAGER->onGamePadInput(STICK_RIGHT, 0, 0, -1);
+                
+                [[self window] invalidateCursorRectsForView:self];
+                
+                return;
+            }
+        }
+    }
+    else
+    {
+        NSString *characters = [event characters];
+        
+        if ([characters length] == 0)
+        {
+            return; // reject dead keys
+        }
+        
+        unichar keyChar = 0;
+        
+        if ([characters length] == 1)
+        {
+            keyChar = [characters characterAtIndex:0];
+            
+            switch (keyChar)
+            {
+                case 'W':
+                case 'w':
+                {
+                    INPUT_MANAGER->onGamePadInput(STICK_LEFT, 0, 0, 1);
+                }
+                    return;
+                case 'S':
+                case 's':
+                {
+                    INPUT_MANAGER->onGamePadInput(STICK_LEFT, 0, 0, -1);
+                }
+                    return;
+                case 'A':
+                case 'a':
+                {
+                    INPUT_MANAGER->onGamePadInput(STICK_LEFT, 0, -1, 0);
+                }
+                    return;
+                case 'D':
+                case 'd':
+                {
+                    INPUT_MANAGER->onGamePadInput(STICK_LEFT, 0, 1, 0);
+                }
+                    return;
+                case 'Q':
+                case 'q':
+                {
+                    INPUT_MANAGER->onGamePadInput(TRIGGER, 0, 1, 0);
+                }
+                    return;
+                case 'E':
+                case 'e':
+                {
+                    INPUT_MANAGER->onGamePadInput(TRIGGER, 0, 0, 1);
+                }
+                    return;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
 @end

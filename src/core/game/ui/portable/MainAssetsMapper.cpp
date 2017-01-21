@@ -15,7 +15,17 @@
 
 void MainAssetsMapper::mapAssets()
 {
-	ASSETS->getTextureRegionMap()["Microwave"] = new TextureRegion("main", 0, 0, 1004, 616, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Microwave"] = new TextureRegion("main", 0, 624, 2048, 1102, TEXTURE_SIZE_4096);
+    
+	ASSETS->getAnimationsMap()["Logo"] = new Animation("main", 0, 0, 964, 620, 3860, 620, TEXTURE_SIZE_4096, true, 0.20f, 4, 0, 2);
+    
+    ASSETS->getTextureRegionMap()["NumPad0"] = new TextureRegion("main", 0, 1728, 304, 258, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["NumPad1"] = new TextureRegion("main", 306, 1728, 304, 258, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["NumPad2"] = new TextureRegion("main", 612, 1728, 304, 258, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["NumPad3"] = new TextureRegion("main", 918, 1728, 304, 258, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["NumPad4"] = new TextureRegion("main", 1224, 1728, 304, 258, TEXTURE_SIZE_4096);
+    
+    ASSETS->getTextureRegionMap()["Glare"] = new TextureRegion("main", 0, 1988, 288, 302, TEXTURE_SIZE_4096);
     
     ASSETS->getTextureRegionMap()["Popcorn"] = new TextureRegion("main", 1008, 0, 188, 174, TEXTURE_SIZE_4096);
     

@@ -252,6 +252,28 @@
 		BBE02D3C1DB18D4600C3268B /* ScreenController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBE02D3B1DB18D4600C3268B /* ScreenController.mm */; };
 		BBE02D3D1DB18D4600C3268B /* ScreenController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBE02D3B1DB18D4600C3268B /* ScreenController.mm */; };
 		BBE167251A17F1DD00080846 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB451A3618C30E810093E559 /* libz.dylib */; };
+		BBEFFB511E33E98C00AA5661 /* sound_release.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB4F1E33E98C00AA5661 /* sound_release.wav */; };
+		BBEFFB521E33E98C00AA5661 /* sound_release.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB4F1E33E98C00AA5661 /* sound_release.wav */; };
+		BBEFFB531E33E98C00AA5661 /* sound_store.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB501E33E98C00AA5661 /* sound_store.wav */; };
+		BBEFFB541E33E98C00AA5661 /* sound_store.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB501E33E98C00AA5661 /* sound_store.wav */; };
+		BBEFFB571E33E9A500AA5661 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB551E33E9A500AA5661 /* Player.cpp */; };
+		BBEFFB581E33E9A500AA5661 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB551E33E9A500AA5661 /* Player.cpp */; };
+		BBEFFB5B1E33E9E500AA5661 /* PopcornKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB591E33E9E500AA5661 /* PopcornKernel.cpp */; };
+		BBEFFB5C1E33E9E500AA5661 /* PopcornKernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB591E33E9E500AA5661 /* PopcornKernel.cpp */; };
+		BBEFFB601E33F01A00AA5661 /* GamePadEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB5D1E33F01A00AA5661 /* GamePadEvent.cpp */; };
+		BBEFFB611E33F01A00AA5661 /* GamePadEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB5D1E33F01A00AA5661 /* GamePadEvent.cpp */; };
+		BBEFFB641E33F9CC00AA5661 /* GameSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB621E33F9CC00AA5661 /* GameSession.cpp */; };
+		BBEFFB651E33F9CC00AA5661 /* GameSession.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB621E33F9CC00AA5661 /* GameSession.cpp */; };
+		BBEFFB6D1E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB671E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp */; };
+		BBEFFB6E1E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB671E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp */; };
+		BBEFFB6F1E3405D100AA5661 /* sin_wave_texture_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB6A1E3405D100AA5661 /* sin_wave_texture_shader.fsh */; };
+		BBEFFB701E3405D100AA5661 /* sin_wave_texture_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFB6A1E3405D100AA5661 /* sin_wave_texture_shader.fsh */; };
+		BBEFFB711E3405D100AA5661 /* SinWaveTextureProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB6B1E3405D100AA5661 /* SinWaveTextureProgram.cpp */; };
+		BBEFFB721E3405D100AA5661 /* SinWaveTextureProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB6B1E3405D100AA5661 /* SinWaveTextureProgram.cpp */; };
+		BBEFFB791E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB771E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp */; };
+		BBEFFB7A1E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB771E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp */; };
+		BBEFFB7D1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB7B1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp */; };
+		BBEFFB7E1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBEFFB7B1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp */; };
 		BEDBEB10667F7565A72E937B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05945F36F017190884FC7FB9 /* AssetsLibrary.framework */; };
 		EF21A84F90D23B88CD7E3542 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF3C8B3638A1D58F89D067F /* SystemConfiguration.framework */; };
 		FE1ACF4F5D764720ED51C8A8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7422774349EFDC9E550FC8B5 /* CoreText.framework */; };
@@ -565,7 +587,6 @@
 		BB809DE41E2D996F00494AD2 /* DeviceResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceResources.h; sourceTree = "<group>"; };
 		BB809DE61E2D996F00494AD2 /* DeviceResources.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DeviceResources.cpp; sourceTree = "<group>"; };
 		BB809DE71E2D996F00494AD2 /* DeviceResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceResources.h; sourceTree = "<group>"; };
-		BB809DE81E2D99A300494AD2 /* d3dx12.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d3dx12.h; sourceTree = "<group>"; };
 		BB809DE91E2D99A300494AD2 /* pch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pch.cpp; sourceTree = "<group>"; };
 		BB809DEA1E2D99A300494AD2 /* pch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pch.h; sourceTree = "<group>"; };
 		BB809DEB1E2D99A300494AD2 /* StepTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepTimer.h; sourceTree = "<group>"; };
@@ -640,6 +661,29 @@
 		BBD9BB7E1E2C1C3600951B30 /* OpenGLRendererHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLRendererHelper.h; sourceTree = "<group>"; };
 		BBE02D3A1DB18D4600C3268B /* ScreenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenController.h; sourceTree = "<group>"; };
 		BBE02D3B1DB18D4600C3268B /* ScreenController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScreenController.mm; sourceTree = "<group>"; };
+		BBEFFB4F1E33E98C00AA5661 /* sound_release.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound_release.wav; sourceTree = "<group>"; };
+		BBEFFB501E33E98C00AA5661 /* sound_store.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound_store.wav; sourceTree = "<group>"; };
+		BBEFFB551E33E9A500AA5661 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		BBEFFB561E33E9A500AA5661 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		BBEFFB591E33E9E500AA5661 /* PopcornKernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PopcornKernel.cpp; sourceTree = "<group>"; };
+		BBEFFB5A1E33E9E500AA5661 /* PopcornKernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopcornKernel.h; sourceTree = "<group>"; };
+		BBEFFB5D1E33F01A00AA5661 /* GamePadEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamePadEvent.cpp; sourceTree = "<group>"; };
+		BBEFFB5E1E33F01A00AA5661 /* GamePadEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePadEvent.h; sourceTree = "<group>"; };
+		BBEFFB5F1E33F01A00AA5661 /* GamePadEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePadEventType.h; sourceTree = "<group>"; };
+		BBEFFB621E33F9CC00AA5661 /* GameSession.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameSession.cpp; sourceTree = "<group>"; };
+		BBEFFB631E33F9CC00AA5661 /* GameSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameSession.h; sourceTree = "<group>"; };
+		BBEFFB671E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLSinWaveTextureGpuProgramWrapper.cpp; sourceTree = "<group>"; };
+		BBEFFB681E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLSinWaveTextureGpuProgramWrapper.h; sourceTree = "<group>"; };
+		BBEFFB6A1E3405D100AA5661 /* sin_wave_texture_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sin_wave_texture_shader.fsh; sourceTree = "<group>"; };
+		BBEFFB6B1E3405D100AA5661 /* SinWaveTextureProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SinWaveTextureProgram.cpp; sourceTree = "<group>"; };
+		BBEFFB6C1E3405D100AA5661 /* SinWaveTextureProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinWaveTextureProgram.h; sourceTree = "<group>"; };
+		BBEFFB731E34066000AA5661 /* Direct3DSinWaveTextureGpuProgramWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Direct3DSinWaveTextureGpuProgramWrapper.cpp; sourceTree = "<group>"; };
+		BBEFFB741E34066000AA5661 /* Direct3DSinWaveTextureGpuProgramWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Direct3DSinWaveTextureGpuProgramWrapper.h; sourceTree = "<group>"; };
+		BBEFFB761E34066000AA5661 /* SinWaveTexturePixelShader.hlsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SinWaveTexturePixelShader.hlsl; sourceTree = "<group>"; };
+		BBEFFB771E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SinWaveTextureGpuProgramWrapper.cpp; sourceTree = "<group>"; };
+		BBEFFB781E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SinWaveTextureGpuProgramWrapper.h; sourceTree = "<group>"; };
+		BBEFFB7B1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainGpuProgramWrapperFactory.cpp; sourceTree = "<group>"; };
+		BBEFFB7C1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGpuProgramWrapperFactory.h; sourceTree = "<group>"; };
 		FFF3C8B3638A1D58F89D067F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -979,6 +1023,9 @@
 		BB31DA341E244F6300364974 /* portable */ = {
 			isa = PBXGroup;
 			children = (
+				BBEFFB5D1E33F01A00AA5661 /* GamePadEvent.cpp */,
+				BBEFFB5E1E33F01A00AA5661 /* GamePadEvent.h */,
+				BBEFFB5F1E33F01A00AA5661 /* GamePadEventType.h */,
 				BB31DA351E244F6300364974 /* Animation.cpp */,
 				BB31DA361E244F6300364974 /* Animation.h */,
 				BBD9BB691E2BF23800951B30 /* Assets.cpp */,
@@ -1081,10 +1128,16 @@
 		BB31DA611E244F6300364974 /* logic */ = {
 			isa = PBXGroup;
 			children = (
+				BB31DA621E244F6300364974 /* GameConstants.h */,
 				BBADAEA81E2EBC2D0093EB2A /* MusicConstants.h */,
+				BBEFFB551E33E9A500AA5661 /* Player.cpp */,
+				BBEFFB561E33E9A500AA5661 /* Player.h */,
+				BBEFFB591E33E9E500AA5661 /* PopcornKernel.cpp */,
+				BBEFFB5A1E33E9E500AA5661 /* PopcornKernel.h */,
 				BBADAEA91E2EBC2D0093EB2A /* ScreenConstants.h */,
 				BBADAEAA1E2EBC2D0093EB2A /* SoundConstants.h */,
-				BB31DA621E244F6300364974 /* GameConstants.h */,
+				BBEFFB621E33F9CC00AA5661 /* GameSession.cpp */,
+				BBEFFB631E33F9CC00AA5661 /* GameSession.h */,
 			);
 			path = logic;
 			sourceTree = "<group>";
@@ -1092,6 +1145,7 @@
 		BB31DA631E244F6300364974 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				BBEFFB661E3405D100AA5661 /* opengl */,
 				BBADAEBF1E2F12B00093EB2A /* direct3d */,
 				BB31DA781E244F6300364974 /* portable */,
 			);
@@ -1101,12 +1155,16 @@
 		BB31DA781E244F6300364974 /* portable */ = {
 			isa = PBXGroup;
 			children = (
+				BBEFFB7B1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp */,
+				BBEFFB7C1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.h */,
 				BB31DA7B1E244F6300364974 /* MainAssetsMapper.cpp */,
 				BB31DA7C1E244F6300364974 /* MainAssetsMapper.h */,
 				BB31DA7F1E244F6300364974 /* MainRenderer.cpp */,
 				BB31DA801E244F6300364974 /* MainRenderer.h */,
 				BB31DA7D1E244F6300364974 /* MainScreen.cpp */,
 				BB31DA7E1E244F6300364974 /* MainScreen.h */,
+				BBEFFB771E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp */,
+				BBEFFB781E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.h */,
 			);
 			path = portable;
 			sourceTree = "<group>";
@@ -1155,7 +1213,6 @@
 		BB31DB8C1E244FCF00364974 /* windows */ = {
 			isa = PBXGroup;
 			children = (
-				BB809DE81E2D99A300494AD2 /* d3dx12.h */,
 				BB809DE91E2D99A300494AD2 /* pch.cpp */,
 				BB809DEA1E2D99A300494AD2 /* pch.h */,
 				BB809DEB1E2D99A300494AD2 /* StepTimer.h */,
@@ -1450,6 +1507,8 @@
 		BBADAEB51E2EC7660093EB2A /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				BBEFFB4F1E33E98C00AA5661 /* sound_release.wav */,
+				BBEFFB501E33E98C00AA5661 /* sound_store.wav */,
 			);
 			path = sounds;
 			sourceTree = "<group>";
@@ -1457,8 +1516,11 @@
 		BBADAEBF1E2F12B00093EB2A /* direct3d */ = {
 			isa = PBXGroup;
 			children = (
+				BBEFFB731E34066000AA5661 /* Direct3DSinWaveTextureGpuProgramWrapper.cpp */,
+				BBEFFB741E34066000AA5661 /* Direct3DSinWaveTextureGpuProgramWrapper.h */,
 				BBADAEC01E2F12B00093EB2A /* Game.cpp */,
 				BBADAEC11E2F12B00093EB2A /* Game.h */,
+				BBEFFB751E34066000AA5661 /* shader */,
 			);
 			path = direct3d;
 			sourceTree = "<group>";
@@ -1497,6 +1559,34 @@
 				BBCB71DA1DB6B0AF006430B6 /* Base64.m */,
 			);
 			path = Base64;
+			sourceTree = "<group>";
+		};
+		BBEFFB661E3405D100AA5661 /* opengl */ = {
+			isa = PBXGroup;
+			children = (
+				BBEFFB671E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp */,
+				BBEFFB681E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.h */,
+				BBEFFB691E3405D100AA5661 /* shader */,
+				BBEFFB6B1E3405D100AA5661 /* SinWaveTextureProgram.cpp */,
+				BBEFFB6C1E3405D100AA5661 /* SinWaveTextureProgram.h */,
+			);
+			path = opengl;
+			sourceTree = "<group>";
+		};
+		BBEFFB691E3405D100AA5661 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				BBEFFB6A1E3405D100AA5661 /* sin_wave_texture_shader.fsh */,
+			);
+			path = shader;
+			sourceTree = "<group>";
+		};
+		BBEFFB751E34066000AA5661 /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				BBEFFB761E34066000AA5661 /* SinWaveTexturePixelShader.hlsl */,
+			);
+			path = shader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1584,10 +1674,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBEFFB531E33E98C00AA5661 /* sound_store.wav in Resources */,
 				BB44C3481DB0323F003E633F /* Images.xcassets in Resources */,
 				BB31DB011E244F6300364974 /* frame_buffer_to_screen_shader.vsh in Resources */,
 				BB44C3441DB0323F003E633F /* InfoPlist.strings in Resources */,
+				BBEFFB6F1E3405D100AA5661 /* sin_wave_texture_shader.fsh in Resources */,
 				BB31DAFD1E244F6300364974 /* color_shader.vsh in Resources */,
+				BBEFFB511E33E98C00AA5661 /* sound_release.wav in Resources */,
 				BB31DAFF1E244F6300364974 /* frame_buffer_to_screen_shader.fsh in Resources */,
 				BB31DAFB1E244F6300364974 /* color_shader.fsh in Resources */,
 				BB44C3471DB0323F003E633F /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -1607,14 +1700,17 @@
 			files = (
 				BB31DAFC1E244F6300364974 /* color_shader.fsh in Resources */,
 				BB44C3291DB030B3003E633F /* Assets.xcassets in Resources */,
+				BBEFFB541E33E98C00AA5661 /* sound_store.wav in Resources */,
 				BB44C32A1DB030B3003E633F /* Main.storyboard in Resources */,
 				BB31DB021E244F6300364974 /* frame_buffer_to_screen_shader.vsh in Resources */,
 				BB31DB081E244F6300364974 /* texture_shader.fsh in Resources */,
 				BB31DB0A1E244F6300364974 /* texture_shader.vsh in Resources */,
 				BBADAEB81E2EC7660093EB2A /* music_demo.wav in Resources */,
+				BBEFFB701E3405D100AA5661 /* sin_wave_texture_shader.fsh in Resources */,
 				BB31DAFE1E244F6300364974 /* color_shader.vsh in Resources */,
 				BB44C93C1DB03A7E003E633F /* rapidjson_readme.txt in Resources */,
 				BB315CF91E33E55F00A8279B /* main.png in Resources */,
+				BBEFFB521E33E98C00AA5661 /* sound_release.wav in Resources */,
 				BB31DB001E244F6300364974 /* frame_buffer_to_screen_shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1627,6 +1723,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBCB71D41DB6AF4B006430B6 /* NSUserDefaults+SecureAdditions.m in Sources */,
+				BBEFFB7D1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp in Sources */,
 				BB31DB0F1E244F6300364974 /* texture.c in Sources */,
 				BB44C8691DB03A7E003E633F /* pngerror.c in Sources */,
 				BB31DB1D1E244F6300364974 /* GpuProgramWrapper.cpp in Sources */,
@@ -1642,6 +1739,7 @@
 				BBD9BB5E1E2BE5C600951B30 /* InputManager.cpp in Sources */,
 				BBCB71DB1DB6B0AF006430B6 /* Base64.m in Sources */,
 				BB31DB251E244F6300364974 /* SpriteBatcher.cpp in Sources */,
+				BBEFFB711E3405D100AA5661 /* SinWaveTextureProgram.cpp in Sources */,
 				BB44C8711DB03A7E003E633F /* pngpread.c in Sources */,
 				BBD9BB621E2BE63500951B30 /* GridManager.cpp in Sources */,
 				BB31DB471E244F6300364974 /* MainRenderer.cpp in Sources */,
@@ -1656,7 +1754,9 @@
 				BB44C87B1DB03A7E003E633F /* pngset.c in Sources */,
 				BB31DA951E244F6300364974 /* NGRect.cpp in Sources */,
 				BB44C3611DB03267003E633F /* SaveData.m in Sources */,
+				BBEFFB641E33F9CC00AA5661 /* GameSession.cpp in Sources */,
 				BBE02D3C1DB18D4600C3268B /* ScreenController.mm in Sources */,
+				BBEFFB5B1E33E9E500AA5661 /* PopcornKernel.cpp in Sources */,
 				BB31DAED1E244F6300364974 /* OpenGLLineBatcher.cpp in Sources */,
 				BB3BB5D41E2C21B500153E81 /* Renderer.cpp in Sources */,
 				BB44C8871DB03A7E003E633F /* pngwtran.c in Sources */,
@@ -1674,7 +1774,10 @@
 				BBD9BB701E2C0A0800951B30 /* TextureLoaderFactory.cpp in Sources */,
 				BB31DB271E244F6300364974 /* Text.cpp in Sources */,
 				BBAD145E1E2B06A10087C160 /* CircleBatcherFactory.cpp in Sources */,
+				BBEFFB791E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp in Sources */,
+				BBEFFB6D1E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp in Sources */,
 				BB31DA811E244F6300364974 /* Entity.cpp in Sources */,
+				BBEFFB601E33F01A00AA5661 /* GamePadEvent.cpp in Sources */,
 				BB31DAE11E244F6300364974 /* FramebufferToScreenProgram.cpp in Sources */,
 				BB44C8831DB03A7E003E633F /* pngwio.c in Sources */,
 				BB31DA871E244F6300364974 /* PhysicalEntity.cpp in Sources */,
@@ -1688,6 +1791,7 @@
 				BBD9BB7F1E2C1C3600951B30 /* OpenGLRendererHelper.cpp in Sources */,
 				BBD9BB6B1E2BF23800951B30 /* Assets.cpp in Sources */,
 				BB31DB171E244F6300364974 /* CircleBatcher.cpp in Sources */,
+				BBEFFB571E33E9A500AA5661 /* Player.cpp in Sources */,
 				BBD9BB741E2C0C3E00951B30 /* OpenGLTextureLoader.cpp in Sources */,
 				BB44C8731DB03A7E003E633F /* pngread.c in Sources */,
 				BB44C8631DB03A7E003E633F /* png.c in Sources */,
@@ -1728,8 +1832,10 @@
 			files = (
 				BB31DB121E244F6300364974 /* TextureProgram.cpp in Sources */,
 				BBD9BB631E2BE63500951B30 /* GridManager.cpp in Sources */,
+				BBEFFB611E33F01A00AA5661 /* GamePadEvent.cpp in Sources */,
 				BB44CB901DB05426003E633F /* platform_asset_utils.m in Sources */,
 				BB777B751E2C6FD0008E9B4F /* OpenGLDeviceHelper.cpp in Sources */,
+				BBEFFB5C1E33E9E500AA5661 /* PopcornKernel.cpp in Sources */,
 				BBAD14611E2B06A10087C160 /* LineBatcherFactory.cpp in Sources */,
 				BBD9BB6C1E2BF23800951B30 /* Assets.cpp in Sources */,
 				BB31DA901E244F6300364974 /* Circle.cpp in Sources */,
@@ -1780,6 +1886,7 @@
 				BB31DADE1E244F6300364974 /* asset_utils.c in Sources */,
 				BB31DB1C1E244F6300364974 /* Font.cpp in Sources */,
 				BB31DB441E244F6300364974 /* MainAssetsMapper.cpp in Sources */,
+				BBEFFB581E33E9A500AA5661 /* Player.cpp in Sources */,
 				BBAD14661E2B104F0087C160 /* EntityUtil.cpp in Sources */,
 				BBAD146B1E2B13810087C160 /* SuperpoweredSoundCollection.cpp in Sources */,
 				BB44CB8D1DB053C0003E633F /* pngwrite.c in Sources */,
@@ -1797,7 +1904,9 @@
 				BB31DAA21E244F6300364974 /* SuperpoweredSound.cpp in Sources */,
 				BBD9BB711E2C0A0800951B30 /* TextureLoaderFactory.cpp in Sources */,
 				BB31DAE41E244F6300364974 /* image.c in Sources */,
+				BBEFFB7A1E34067600AA5661 /* SinWaveTextureGpuProgramWrapper.cpp in Sources */,
 				BB31DA9A1E244F6300364974 /* Vector2D.cpp in Sources */,
+				BBEFFB7E1E3406DC00AA5661 /* MainGpuProgramWrapperFactory.cpp in Sources */,
 				BB31DAF01E244F6300364974 /* OpenGLManager.cpp in Sources */,
 				BB09CE231DBD3779006A3E49 /* SuperpoweredOSXAudioIO.mm in Sources */,
 				BB31DB2E1E244F6300364974 /* TransitionGpuProgramWrapper.cpp in Sources */,
@@ -1811,12 +1920,15 @@
 				BB31DAEE1E244F6300364974 /* OpenGLLineBatcher.cpp in Sources */,
 				BB44CB081DB04C83003E633F /* GLEssentialsFullscreenWindow.mm in Sources */,
 				BB31DAEA1E244F6300364974 /* OpenGLFramebufferToScreenGpuProgramWrapper.cpp in Sources */,
+				BBEFFB651E33F9CC00AA5661 /* GameSession.cpp in Sources */,
 				BB31DA881E244F6300364974 /* PhysicalEntity.cpp in Sources */,
 				BBD9BB5F1E2BE5C600951B30 /* InputManager.cpp in Sources */,
 				BB777B671E2C3A26008E9B4F /* TouchConverter.cpp in Sources */,
 				BB31DA841E244F6300364974 /* EntityManager.cpp in Sources */,
 				BB31DAF61E244F6300364974 /* OpenGLSpriteBatcher.cpp in Sources */,
 				BB44C3281DB030B3003E633F /* AppDelegate.m in Sources */,
+				BBEFFB6E1E3405D100AA5661 /* OpenGLSinWaveTextureGpuProgramWrapper.cpp in Sources */,
+				BBEFFB721E3405D100AA5661 /* SinWaveTextureProgram.cpp in Sources */,
 				BB31DB2A1E244F6300364974 /* TextureRegion.cpp in Sources */,
 				BB31DB181E244F6300364974 /* CircleBatcher.cpp in Sources */,
 				BB31DAE61E244F6300364974 /* OpenGLCircleBatcher.cpp in Sources */,

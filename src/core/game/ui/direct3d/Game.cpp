@@ -11,6 +11,7 @@
 #include "SoundConstants.h"
 #include "macros.h"
 #include "GamePadEventType.h"
+#include "GameSession.h"
 
 extern void ExitGame();
 
@@ -131,11 +132,14 @@ void Game::Update(DX::StepTimer const& timer)
 		}
 	}
 
+    int numPlayersConnected = 0;
 	for (int i = 0; i < 4; i++)
 	{
 		auto gamePadState = m_gamePad->GetState(i);
 		if (gamePadState.IsConnected())
 		{
+            numPlayersConnected++;
+            
 			if (gamePadState.IsViewPressed())
 			{
 				PostQuitMessage(0);
@@ -162,6 +166,8 @@ void Game::Update(DX::StepTimer const& timer)
 			}
 		}
 	}
+    
+    GAME_SESSION->setNumPlayersConnected(numPlayersConnected);
 
 	if (m_retryAudio)
 	{

@@ -20,6 +20,8 @@
 #include "ITextureLoader.h"
 #include "Assets.h"
 #include "TextureRegion.h"
+#include "GameSession.h"
+#include "Player.h"
 
 MainRenderer::MainRenderer() : Renderer(), m_demo(new TextureWrapper("main"))
 {
@@ -33,7 +35,7 @@ MainRenderer::~MainRenderer()
     destroyTexture(m_demo);
 }
 
-void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+void MainRenderer::mainDraw(float stateTime)
 {
     m_rendererHelper->clearFramebufferWithColor(0, 0, 0, 1);
     
@@ -53,18 +55,78 @@ void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float
         m_spriteBatcher->beginBatch();
         
         {
-            TextureRegion tr = ASSETS->findTextureRegion("Microwave");
+            static TextureRegion tr = ASSETS->findTextureRegion("Microwave");
             m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, tr);
         }
         
         {
-            TextureRegion tr = ASSETS->findTextureRegion("Popcorn", stateTime);
-            m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
-            m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
-            m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
-            m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
+            TextureRegion tr = ASSETS->findTextureRegion("Logo", stateTime);
+            m_spriteBatcher->drawSprite(CAM_WIDTH * 0.39599609375f, CAM_HEIGHT * 0.50453720508167f, CAM_WIDTH * 0.470703125f, CAM_HEIGHT * 0.56261343012704f, 0, tr);
         }
         
+        {
+            static TextureRegion tr = ASSETS->findTextureRegion("Glare");
+            m_spriteBatcher->drawSprite(CAM_WIDTH / 4 - 0.5f, CAM_HEIGHT * 2 / 3, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.27404718693285f, 0, tr);
+        }
+        
+        {
+            int numPlayers = GAME_SESSION->getNumPlayersConnected();
+            switch (numPlayers)
+            {
+                case 0:
+                {
+                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad0");
+                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                }
+                    break;
+                case 1:
+                {
+                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad1");
+                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                }
+                    break;
+                case 2:
+                {
+                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad2");
+                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                }
+                    break;
+                case 3:
+                {
+                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad3");
+                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                }
+                    break;
+                case 4:
+                {
+                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad4");
+                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                }
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+//        {
+//            TextureRegion tr = ASSETS->findTextureRegion("Popcorn", stateTime);
+//            m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
+//            m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
+//            m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
+//            m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
+//        }
+        
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        
+        m_fillNGRectBatcher->beginBatch();
+        int numPlayers = GAME_SESSION->getNumPlayersConnected();
+        for (int i = 0; i < numPlayers; i++)
+        {
+            Player* player = GAME_SESSION->getPlayers().at(i);
+            NGRect r = NGRect(player->getPosition().getX(), player->getPosition().getY(), player->getWidth(), player->getHeight());
+            Color c = Color(player->getHeat(), 0, 0, 1);
+            m_fillNGRectBatcher->renderNGRect(r, c);
+        }
+        m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
     }
 }

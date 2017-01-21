@@ -69,9 +69,25 @@
 
 - (void)handleSound
 {
+    short rawSoundId;
+    short playerIndex;
     short soundId;
-    while ((soundId = SOUND_MANAGER->getCurrentSoundId()) > SOUND_NONE)
+    while ((rawSoundId = SOUND_MANAGER->getCurrentSoundId()) > SOUND_NONE)
     {
+        playerIndex = 0;
+        while (rawSoundId >= 10000)
+        {
+            rawSoundId -= 10000;
+            playerIndex++;
+        }
+        
+        soundId = 0;
+        while (rawSoundId >= 1000)
+        {
+            rawSoundId -= 1000;
+            soundId++;
+        }
+        
         [self playSound:soundId];
     }
 }
@@ -167,7 +183,8 @@
 {
     _appleSoundManager = [[AppleSoundManager alloc] init];
     
-    [_appleSoundManager loadSound:@"sound_demo" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"sound_store" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"sound_release" withExtension:@"wav" andNumCopies:4];
 }
 
 @end

@@ -30,7 +30,7 @@ m_iRequestedUiAction(0)
 {
 	for (int i = 0; i < 8; i++)
 	{
-		m_playerCoords[i] = CAM_WIDTH / 2;
+		m_playerCoords[i] = 0;
 	}
 
     SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);

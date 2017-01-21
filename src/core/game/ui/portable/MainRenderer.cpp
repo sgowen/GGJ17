@@ -39,6 +39,15 @@ void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float
     
     m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
     
+    m_fillNGRectBatcher->beginBatch();
+    {
+        NGRect r = NGRect(0, 0, CAM_WIDTH / 2, CAM_HEIGHT * 6);
+        static Color c = Color(0, 1, 0, 1);
+        m_fillNGRectBatcher->renderNGRect(r, c);
+    }
+    
+    m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
+    
     if (m_demo->gpuTextureWrapper)
     {
 		TextureRegion tr = ASSETS->findTextureRegion("Sonic_Idle", stateTime);

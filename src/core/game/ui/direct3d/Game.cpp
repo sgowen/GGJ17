@@ -143,7 +143,7 @@ void Game::Update(DX::StepTimer const& timer)
 			// B was down last frame, it just went up this frame
 		}
 
-		m_screen->tempUpdateSonic(gamePadState.thumbSticks.leftX / 5, gamePadState.thumbSticks.leftY / 5);
+		//m_screen->tempUpdateSonic(gamePadState.thumbSticks.leftX / 5, gamePadState.thumbSticks.leftY / 5);
 	}
 
 	if (m_retryAudio)

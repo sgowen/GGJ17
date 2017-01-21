@@ -55,7 +55,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         wcex.hbrBackground = (HBRUSH) (COLOR_WINDOW + 1);
         wcex.lpszMenuName = nullptr;
-        wcex.lpszClassName = L"DanteWindowClass";
+        wcex.lpszClassName = L"GGJ17WindowClass";
         wcex.hIconSm = LoadIcon(wcex.hInstance, L"IDI_ICON");
 		if (!RegisterClassEx(&wcex))
 		{
@@ -74,10 +74,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
         AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-        HWND hwnd = CreateWindowEx(0, L"DanteWindowClass", L"Dante", WS_OVERLAPPEDWINDOW,
+        HWND hwnd = CreateWindowEx(0, L"GGJ17WindowClass", L"GGJ17", WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
             nullptr);
-        // TODO: Change to CreateWindowEx(WS_EX_TOPMOST, L"DanteWindowClass", L"Dante", WS_POPUP,
+        // TODO: Change to CreateWindowEx(WS_EX_TOPMOST, L"GGJ17WindowClass", L"GGJ17", WS_POPUP,
         // to default to fullscreen.
 
 		if (!hwnd)

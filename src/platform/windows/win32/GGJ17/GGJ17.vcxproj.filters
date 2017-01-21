@@ -16,7 +16,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\core\framework\util\windows\d3dx12.h" />
     <ClInclude Include="..\..\..\..\core\framework\util\windows\pch.h" />
     <ClInclude Include="..\..\..\..\core\framework\util\windows\StepTimer.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\direct3d\win32\DeviceResources.h" />
@@ -31,7 +30,6 @@
     <ClInclude Include="..\..\..\..\core\framework\math\Triangle.h" />
     <ClInclude Include="..\..\..\..\core\framework\math\Vector2D.h" />
     <ClInclude Include="..\..\..\..\core\framework\math\Circle.h" />
-    <ClInclude Include="..\..\..\..\core\framework\network\client\client.h" />
     <ClInclude Include="..\..\..\..\core\framework\state\State.h" />
     <ClInclude Include="..\..\..\..\core\framework\state\StateMachine.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\Assets.h" />
@@ -122,7 +120,6 @@
     <ClCompile Include="..\..\..\..\core\framework\math\Triangle.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\math\Vector2D.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\math\Circle.cpp" />
-    <ClCompile Include="..\..\..\..\core\framework\network\client\client.c" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\CircleBatcher.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\CircleBatcherFactory.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\DummyGpuProgramWrapper.cpp" />

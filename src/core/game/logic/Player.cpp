@@ -8,16 +8,24 @@
 
 #include "Player.h"
 
+#include "MathUtil.h"
+
 Player::Player(float x, float y, float width, float height) : PopcornKernel(x, y, width, height)
 {
-    // Empty
+	m_fDelay = 0;
 }
 
 void Player::update(float deltaTime)
 {
-    PhysicalEntity::update(deltaTime);
-    
-    // TODO
+	PopcornKernel::update(deltaTime);
+
+	float x = getVelocity().getX();
+	float y = getVelocity().getY();
+
+	x = clamp(x, 5, -5);
+	y = clamp(y, 5, -5);
+
+	getVelocity().set(x, y);
 }
 
 RTTI_IMPL(Player, PopcornKernel);

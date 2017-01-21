@@ -24,6 +24,7 @@ public:
     
 protected:
     float m_fHeat;
+	float m_fDelay;
 };
 
 #endif /* PopcornKernel_hpp */

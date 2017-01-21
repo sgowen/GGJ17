@@ -11,12 +11,38 @@
 
 #include <vector>
 
-class Entity;
-
 class EntityUtil
 {
 public:
-    static void updateAndClean(std::vector<Entity *>& items, float deltaTime);
+	template<typename T>
+	static void update(std::vector<T>& items, float deltaTime)
+	{
+		for (typename std::vector<T>::iterator i = items.begin(); i != items.end(); i++)
+		{
+			(*i)->update(deltaTime);
+		}
+	}
+
+	template<typename T>
+	static void updateAndClean(std::vector<T*>& items, float deltaTime)
+	{
+		for (typename std::vector<T*>::iterator i = items.begin(); i != items.end(); )
+		{
+			(*i)->update(deltaTime);
+
+			if ((*i)->isRequestingDeletion())
+			{
+				(*i)->onDeletion();
+
+				delete *i;
+				i = items.erase(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
     
 private:
     // ctor, copy ctor, and assignment should be private in a Singleton

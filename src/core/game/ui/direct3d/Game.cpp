@@ -158,22 +158,16 @@ void Game::Update(DX::StepTimer const& timer)
 			m_buttons.Update(gamePadState);
 			if (m_buttons.a == GamePad::ButtonStateTracker::PRESSED)
 			{
-				// A was up last frame, it just went down this frame
-			}
-			if (m_buttons.b == GamePad::ButtonStateTracker::RELEASED)
-			{
-				// B was down last frame, it just went up this frame
+				INPUT_MANAGER->onGamePadInput(A_BUTTON, i, 0, 0);
 			}
 
-			INPUT_MANAGER->onGamePadInput(STICK_LEFT, i, gamePadState.thumbSticks.leftX / 10, gamePadState.thumbSticks.leftY / 10);
-			INPUT_MANAGER->onGamePadInput(STICK_RIGHT, i, gamePadState.thumbSticks.leftX / 10, gamePadState.thumbSticks.rightY / 10);
+			if (m_buttons.start == GamePad::ButtonStateTracker::PRESSED)
+			{
+				INPUT_MANAGER->onGamePadInput(START_BUTTON, i, 0, 0);
+			}
+
+			INPUT_MANAGER->onGamePadInput(STICK_LEFT, i, gamePadState.thumbSticks.leftX, gamePadState.thumbSticks.leftY);
 			INPUT_MANAGER->onGamePadInput(TRIGGER, i, gamePadState.triggers.left, gamePadState.triggers.right);
-
-			if (m_buttons.leftTrigger == GamePad::ButtonStateTracker::PRESSED
-				|| m_buttons.leftTrigger == GamePad::ButtonStateTracker::HELD)
-			{
-				
-			}
 		}
 	}
     

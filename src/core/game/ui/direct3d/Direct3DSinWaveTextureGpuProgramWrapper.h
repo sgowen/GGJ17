@@ -10,12 +10,13 @@
 #define __noctisgames__Direct3DSinWaveTextureGpuProgramWrapper__
 
 #include "SinWaveTextureGpuProgramWrapper.h"
-#include "DeviceResources.h"
+
+#include "pch.h"
 
 class Direct3DSinWaveTextureGpuProgramWrapper : public SinWaveTextureGpuProgramWrapper
 {
 public:
-	Direct3DSinWaveTextureGpuProgramWrapper(const std::shared_ptr<DX::DeviceResources>& deviceResources);
+	Direct3DSinWaveTextureGpuProgramWrapper();
 
 	virtual void bind();
 
@@ -24,10 +25,6 @@ public:
 	virtual void cleanUp();
 
 private:
-	int m_iNumShadersLoaded;
-
-	// Cached pointer to device resources.
-	std::shared_ptr<DX::DeviceResources> m_deviceResources;
 	Microsoft::WRL::ComPtr<ID3D11Buffer> m_offsetConstantBuffer;
 	Microsoft::WRL::ComPtr<ID3D11VertexShader> m_vertexShader;
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;

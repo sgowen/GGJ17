@@ -108,6 +108,12 @@
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.h" />
     <ClInclude Include="..\..\..\..\core\framework\ui\portable\GamePadEventType.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\GameSession.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\Player.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\PopcornKernel.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\portable\MainGpuProgramWrapperFactory.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\portable\SinWaveTextureGpuProgramWrapper.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\direct3d\Direct3DSinWaveTextureGpuProgramWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\core\framework\util\windows\pch.cpp" />
@@ -181,6 +187,12 @@
     <ClCompile Include="..\..\..\..\core\framework\ui\direct3d\portable\Direct3DDeviceHelper.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\DeviceHelperFactory.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\ui\portable\GamePadEvent.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\Player.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\PopcornKernel.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\GameSession.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\portable\MainGpuProgramWrapperFactory.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\portable\SinWaveTextureGpuProgramWrapper.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\direct3d\Direct3DSinWaveTextureGpuProgramWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -205,6 +217,7 @@
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\TexturePixelShader.hlsl" />
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\TextureVertexShader.hlsl" />
     <FxCompile Include="..\..\..\..\core\framework\ui\direct3d\shader\ColorPixelShader.hlsl" />
+    <FxCompile Include="..\..\..\..\core\game\ui\direct3d\shader\SinWaveTexturePixelShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="music_demo.wav">

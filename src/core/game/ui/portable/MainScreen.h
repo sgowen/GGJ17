@@ -44,8 +44,6 @@ private:
     MainRenderer* m_renderer;
     float m_fStateTime;
     int m_iRequestedUiAction;
-    
-    void updatePlayerCoords(int playerIndex, float x, float y);
 };
 
 #endif /* defined(__ggj17__MainScreen__) */

@@ -30,11 +30,8 @@ m_renderer(new MainRenderer()),
 m_fStateTime(0),
 m_iRequestedUiAction(0)
 {
-    GAME_SESSION->setNumPlayersConnected(1);
-    GAME_SESSION->startGame();
-    
-    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);
-    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
+	//SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);
+    //SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
 }
 
 MainScreen::~MainScreen()
@@ -93,12 +90,7 @@ void MainScreen::update(float deltaTime)
         {
             case STICK_LEFT:
             {
-				updatePlayerCoords(playerIndex, x, y);
-                continue;
-            }
-            case STICK_RIGHT:
-            {
-				updatePlayerCoords(playerIndex, x, y);
+				GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 5, y * 5);
                 continue;
             }
             case TRIGGER:
@@ -118,8 +110,18 @@ void MainScreen::update(float deltaTime)
 					releaseHeatSoundId += y * 100;
 					SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
 				}
-                return;
+				continue;
             }
+			case A_BUTTON:
+			{
+				GAME_SESSION->getPlayers().at(playerIndex)->getVelocity().set(0, 0);
+				continue;
+			}
+			case START_BUTTON:
+			{
+				GAME_SESSION->startGame();
+				continue;
+			}
             default:
                 break;
         }
@@ -133,11 +135,6 @@ void MainScreen::render()
     m_renderer->mainDraw(m_fStateTime);
     
     m_renderer->endFrame();
-}
-
-void MainScreen::updatePlayerCoords(int playerIndex, float x, float y)
-{
-    GAME_SESSION->getPlayers().at(playerIndex)->getVelocity().set(x, y);
 }
 
 RTTI_IMPL(MainScreen, IScreen);

@@ -119,14 +119,23 @@ void MainRenderer::mainDraw(float stateTime)
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         
         m_fillNGRectBatcher->beginBatch();
-        int numPlayers = GAME_SESSION->getNumPlayersConnected();
-        for (int i = 0; i < numPlayers; i++)
-        {
-            Player* player = GAME_SESSION->getPlayers().at(i);
-            NGRect r = NGRect(player->getPosition().getX(), player->getPosition().getY(), player->getWidth(), player->getHeight());
-            Color c = Color(player->getHeat(), 0, 0, 1);
-            m_fillNGRectBatcher->renderNGRect(r, c);
-        }
+		for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
+		{
+			NGRect r = NGRect((*i)->getPosition().getX(), (*i)->getPosition().getY(), (*i)->getWidth(), (*i)->getHeight());
+			Color c = Color((*i)->getHeat(), 0, 0, 1);
+			m_fillNGRectBatcher->renderNGRect(r, c);
+		}
+
+		for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
+		{
+			float x = (*i)->getPosition().getX();
+			float y = (*i)->getPosition().getY();
+			float w = (*i)->getWidth();
+			float h = (*i)->getHeight();
+			NGRect r = NGRect(x - w / 2, y - h / 2, w, h);
+			Color c = Color((*i)->getHeat(), 0, 0, 1);
+			m_fillNGRectBatcher->renderNGRect(r, c);
+		}
         m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
     }
 }

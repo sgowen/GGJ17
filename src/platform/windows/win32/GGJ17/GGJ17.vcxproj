@@ -256,13 +256,19 @@
     <ClInclude Include="..\..\..\..\core\framework\util\windows\pch.h" />
     <ClInclude Include="..\..\..\..\core\framework\util\windows\StepTimer.h" />
     <ClInclude Include="..\..\..\..\core\game\logic\GameConstants.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\GameSession.h" />
     <ClInclude Include="..\..\..\..\core\game\logic\MusicConstants.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\Player.h" />
+    <ClInclude Include="..\..\..\..\core\game\logic\PopcornKernel.h" />
     <ClInclude Include="..\..\..\..\core\game\logic\ScreenConstants.h" />
     <ClInclude Include="..\..\..\..\core\game\logic\SoundConstants.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\direct3d\Direct3DSinWaveTextureGpuProgramWrapper.h" />
     <ClInclude Include="..\..\..\..\core\game\ui\direct3d\Game.h" />
     <ClInclude Include="..\..\..\..\core\game\ui\portable\MainAssetsMapper.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\portable\MainGpuProgramWrapperFactory.h" />
     <ClInclude Include="..\..\..\..\core\game\ui\portable\MainRenderer.h" />
     <ClInclude Include="..\..\..\..\core\game\ui\portable\MainScreen.h" />
+    <ClInclude Include="..\..\..\..\core\game\ui\portable\SinWaveTextureGpuProgramWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\core\framework\entity\Entity.cpp" />
@@ -340,10 +346,16 @@
     <ClCompile Include="..\..\..\..\core\framework\util\portable\EntityUtil.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\util\portable\RTTI.cpp" />
     <ClCompile Include="..\..\..\..\core\framework\util\windows\pch.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\GameSession.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\Player.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\logic\PopcornKernel.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\direct3d\Direct3DSinWaveTextureGpuProgramWrapper.cpp" />
     <ClCompile Include="..\..\..\..\core\game\ui\direct3d\Game.cpp" />
     <ClCompile Include="..\..\..\..\core\game\ui\portable\MainAssetsMapper.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\portable\MainGpuProgramWrapperFactory.cpp" />
     <ClCompile Include="..\..\..\..\core\game\ui\portable\MainRenderer.cpp" />
     <ClCompile Include="..\..\..\..\core\game\ui\portable\MainScreen.cpp" />
+    <ClCompile Include="..\..\..\..\core\game\ui\portable\SinWaveTextureGpuProgramWrapper.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +461,16 @@
       </ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="..\..\..\..\core\game\ui\direct3d\shader\SinWaveTexturePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0_level_9_3</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0_level_9_3</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0_level_9_3</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0_level_9_3</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

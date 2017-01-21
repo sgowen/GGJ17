@@ -12,6 +12,12 @@
 
 #include "PopcornKernel.h"
 #include "Player.h"
+#include "ScreenConstants.h"
+#include "EntityUtil.h"
+
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 GameSession* GameSession::getInstance()
 {
@@ -21,23 +27,21 @@ GameSession* GameSession::getInstance()
 
 void GameSession::startGame()
 {
-    for (int i = 0; i < m_iNumPlayersConnected; i++)
-    {
-        m_players.push_back(new Player(4, 4, 2, 2));
-    }
+	/* initialize random seed: */
+	srand((unsigned int)time(0));
+
+	for (int i = 0; i < 333; i++)
+	{
+		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+		m_popcornKernels.push_back(new PopcornKernel(x, y, 1, 1));
+	}
 }
 
 void GameSession::update(float deltaTime)
 {
-    for (std::vector<PopcornKernel *>::iterator i = m_popcornKernels.begin(); i != m_popcornKernels.end(); i++)
-    {
-        (*i)->update(deltaTime);
-    }
-    
-    for (std::vector<Player *>::iterator i = m_players.begin(); i != m_players.end(); i++)
-    {
-        (*i)->update(deltaTime);
-    }
+	EntityUtil::updateAndClean(m_popcornKernels, deltaTime);
+	EntityUtil::update(m_players, deltaTime);
 }
 
 void GameSession::reset()
@@ -60,6 +64,11 @@ std::vector<Player *>& GameSession::getPlayers()
 void GameSession::setNumPlayersConnected(int numPlayers)
 {
     m_iNumPlayersConnected = numPlayers;
+
+	while (m_iNumPlayersConnected > m_players.size())
+	{
+		m_players.push_back(new Player(4, 4, 2, 2));
+	}
 }
 
 int GameSession::getNumPlayersConnected()

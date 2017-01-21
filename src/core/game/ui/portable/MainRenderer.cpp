@@ -41,7 +41,7 @@ void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float
     
     m_fillNGRectBatcher->beginBatch();
     {
-        NGRect r = NGRect(0, 0, CAM_WIDTH / 2, CAM_HEIGHT * 6);
+        NGRect r = NGRect(0, 0, CAM_WIDTH, CAM_HEIGHT);
         static Color c = Color(0, 1, 0, 1);
         m_fillNGRectBatcher->renderNGRect(r, c);
     }

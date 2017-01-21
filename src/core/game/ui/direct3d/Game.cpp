@@ -125,25 +125,28 @@ void Game::Update(DX::StepTimer const& timer)
 		}
 	}
 
-	auto gamePadState = m_gamePad->GetState(0);
-	if (gamePadState.IsConnected())
+	for (int i = 0; i < 4; i++)
 	{
-		if (gamePadState.IsViewPressed())
+		auto gamePadState = m_gamePad->GetState(i);
+		if (gamePadState.IsConnected())
 		{
-			PostQuitMessage(0);
-		}
+			if (gamePadState.IsViewPressed())
+			{
+				PostQuitMessage(0);
+			}
 
-		m_buttons.Update(gamePadState);
-		if (m_buttons.a == GamePad::ButtonStateTracker::PRESSED)
-		{
-			// A was up last frame, it just went down this frame
-		}
-		if (m_buttons.b == GamePad::ButtonStateTracker::RELEASED)
-		{
-			// B was down last frame, it just went up this frame
-		}
+			m_buttons.Update(gamePadState);
+			if (m_buttons.a == GamePad::ButtonStateTracker::PRESSED)
+			{
+				// A was up last frame, it just went down this frame
+			}
+			if (m_buttons.b == GamePad::ButtonStateTracker::RELEASED)
+			{
+				// B was down last frame, it just went up this frame
+			}
 
-		//m_screen->tempUpdateSonic(gamePadState.thumbSticks.leftX / 5, gamePadState.thumbSticks.leftY / 5);
+			m_screen->updatePlayerCoords(i, gamePadState.thumbSticks.leftX / 5, gamePadState.thumbSticks.leftY / 5);
+		}
 	}
 
 	if (m_retryAudio)

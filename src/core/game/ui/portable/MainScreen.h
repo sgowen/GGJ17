@@ -39,10 +39,13 @@ public:
     
     virtual void render();
 
+	void updatePlayerCoords(int playerIndex, float x, float y);
+
 private:
 	IDeviceHelper* m_deviceHelper;
     MainRenderer* m_renderer;
     float m_fStateTime;
+	float m_playerCoords[8];
     int m_iRequestedUiAction;
 };
 

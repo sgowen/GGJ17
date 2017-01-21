@@ -20,6 +20,7 @@
 #include "MusicConstants.h"
 #include "SoundConstants.h"
 #include "Vector2D.h"
+#include "MathUtil.h"
 
 MainScreen::MainScreen() : IScreen(),
 m_deviceHelper(DEVICE_HELPER_FACTORY->createDeviceHelper()),
@@ -27,6 +28,11 @@ m_renderer(new MainRenderer()),
 m_fStateTime(0),
 m_iRequestedUiAction(0)
 {
+	for (int i = 0; i < 8; i++)
+	{
+		m_playerCoords[i] = CAM_WIDTH / 2;
+	}
+
     SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);
     SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
 }
@@ -105,9 +111,26 @@ void MainScreen::render()
 {
     m_renderer->beginFrame();
     
-    m_renderer->tempDraw(m_fStateTime);
+    m_renderer->tempDraw(m_fStateTime
+		, m_playerCoords[0]
+		, m_playerCoords[1]
+		, m_playerCoords[2]
+		, m_playerCoords[3]
+		, m_playerCoords[4]
+		, m_playerCoords[5]
+		, m_playerCoords[6]
+		, m_playerCoords[7]);
     
     m_renderer->endFrame();
+}
+
+void MainScreen::updatePlayerCoords(int playerIndex, float x, float y)
+{
+	m_playerCoords[playerIndex * 2] += x;
+	m_playerCoords[playerIndex * 2] = clamp(m_playerCoords[playerIndex * 2], CAM_WIDTH, 0);
+	
+	m_playerCoords[playerIndex * 2 + 1] += y;
+	m_playerCoords[playerIndex * 2 + 1] = clamp(m_playerCoords[playerIndex * 2 + 1], CAM_HEIGHT, 0);
 }
 
 RTTI_IMPL(MainScreen, IScreen);

@@ -33,50 +33,21 @@ MainRenderer::~MainRenderer()
     destroyTexture(m_demo);
 }
 
-void MainRenderer::tempDraw(float stateTime)
+void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
 {
     m_rendererHelper->clearFramebufferWithColor(0, 0, 0, 1);
     
     m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
     
-    m_fillNGRectBatcher->beginBatch();
-    {
-        NGRect r = NGRect(5 - 0.5f, 5 - 0.5f, 1, 1);
-        static Color c = Color(1, 0, 0, 1);
-        m_fillNGRectBatcher->renderNGRect(r, c);
-    }
-    
-    {
-        NGRect r = NGRect(7 - 0.5f, 7 - 0.5f, 1, 1);
-        static Color c = Color(0, 1, 0, 1);
-        m_fillNGRectBatcher->renderNGRect(r, c);
-    }
-    
-    {
-        NGRect r = NGRect(2 - 0.5f, 2 - 0.5f, 1, 1);
-        static Color c = Color(0, 0, 1, 1);
-        m_fillNGRectBatcher->renderNGRect(r, c);
-    }
-    
-    {
-        NGRect r = NGRect(13 - 0.5f, 13 - 0.5f, 1, 1);
-        static Color c = Color(1, 1, 0, 1);
-        m_fillNGRectBatcher->renderNGRect(r, c);
-    }
-    m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
-    
     if (m_demo->gpuTextureWrapper)
     {
-        m_spriteBatcher->beginBatch();
-        {
-            static TextureRegion tr = ASSETS->findTextureRegion("Sonic_Standing");
-            m_spriteBatcher->drawSprite(8, 8, 2, 2, 0, tr);
-        }
-        
-        {
-            TextureRegion tr = ASSETS->findTextureRegion("Sonic_Idle", stateTime);
-            m_spriteBatcher->drawSprite(4, 4, 2, 2, 0, tr);
-        }
+		TextureRegion tr = ASSETS->findTextureRegion("Sonic_Idle", stateTime);
+		
+		m_spriteBatcher->beginBatch(); 
+		m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
+		m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
+		m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
+		m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
     }
 }

@@ -21,11 +21,11 @@
 #include "Assets.h"
 #include "TextureRegion.h"
 
-MainRenderer::MainRenderer() : Renderer(), m_demo(new TextureWrapper("demo"))
+MainRenderer::MainRenderer() : Renderer(), m_demo(new TextureWrapper("main"))
 {
     ASSETS->init(new MainAssetsMapper());
     
-    loadTextureSync(m_demo, "demo");
+    loadTextureSync(m_demo, "main");
 }
 
 MainRenderer::~MainRenderer()
@@ -50,13 +50,21 @@ void MainRenderer::tempDraw(float stateTime, float x1, float y1, float x2, float
     
     if (m_demo->gpuTextureWrapper)
     {
-		TextureRegion tr = ASSETS->findTextureRegion("Sonic_Idle", stateTime);
-		
-		m_spriteBatcher->beginBatch(); 
-		m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
-		m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
-		m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
-		m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
+        m_spriteBatcher->beginBatch();
+        
+        {
+            TextureRegion tr = ASSETS->findTextureRegion("Microwave");
+            m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, tr);
+        }
+        
+        {
+            TextureRegion tr = ASSETS->findTextureRegion("Popcorn", stateTime);
+            m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
+            m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
+            m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
+            m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
+        }
+        
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
     }
 }

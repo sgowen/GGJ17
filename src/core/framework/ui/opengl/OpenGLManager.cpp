@@ -87,44 +87,17 @@ void OpenGLManager::releaseDeviceDependentResources()
 
 void OpenGLManager::createMatrix(float left, float right, float bottom, float top)
 {
-    
-    
     vec3 eye = { 0, 0, 1 };
     vec3 center = { 0, 0, 0 };
     vec3 up = { 0, 1, 0 };
     
     mat4x4 projectionMatrix;
     mat4x4 viewMatrix;
-    mat4x4_identity(viewMatrix);
     
     mat4x4_ortho(projectionMatrix, left, right, bottom, top, -1, 1);
-//    mat4x4_look_at(viewMatrix, eye, center, up);
+    mat4x4_look_at(viewMatrix, eye, center, up);
     
-//    mat4x4_mul(m_viewProjectionMatrix, projectionMatrix, viewMatrix);
-    
-    mat4x4 rotMatrix;
-//    mat4x4_ortho(rotMatrix, left, right, bottom, top, -1, 1);
-    
-    mat4x4 xRotated;
-    mat4x4_identity(xRotated);
-//    mat4x4_ortho(xRotated, left, right, bottom, top, -1, 1);
-    mat4x4_identity(rotMatrix);
-    mat4x4_rotate_X(xRotated, rotMatrix, -30);
-//    mat4x4_ortho(xRotated, left, right, bottom, top, -1, 1);
-    
-    mat4x4 zRotated;
-    mat4x4_identity(zRotated);
-    //    mat4x4_ortho(xRotated, left, right, bottom, top, -1, 1);
-    mat4x4_identity(rotMatrix);
-    mat4x4_rotate_Z(zRotated, rotMatrix, -45);
-    mat4x4_ortho(zRotated, left, right, bottom, top, -1, 1);
-    
-    mat4x4_identity(m_viewProjectionMatrix);
-    mat4x4_ortho(m_viewProjectionMatrix, left, right, bottom, top, -1, 1);
-//    mat4x4_mul(m_viewProjectionMatrix, zRotated, xRotated);
-//    mat4x4_identity(rotMatrix);
-//    mat4x4_ortho(rotMatrix, left, right, bottom, top, -1, 1);
-//    mat4x4_rotate_Z(m_viewProjectionMatrix, rotMatrix, -45);
+    mat4x4_mul(m_viewProjectionMatrix, projectionMatrix, viewMatrix);
 }
 
 void OpenGLManager::addVertexCoordinate(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat u, GLfloat v)

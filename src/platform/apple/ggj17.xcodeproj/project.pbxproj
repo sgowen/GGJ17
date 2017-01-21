@@ -25,6 +25,8 @@
 		BB09CE3C1DBD4701006A3E49 /* AppleSoundManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB09CE391DBD4701006A3E49 /* AppleSoundManager.mm */; };
 		BB12EDD21A1CF6D1006D385B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB12EDD11A1CF6D1006D385B /* MediaPlayer.framework */; };
 		BB12EDD41A1CF6D9006D385B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB12EDD31A1CF6D9006D385B /* QuartzCore.framework */; };
+		BB315CF81E33E55F00A8279B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = BB315CF71E33E55F00A8279B /* main.png */; };
+		BB315CF91E33E55F00A8279B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = BB315CF71E33E55F00A8279B /* main.png */; };
 		BB31DA811E244F6300364974 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31D9981E244F6300364974 /* Entity.cpp */; };
 		BB31DA821E244F6300364974 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31D9981E244F6300364974 /* Entity.cpp */; };
 		BB31DA831E244F6300364974 /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31D99A1E244F6300364974 /* EntityManager.cpp */; };
@@ -218,8 +220,6 @@
 		BBAD146B1E2B13810087C160 /* SuperpoweredSoundCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBAD14681E2B13810087C160 /* SuperpoweredSoundCollection.cpp */; };
 		BBADAEB71E2EC7660093EB2A /* music_demo.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBADAEB41E2EC7660093EB2A /* music_demo.wav */; };
 		BBADAEB81E2EC7660093EB2A /* music_demo.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBADAEB41E2EC7660093EB2A /* music_demo.wav */; };
-		BBADEAA81E2DB2E10077A9B5 /* demo.png in Resources */ = {isa = PBXBuildFile; fileRef = BBADEAA71E2DB2E10077A9B5 /* demo.png */; };
-		BBADEAA91E2DB2E10077A9B5 /* demo.png in Resources */ = {isa = PBXBuildFile; fileRef = BBADEAA71E2DB2E10077A9B5 /* demo.png */; };
 		BBCB71D01DB6AF4B006430B6 /* CocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = BBCB71CC1DB6AF4B006430B6 /* CocoaSecurity.m */; };
 		BBCB71D21DB6AF4B006430B6 /* CocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = BBCB71CC1DB6AF4B006430B6 /* CocoaSecurity.m */; };
 		BBCB71D41DB6AF4B006430B6 /* NSUserDefaults+SecureAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BBCB71CF1DB6AF4B006430B6 /* NSUserDefaults+SecureAdditions.m */; };
@@ -318,6 +318,7 @@
 		BB12EDD31A1CF6D9006D385B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB12EDD71A1CF6F1006D385B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		BB2BB0851DB81ECF000CE5E5 /* GGJ17.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GGJ17.entitlements; sourceTree = "<group>"; };
+		BB315CF71E33E55F00A8279B /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 		BB31D9981E244F6300364974 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		BB31D9991E244F6300364974 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		BB31D99A1E244F6300364974 /* EntityManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
@@ -603,7 +604,6 @@
 		BBADAEB41E2EC7660093EB2A /* music_demo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music_demo.wav; sourceTree = "<group>"; };
 		BBADAEC01E2F12B00093EB2A /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		BBADAEC11E2F12B00093EB2A /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		BBADEAA71E2DB2E10077A9B5 /* demo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo.png; sourceTree = "<group>"; };
 		BBCB71C81DB6A218006430B6 /* texconv.exe */ = {isa = PBXFileReference; lastKnownFileType = file; path = texconv.exe; sourceTree = "<group>"; };
 		BBCB71C91DB6A218006430B6 /* Texconv_readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Texconv_readme.txt; sourceTree = "<group>"; };
 		BBCB71CB1DB6AF4B006430B6 /* CocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaSecurity.h; sourceTree = "<group>"; };
@@ -1245,7 +1245,7 @@
 		BB44C3B01DB03276003E633F /* textures */ = {
 			isa = PBXGroup;
 			children = (
-				BBADEAA71E2DB2E10077A9B5 /* demo.png */,
+				BB315CF71E33E55F00A8279B /* main.png */,
 			);
 			path = textures;
 			sourceTree = "<group>";
@@ -1591,8 +1591,8 @@
 				BB31DAFF1E244F6300364974 /* frame_buffer_to_screen_shader.fsh in Resources */,
 				BB31DAFB1E244F6300364974 /* color_shader.fsh in Resources */,
 				BB44C3471DB0323F003E633F /* MainStoryboard_iPhone.storyboard in Resources */,
-				BBADEAA81E2DB2E10077A9B5 /* demo.png in Resources */,
 				BB44C93B1DB03A7E003E633F /* rapidjson_readme.txt in Resources */,
+				BB315CF81E33E55F00A8279B /* main.png in Resources */,
 				BBADAEB71E2EC7660093EB2A /* music_demo.wav in Resources */,
 				BB31DB091E244F6300364974 /* texture_shader.vsh in Resources */,
 				BB31DB071E244F6300364974 /* texture_shader.fsh in Resources */,
@@ -1611,10 +1611,10 @@
 				BB31DB021E244F6300364974 /* frame_buffer_to_screen_shader.vsh in Resources */,
 				BB31DB081E244F6300364974 /* texture_shader.fsh in Resources */,
 				BB31DB0A1E244F6300364974 /* texture_shader.vsh in Resources */,
-				BBADEAA91E2DB2E10077A9B5 /* demo.png in Resources */,
 				BBADAEB81E2EC7660093EB2A /* music_demo.wav in Resources */,
 				BB31DAFE1E244F6300364974 /* color_shader.vsh in Resources */,
 				BB44C93C1DB03A7E003E633F /* rapidjson_readme.txt in Resources */,
+				BB315CF91E33E55F00A8279B /* main.png in Resources */,
 				BB31DB001E244F6300364974 /* frame_buffer_to_screen_shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

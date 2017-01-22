@@ -92,8 +92,6 @@ void Player::storeHeat(float intensity, int playerIndex)
     m_fHeatManipIntensity = intensity;
     m_fStateTime = 0;
     
-    log();
-    
     int storeHeatSoundId = playerIndex * 10000;
     storeHeatSoundId += SOUND_STORE_HEAT * 1000;
     storeHeatSoundId += intensity * 100;
@@ -107,18 +105,23 @@ void Player::releaseHeat(float intensity, int playerIndex)
         return;
     }
     
-    m_fClamp = 0;
-    m_acceleration.set(0, 0);
-    m_iState = PLAYER_STATE_RELEASING_HEAT;
-    m_fHeatManipIntensity = intensity;
-    m_fStateTime = 0;
-    
-    log();
-    
-    int releaseHeatSoundId = playerIndex * 10000;
-    releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
-    releaseHeatSoundId += intensity * 100;
-    SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
+    if (m_fHeat < 0.4f)
+    {
+        // Not enough heat
+    }
+    else
+    {
+        m_fClamp = 0;
+        m_acceleration.set(0, 0);
+        m_iState = PLAYER_STATE_RELEASING_HEAT;
+        m_fHeatManipIntensity = intensity;
+        m_fStateTime = 0;
+        
+        int releaseHeatSoundId = playerIndex * 10000;
+        releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
+        releaseHeatSoundId += intensity * 100;
+        SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
+    }
 }
 
 void Player::dash()
@@ -137,8 +140,6 @@ void Player::dash()
     m_fStateTime = 0;
     m_fHeat += 0.1f;
     getVelocity().mul(3);
-    
-    log();
 }
 
 void Player::noAction()
@@ -146,8 +147,6 @@ void Player::noAction()
     m_iState = PLAYER_STATE_NONE;
     m_fStateTime = 0;
     m_fClamp = 3;
-    
-    log();
 }
 
 void Player::handleHeatRelease()

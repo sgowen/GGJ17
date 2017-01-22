@@ -501,6 +501,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sound_beep.wav" />
+    <Media Include="Sound_beep2.wav" />
     <Media Include="Sound_Colonel_dash1.wav" />
     <Media Include="Sound_Colonel_dashvoice.wav" />
     <Media Include="Sound_Colonel_hurt1.wav" />

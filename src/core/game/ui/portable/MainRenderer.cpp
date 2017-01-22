@@ -149,7 +149,10 @@ void MainRenderer::mainDraw(float stateTime)
                     circColor.blue = 0.0078431372549f;
                     break;
             }
-            m_circleBatcher->renderCircle(circ, circColor, *m_colorGpuProgramWrapper);
+			if ((*i)->isPopped())
+			{
+				m_circleBatcher->renderCircle(circ, circColor, *m_colorGpuProgramWrapper);
+			}
             
             if ((*i)->isPopped())
             {

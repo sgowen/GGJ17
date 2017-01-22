@@ -201,12 +201,6 @@
     <Image Include="directx.ico">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\assets\textures\main.png">
-      <Filter>Assets\textures</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\assets\textures\scene.png">
-      <Filter>Assets\textures</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest">
@@ -376,5 +370,16 @@
     <Media Include="Sound_music_battleloop.wav">
       <Filter>Assets\music</Filter>
     </Media>
+    <Media Include="Sound_beep2.wav">
+      <Filter>Assets\sounds</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\assets\textures\main.png">
+      <Filter>Assets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\assets\textures\scene.png">
+      <Filter>Assets</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

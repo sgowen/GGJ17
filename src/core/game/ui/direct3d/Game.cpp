@@ -639,6 +639,7 @@ void Game::initSoundEngine()
 	loadSound(L"Sound_music_loseall.wav");
 	loadSound(L"Sound_music_startbattle.wav");
 	loadSound(L"Sound_music_victory.wav");
+	loadSound(L"Sound_beep2.wav");
 }
 
 void Game::loadSound(const wchar_t* waveFileName)

@@ -32,7 +32,7 @@ void OpenGLCircleBatcher::renderCircle(Circle &circle, Color &c, GpuProgramWrapp
         float cos = cosf(rad);
         float sin = sinf(rad);
         
-        OGLManager->addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+        OGLManager->addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
         
         m_iNumPoints++;
     }
@@ -54,7 +54,7 @@ void OpenGLCircleBatcher::renderPartialCircle(Circle &circle, int arcDegrees, Co
         float cos = cosf(rad);
         float sin = sinf(rad);
         
-        OGLManager->addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+        OGLManager->addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
         
         m_iNumPoints++;
     }
@@ -63,7 +63,7 @@ void OpenGLCircleBatcher::renderPartialCircle(Circle &circle, int arcDegrees, Co
     float cos = cosf(rad);
     float sin = sinf(rad);
     
-    OGLManager->addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+    OGLManager->addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
     
     m_iNumPoints++;
     

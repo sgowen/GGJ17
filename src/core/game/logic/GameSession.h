@@ -15,6 +15,7 @@
 
 class PopcornKernel;
 class Player;
+class Circle;
 
 class GameSession
 {
@@ -33,11 +34,14 @@ public:
     
     void setNumPlayersConnected(int numPlayers);
     
+    Circle& getBoundingCircle();
+    
     int getNumPlayersConnected();
     
 private:
     std::vector<PopcornKernel *> m_popcornKernels; // TODO, randomly generate this using a file named "popcorn.bag"
     std::vector<Player *> m_players;
+    Circle* m_circle;
     int m_iNumPlayersConnected;
     
     // ctor, copy ctor, and assignment should be private in a Singleton

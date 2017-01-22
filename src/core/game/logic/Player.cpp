@@ -43,8 +43,6 @@ void Player::update(float deltaTime)
     }
     else if (m_iState == PLAYER_STATE_RELEASING_HEAT)
     {
-        m_fHeat += m_fHeatManipIntensity * deltaTime / 4;
-        
         handleHeatRelease();
     }
     
@@ -53,8 +51,8 @@ void Player::update(float deltaTime)
         float x = getVelocity().getX();
         float y = getVelocity().getY();
         
-        x = clamp(x, 3, -3);
-        y = clamp(y, 3, -3);
+        x = clamp(x, m_fClamp, -m_fClamp);
+        y = clamp(y, m_fClamp, -m_fClamp);
         
         getVelocity().set(x, y);
     }
@@ -67,9 +65,13 @@ void Player::storeHeat(float intensity, int playerIndex)
         return;
     }
     
+    m_acceleration.mul(0.5f);
+    m_fClamp = 1.5f;
     m_iState = PLAYER_STATE_STORING_HEAT;
     m_fHeatManipIntensity = intensity;
     m_fStateTime = 0;
+    
+    log();
     
     int storeHeatSoundId = playerIndex * 10000;
     storeHeatSoundId += SOUND_STORE_HEAT * 1000;
@@ -84,9 +86,13 @@ void Player::releaseHeat(float intensity, int playerIndex)
         return;
     }
     
+    m_fClamp = 0;
+    m_acceleration.set(0, 0);
     m_iState = PLAYER_STATE_RELEASING_HEAT;
     m_fHeatManipIntensity = intensity;
     m_fStateTime = 0;
+    
+    log();
     
     int releaseHeatSoundId = playerIndex * 10000;
     releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
@@ -110,6 +116,17 @@ void Player::dash()
     m_fStateTime = 0;
     m_fHeat += 0.1f;
     getVelocity().mul(3);
+    
+    log();
+}
+
+void Player::noAction()
+{
+    m_iState = PLAYER_STATE_NONE;
+    m_fStateTime = 0;
+    m_fClamp = 3;
+    
+    log();
 }
 
 void Player::handleHeatRelease()

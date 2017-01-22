@@ -35,7 +35,7 @@ void Direct3DCircleBatcher::renderCircle(Circle &circle, Color &c, GpuProgramWra
 		float cos = cosf(rad);
 		float sin = sinf(rad);
 
-		addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+		addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 
 		addVertexCoordinate(circle.getCenter().getX(), circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 	}
@@ -54,7 +54,7 @@ void Direct3DCircleBatcher::renderPartialCircle(Circle &circle, int arcDegrees, 
 		float cos = cosf(rad);
 		float sin = sinf(rad);
 
-		addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+		addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 
 		addVertexCoordinate(circle.getCenter().getX(), circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 	}
@@ -63,7 +63,7 @@ void Direct3DCircleBatcher::renderPartialCircle(Circle &circle, int arcDegrees, 
 	float cos = cosf(rad);
 	float sin = sinf(rad);
 
-	addVertexCoordinate(cos * circle.getRadius() + circle.getCenter().getX(), sin * circle.getRadius() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
+	addVertexCoordinate(cos * circle.getRadiusWidth() + circle.getCenter().getX(), sin * circle.getRadiusHeight() + circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 
 	addVertexCoordinate(circle.getCenter().getX(), circle.getCenter().getY(), 0, c.red, c.green, c.blue, c.alpha);
 

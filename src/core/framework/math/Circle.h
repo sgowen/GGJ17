@@ -14,15 +14,18 @@
 class Circle
 {
 public:
-	Circle(float x, float y, float radius);
+	Circle(float x, float y, float radiusWidth, float radiusHeight);
     
 	Vector2D& getCenter();
     
-    float getRadius();
+    float getRadiusWidth();
+    
+    float getRadiusHeight();
 
 private:
     Vector2D m_center;
-    float m_fRadius;
+    float m_fRadiusWidth;
+    float m_fRadiusHeight;
 };
 
 #endif /* defined(__noctisgames__Circle__) */

@@ -8,7 +8,7 @@
 
 #include "Circle.h"
 
-Circle::Circle(float x, float y, float radius) : m_center(x, y), m_fRadius(radius)
+Circle::Circle(float x, float y, float radiusWidth, float radiusHeight) : m_center(x, y), m_fRadiusWidth(radiusWidth), m_fRadiusHeight(radiusHeight)
 {
     // Empty
 }
@@ -18,7 +18,12 @@ Vector2D& Circle::getCenter()
     return m_center;
 }
 
-float Circle::getRadius()
+float Circle::getRadiusWidth()
 {
-    return m_fRadius;
+    return m_fRadiusWidth;
+}
+
+float Circle::getRadiusHeight()
+{
+    return m_fRadiusHeight;
 }

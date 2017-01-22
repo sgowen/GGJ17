@@ -24,7 +24,7 @@ bool OverlapTester::doCirclesOverlap(Circle &c1, Circle &c2)
     Vector2D c1Center = c1.getCenter();
     Vector2D c2Center = c2.getCenter();
     float distance = c1Center.distSquared(c2Center);
-    float radiusSum = c1.getRadius() + c2.getRadius();
+    float radiusSum = c1.getRadiusWidth() + c2.getRadiusWidth();
     
     return distance <= radiusSum * radiusSum;
 }
@@ -77,28 +77,15 @@ bool OverlapTester::doNGRectsOverlap(NGRect &r1, NGRect &r2)
 
 bool OverlapTester::overlapCircleNGRect(Circle &c, NGRect &r)
 {
-    float closestX = c.getCenter().getX();
-    float closestY = c.getCenter().getY();
+    Vector2D bl = Vector2D(r.getLeft(), r.getBottom());
+    Vector2D br = Vector2D(r.getRight(), r.getBottom());
+    Vector2D tl = Vector2D(r.getLeft(), r.getTop());
+    Vector2D tr = Vector2D(r.getRight(), r.getTop());
     
-    if (c.getCenter().getX() < r.getLeft())
-    {
-        closestX = r.getLeft();
-    }
-    else if (c.getCenter().getX() > r.getLeft() + r.getWidth())
-    {
-        closestX = r.getLeft() + r.getWidth();
-    }
-    
-    if (c.getCenter().getY() < r.getBottom())
-    {
-        closestY = r.getBottom();
-    }
-    else if (c.getCenter().getY() > r.getTop())
-    {
-        closestY = r.getTop();
-    }
-    
-    return c.getCenter().distSquared(closestX, closestY) < c.getRadius() * c.getRadius();
+    return isPointInCircle(bl, c)
+    || isPointInCircle(br, c)
+    || isPointInCircle(tl, c)
+    || isPointInCircle(tr, c);
 }
 
 bool OverlapTester::doesNGRectOverlapTriangle(NGRect &r, Triangle &t)
@@ -113,7 +100,21 @@ bool OverlapTester::isPointInNGRect(Vector2D p, NGRect &r)
 
 bool OverlapTester::isPointInCircle(Vector2D &p, Circle &c)
 {
-    return c.getCenter().distSquared(p) < c.getRadius() * c.getRadius();
+    double _xRadius = c.getRadiusWidth() / 2;
+    double _yRadius = c.getRadiusHeight() / 2;
+    
+    
+    if (_xRadius <= 0.0 || _yRadius <= 0.0)
+        return false;
+    /* This is a more general form of the circle equation
+     *
+     * X^2/a^2 + Y^2/b^2 <= 1
+     */
+    
+    Vector2D normalized = Vector2D(p.getX() - c.getCenter().getX(),
+                                 p.getY() - c.getCenter().getY());
+    
+    return ((double)(normalized.getX() * normalized.getX()) / (_xRadius * _xRadius)) + ((double)(normalized.getY() * normalized.getY()) / (_yRadius * _yRadius)) <= 1.0;
 }
 
 bool OverlapTester::isPointInTriangle(Vector2D &p, Triangle &tr)

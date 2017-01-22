@@ -31,6 +31,8 @@ public:
     
     void dash();
     
+    void noAction();
+    
 private:
     int m_iState;
     float m_fHeatManipIntensity;

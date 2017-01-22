@@ -98,7 +98,7 @@ void MainScreen::update(float deltaTime)
         {
             case STICK_LEFT:
             {
-				GAME_SESSION->getPlayers().at(playerIndex)->getVelocity().set(x * 3, y * 3);
+				GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 6, y * 6);
                 continue;
             }
             case TRIGGER:
@@ -107,11 +107,19 @@ void MainScreen::update(float deltaTime)
 				{
                     GAME_SESSION->getPlayers().at(playerIndex)->storeHeat(x, playerIndex);
 				}
+                else
+                {
+                    GAME_SESSION->getPlayers().at(playerIndex)->noAction();
+                }
 
 				if (y > 0)
 				{
                     GAME_SESSION->getPlayers().at(playerIndex)->releaseHeat(y, playerIndex);
 				}
+                else
+                {
+                    GAME_SESSION->getPlayers().at(playerIndex)->noAction();
+                }
 				continue;
             }
 			case A_BUTTON:

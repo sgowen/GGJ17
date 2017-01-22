@@ -26,7 +26,12 @@ public:
     
     bool isPopped() { return m_isPopped; }
     
+    void pop();
+    
+    void onHit(PopcornKernel* explodingKernel);
+    
 protected:
+    float m_fClamp;
     float m_fHeat;
 	float m_fDelay;
     bool m_isPopped;

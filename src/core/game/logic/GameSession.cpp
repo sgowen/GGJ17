@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "ScreenConstants.h"
 #include "EntityUtil.h"
+#include "Circle.h"
 
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -34,7 +35,7 @@ void GameSession::startGame()
 
 	reset();
 
-	for (int i = 0; i < 333; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
@@ -84,12 +85,17 @@ void GameSession::setNumPlayersConnected(int numPlayers)
 	}
 }
 
+Circle& GameSession::getBoundingCircle()
+{
+    return *m_circle;
+}
+
 int GameSession::getNumPlayersConnected()
 {
     return m_iNumPlayersConnected;
 }
 
-GameSession::GameSession() : m_iNumPlayersConnected(0)
+GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0)
 {
     // Empty
 }

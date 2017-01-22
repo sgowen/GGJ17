@@ -108,4 +108,38 @@ float PhysicalEntity::getAngle()
     return m_fAngle;
 }
 
+#include <iostream>
+
+void PhysicalEntity::log()
+{
+    NGRect& bounds = getMainBounds();
+    
+    using namespace std;
+    cout
+    << "position: ("
+    << getPosition().getX() << ", "
+    << getPosition().getY() << ", "
+    << getWidth() << ", "
+    << getHeight()
+    << ")"
+    << ", "
+    << "bounds: ("
+    << bounds.getLeft() << ", "
+    << bounds.getBottom() << ", "
+    << bounds.getWidth() << ", "
+    << bounds.getHeight()
+    << ")"
+    << ", "
+    << "velocity: ("
+    << m_velocity.getX() << ", "
+    << m_velocity.getY()
+    << ")"
+    << ", "
+    << "acceleration: ("
+    << m_acceleration.getX() << ", "
+    << m_acceleration.getY()
+    << ")"
+    << endl;
+}
+
 RTTI_IMPL(PhysicalEntity, Entity);

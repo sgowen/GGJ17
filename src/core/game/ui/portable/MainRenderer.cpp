@@ -22,8 +22,12 @@
 #include "TextureRegion.h"
 #include "GameSession.h"
 #include "Player.h"
+#include "SinWaveTextureGpuProgramWrapper.h"
+#include "MainGpuProgramWrapperFactory.h"
 
-MainRenderer::MainRenderer() : Renderer(), m_demo(new TextureWrapper("main"))
+MainRenderer::MainRenderer() : Renderer(),
+m_sinWaveGpuProgramWrapper(MAIN_GPU_PROGRAM_WRAPPER_FACTORY->createSinWaveTextureGpuProgramWrapper()),
+m_demo(new TextureWrapper("main"))
 {
     ASSETS->init(new MainAssetsMapper());
     
@@ -37,6 +41,8 @@ MainRenderer::~MainRenderer()
 
 void MainRenderer::mainDraw(float stateTime)
 {
+    m_sinWaveGpuProgramWrapper->setOffset(stateTime / 8);
+    
     m_rendererHelper->clearFramebufferWithColor(0, 0, 0, 1);
     
     m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
@@ -59,16 +65,25 @@ void MainRenderer::mainDraw(float stateTime)
             m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, tr);
         }
         
+        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        
+        m_spriteBatcher->beginBatch();
+        
         {
             TextureRegion tr = ASSETS->findTextureRegion("Logo", stateTime);
             m_spriteBatcher->drawSprite(CAM_WIDTH * 0.39599609375f, CAM_HEIGHT * 0.50453720508167f, CAM_WIDTH * 0.470703125f, CAM_HEIGHT * 0.56261343012704f, 0, tr);
         }
         
+        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        
+        m_spriteBatcher->beginBatch();
         {
             static TextureRegion tr = ASSETS->findTextureRegion("Glare");
             m_spriteBatcher->drawSprite(CAM_WIDTH / 4 - 0.5f, CAM_HEIGHT * 2 / 3, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.27404718693285f, 0, tr);
         }
+        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         
+        m_spriteBatcher->beginBatch();
         {
             int numPlayers = GAME_SESSION->getNumPlayersConnected();
             switch (numPlayers)
@@ -108,34 +123,24 @@ void MainRenderer::mainDraw(float stateTime)
             }
         }
         
-//        {
-//            TextureRegion tr = ASSETS->findTextureRegion("Popcorn", stateTime);
-//            m_spriteBatcher->drawSprite(x1, y1, 2, 2, 0, tr);
-//            m_spriteBatcher->drawSprite(x2, y2, 2, 2, 0, tr);
-//            m_spriteBatcher->drawSprite(x3, y3, 2, 2, 0, tr);
-//            m_spriteBatcher->drawSprite(x4, y4, 2, 2, 0, tr);
-//        }
-        
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         
-        m_fillNGRectBatcher->beginBatch();
+        TextureRegion popcornTr = ASSETS->findTextureRegion("Popcorn", stateTime);
+        TextureRegion poppedTr = ASSETS->findTextureRegion("Popped", stateTime);
+        
+        m_spriteBatcher->beginBatch();
 		for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
 		{
-			NGRect r = NGRect((*i)->getPosition().getX(), (*i)->getPosition().getY(), (*i)->getWidth(), (*i)->getHeight());
-			Color c = Color((*i)->getHeat(), 0, 0, 1);
-			m_fillNGRectBatcher->renderNGRect(r, c);
+            Color c = Color((*i)->getHeat(), 0, 0, 1);
+            
+            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
 		}
 
 		for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
 		{
-			float x = (*i)->getPosition().getX();
-			float y = (*i)->getPosition().getY();
-			float w = (*i)->getWidth();
-			float h = (*i)->getHeight();
-			NGRect r = NGRect(x - w / 2, y - h / 2, w, h);
-			Color c = Color((*i)->getHeat(), 0, 0, 1);
-			m_fillNGRectBatcher->renderNGRect(r, c);
+            Color c = Color((*i)->getHeat(), 0, 0, 1);
+            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
 		}
-        m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
+        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
     }
 }

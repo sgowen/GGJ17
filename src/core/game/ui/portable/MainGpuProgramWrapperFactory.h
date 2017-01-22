@@ -11,7 +11,7 @@
 
 class SinWaveTextureGpuProgramWrapper;
 
-#define GPU_PROGRAM_WRAPPER_FACTORY (MainGpuProgramWrapperFactory::getInstance())
+#define MAIN_GPU_PROGRAM_WRAPPER_FACTORY (MainGpuProgramWrapperFactory::getInstance())
 
 class MainGpuProgramWrapperFactory
 {

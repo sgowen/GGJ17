@@ -9,6 +9,7 @@
 #include "PhysicalEntity.h"
 
 #include "macros.h"
+#include "VectorUtil.h"
 
 PhysicalEntity::PhysicalEntity(float x, float y, float width, float height) : Entity(),
 m_position(x, y),
@@ -18,7 +19,12 @@ m_fWidth(width),
 m_fHeight(height),
 m_fAngle(0)
 {
-    m_bounds.push_back(NGRect(x - width / 2, y - height / 2, width, height));
+    m_bounds.push_back(new NGRect(x - width / 2, y - height / 2, width, height));
+}
+
+PhysicalEntity::~PhysicalEntity()
+{
+    VectorUtil::cleanUpVectorOfPointers(m_bounds);
 }
 
 void PhysicalEntity::update(float deltaTime)
@@ -33,16 +39,16 @@ void PhysicalEntity::update(float deltaTime)
 
 void PhysicalEntity::resetBounds(float width, float height)
 {
-    Vector2D &lowerLeft = m_bounds.at(0).getLowerLeft();
+    Vector2D &lowerLeft = m_bounds.at(0)->getLowerLeft();
     lowerLeft.set(m_position.getX() - width / 2, m_position.getY() - height / 2);
-    m_bounds.at(0).setWidth(width);
-    m_bounds.at(0).setHeight(height);
+    m_bounds.at(0)->setWidth(width);
+    m_bounds.at(0)->setHeight(height);
 }
 
 void PhysicalEntity::updateBounds()
 {
-    Vector2D &lowerLeft = m_bounds.at(0).getLowerLeft();
-    lowerLeft.set(m_position.getX() - m_bounds.at(0).getWidth() / 2, m_position.getY() - m_bounds.at(0).getHeight() / 2);
+    Vector2D &lowerLeft = m_bounds.at(0)->getLowerLeft();
+    lowerLeft.set(m_position.getX() - m_bounds.at(0)->getWidth() / 2, m_position.getY() - m_bounds.at(0)->getHeight() / 2);
 }
 
 void PhysicalEntity::placeOn(float itemTopY)
@@ -67,14 +73,14 @@ Vector2D& PhysicalEntity::getAcceleration()
     return m_acceleration;
 }
 
-std::vector<NGRect>& PhysicalEntity::getBounds()
+std::vector<NGRect*>& PhysicalEntity::getBounds()
 {
     return m_bounds;
 }
 
 NGRect& PhysicalEntity::getMainBounds()
 {
-    return m_bounds.at(0);
+    return *m_bounds.at(0);
 }
 
 const float& PhysicalEntity::getWidth()

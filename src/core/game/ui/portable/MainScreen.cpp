@@ -24,6 +24,10 @@
 #include "GameSession.h"
 #include "Player.h"
 
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
+
 MainScreen::MainScreen() : IScreen(),
 m_deviceHelper(DEVICE_HELPER_FACTORY->createDeviceHelper()),
 m_renderer(new MainRenderer()),
@@ -32,6 +36,10 @@ m_iRequestedUiAction(0)
 {
 	//SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);
     //SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
+    
+#if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
+GAME_SESSION->setNumPlayersConnected(1);
+#endif
 }
 
 MainScreen::~MainScreen()
@@ -90,31 +98,25 @@ void MainScreen::update(float deltaTime)
         {
             case STICK_LEFT:
             {
-				GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 5, y * 5);
+				GAME_SESSION->getPlayers().at(playerIndex)->getVelocity().set(x * 3, y * 3);
                 continue;
             }
             case TRIGGER:
             {
 				if (x > 0)
 				{
-					int storeHeatSoundId = playerIndex * 10000;
-					storeHeatSoundId += SOUND_STORE_HEAT * 1000;
-					storeHeatSoundId += x * 100;
-					SOUND_MANAGER->addSoundIdToPlayQueue(storeHeatSoundId);
+                    GAME_SESSION->getPlayers().at(playerIndex)->storeHeat(x, playerIndex);
 				}
 
 				if (y > 0)
 				{
-					int releaseHeatSoundId = playerIndex * 10000;
-					releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
-					releaseHeatSoundId += y * 100;
-					SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
+                    GAME_SESSION->getPlayers().at(playerIndex)->releaseHeat(y, playerIndex);
 				}
 				continue;
             }
 			case A_BUTTON:
 			{
-				GAME_SESSION->getPlayers().at(playerIndex)->getVelocity().set(0, 0);
+                GAME_SESSION->getPlayers().at(playerIndex)->dash();
 				continue;
 			}
 			case START_BUTTON:

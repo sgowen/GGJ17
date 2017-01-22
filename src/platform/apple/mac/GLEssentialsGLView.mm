@@ -362,7 +362,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
             
             if (keyChar == NSDownArrowFunctionKey)
             {
-                INPUT_MANAGER->onGamePadInput(STICK_RIGHT, 0, 0, -1);
+                INPUT_MANAGER->onGamePadInput(A_BUTTON, 0, 0, 0);
                 
                 [[self window] invalidateCursorRectsForView:self];
                 
@@ -421,6 +421,12 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
                 case 'e':
                 {
                     INPUT_MANAGER->onGamePadInput(TRIGGER, 0, 0, 1);
+                }
+                    return;
+                case 'B':
+                case 'b':
+                {
+                    INPUT_MANAGER->onGamePadInput(START_BUTTON, 0, 0, 0);
                 }
                     return;
                 default:

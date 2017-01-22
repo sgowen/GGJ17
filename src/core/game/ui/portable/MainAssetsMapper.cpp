@@ -27,7 +27,9 @@ void MainAssetsMapper::mapAssets()
     
     ASSETS->getTextureRegionMap()["Glare"] = new TextureRegion("main", 0, 1988, 288, 302, TEXTURE_SIZE_4096);
     
-    ASSETS->getTextureRegionMap()["Popcorn"] = new TextureRegion("main", 1008, 0, 188, 174, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Popcorn"] = new TextureRegion("main", 0, 3200, 264, 332, TEXTURE_SIZE_4096);
+    
+    ASSETS->getTextureRegionMap()["Popped"] = new TextureRegion("main", 266, 3200, 264, 332, TEXTURE_SIZE_4096);
     
 //    ASSETS->getAnimationsMap()["Sonic_Idle"] = new Animation("demo", 34, 48, 32, 40, 204, 40, TEXTURE_SIZE_512, true, 0.1f, 6, 0, 2);
 }

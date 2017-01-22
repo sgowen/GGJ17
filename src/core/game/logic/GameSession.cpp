@@ -34,7 +34,8 @@ void GameSession::startGame()
 	{
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
-		m_popcornKernels.push_back(new PopcornKernel(x, y, 1, 1));
+        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 52));
+		m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
 	}
 }
 
@@ -67,7 +68,7 @@ void GameSession::setNumPlayersConnected(int numPlayers)
 
 	while (m_iNumPlayersConnected > m_players.size())
 	{
-		m_players.push_back(new Player(4, 4, 2, 2));
+		m_players.push_back(new Player(4, 4, 0.4f, 0.4f));
 	}
 }
 

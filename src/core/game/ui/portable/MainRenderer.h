@@ -11,6 +11,7 @@
 
 #include "Renderer.h"
 
+class SinWaveTextureGpuProgramWrapper;
 struct TextureWrapper;
 
 class MainRenderer : public Renderer
@@ -23,6 +24,7 @@ public:
     void mainDraw(float stateTime);
     
 private:
+    SinWaveTextureGpuProgramWrapper* m_sinWaveGpuProgramWrapper;
     TextureWrapper* m_demo;
 };
 

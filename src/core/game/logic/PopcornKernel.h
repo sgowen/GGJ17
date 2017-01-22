@@ -16,15 +16,20 @@ class PopcornKernel : public PhysicalEntity
     RTTI_DECL;
     
 public:
-    PopcornKernel(float x, float y, float width, float height);
+    PopcornKernel(float x, float y, float width, float height, float delay);
     
     virtual void update(float deltaTime);
     
+    void acceptHeatTransfer(float heat);
+    
     float getHeat();
+    
+    bool isPopped() { return m_isPopped; }
     
 protected:
     float m_fHeat;
 	float m_fDelay;
+    bool m_isPopped;
 };
 
 #endif /* PopcornKernel_hpp */

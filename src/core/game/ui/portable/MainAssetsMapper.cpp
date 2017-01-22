@@ -82,5 +82,6 @@ void MainAssetsMapper::mapAssets()
     ASSETS->getTextureRegionMap()["GameOver_Rematch"] = new TextureRegion("main", 1024, 2688, 1024, 512, TEXTURE_SIZE_4096);
     
     ASSETS->getTextureRegionMap()["Microwave_Scene"] = new TextureRegion("scene", 0, 0, 2048, 2048, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Microwave_Game_Scene"] = new TextureRegion("scene", 2052, 718, 407, 229, TEXTURE_SIZE_4096);
     ASSETS->getTextureRegionMap()["Microwave_Cover"] = new TextureRegion("scene", 2052, 0, 736, 684, TEXTURE_SIZE_4096);
 }

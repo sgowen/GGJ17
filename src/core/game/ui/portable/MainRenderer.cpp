@@ -52,25 +52,61 @@ void MainRenderer::mainDraw(float stateTime)
     
     if (GAME_SESSION->isSessionLive())
     {
+        m_sinWaveGpuProgramWrapper->setOffset(stateTime / 12);
+        
         float out = 0;
+        float coverAlpha = 1;
         if (GAME_SESSION->getStateTime() < 3)
         {
             out = 3 - GAME_SESSION->getStateTime();
+            
+            m_rendererHelper->updateMatrix(-CAM_WIDTH * out, CAM_WIDTH + CAM_WIDTH * out, -CAM_HEIGHT * out, CAM_HEIGHT + CAM_HEIGHT * out);
+            
+            m_spriteBatcher->beginBatch();
+            
+            TextureRegion& microwaveScene = ASSETS->findTextureRegion("Microwave_Scene");
+            m_spriteBatcher->drawSprite(CAM_WIDTH / 2 - 0.05520629882812f * CAM_WIDTH * 8.92374727668845f,
+                                        CAM_HEIGHT / 2 - 0.13916015625f * CAM_HEIGHT * 8.82758620689655f,
+                                        CAM_WIDTH * 8.92374727668845f * 0.5625f,
+                                        CAM_HEIGHT * 8.82758620689655f,
+                                        0, microwaveScene);
+            
+            TextureRegion& microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
+            if (out < 1.5f)
+            {
+                coverAlpha = out / 1.5f;
+            }
+            Color microwaveCoverColor = Color(1, 1, 1, coverAlpha);
+            m_spriteBatcher->drawSprite(CAM_WIDTH / 2 - 0.01448359375f * CAM_WIDTH * 8.92374727668845f,
+                                        CAM_HEIGHT / 2 + 0.0415515625f * CAM_HEIGHT * 8.82758620689655f,
+                                        CAM_WIDTH * 1.80835380835381f,
+                                        CAM_HEIGHT * 2.98689956331878f,
+                                        0, microwaveCoverColor, microwaveCover);
+            
+            m_spriteBatcher->endBatch(*m_scene->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        }
+        else
+        {
+            coverAlpha = 0;
+            
+            m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
+            
+            m_spriteBatcher->beginBatch();
+            
+            TextureRegion& microwaveScene = ASSETS->findTextureRegion("Microwave_Game_Scene");
+            m_spriteBatcher->drawSprite(CAM_WIDTH / 2,
+                                        CAM_HEIGHT / 2,
+                                        CAM_WIDTH,
+                                        CAM_HEIGHT,
+                                        0, microwaveScene);
+            
+            m_spriteBatcher->endBatch(*m_scene->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         }
         
-        m_rendererHelper->updateMatrix(-CAM_WIDTH * out, CAM_WIDTH + CAM_WIDTH * out, -CAM_HEIGHT * out, CAM_HEIGHT + CAM_HEIGHT * out);
-        
-        m_sinWaveGpuProgramWrapper->setOffset(stateTime / 12);
-        
-        m_spriteBatcher->beginBatch();
-        
-        TextureRegion& microwavePlate = ASSETS->findTextureRegion("Microwave_Scene");
-        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwavePlate);
-        
-        TextureRegion& microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
-        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwaveCover);
-        
-        m_spriteBatcher->endBatch(*m_scene->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        if (coverAlpha > 0.5f)
+        {
+            return;
+        }
         
         m_spriteBatcher->beginBatch();
         

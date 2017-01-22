@@ -34,4 +34,6 @@ void main()
             gl_FragColor.b = clamp(gl_FragColor.b, 0.0, 1.0);
         }
     }
+    
+    gl_FragColor.a *= v_Color.a;
 }

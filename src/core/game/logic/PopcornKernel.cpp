@@ -30,7 +30,7 @@ void PopcornKernel::update(float deltaTime)
         
         if (m_fDelay < 0)
         {
-            m_fHeat += deltaTime / 6;
+            m_fHeat += deltaTime / 4;
             
             if (m_fHeat > 1)
             {

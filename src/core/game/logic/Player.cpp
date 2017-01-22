@@ -39,11 +39,11 @@ void Player::update(float deltaTime)
     }
     else if (m_iState == PLAYER_STATE_STORING_HEAT)
     {
-        m_fHeat += m_fHeatManipIntensity * deltaTime / 12;
+        m_fHeat += m_fHeatManipIntensity * deltaTime / 4;
     }
     else if (m_iState == PLAYER_STATE_RELEASING_HEAT)
     {
-        m_fHeat += m_fHeatManipIntensity * deltaTime / 12;
+        m_fHeat += m_fHeatManipIntensity * deltaTime / 4;
         
         handleHeatRelease();
     }

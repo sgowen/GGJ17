@@ -30,12 +30,23 @@ void GameSession::startGame()
 	/* initialize random seed: */
 	srand((unsigned int)time(0));
 
+	int numPlayersConnected = m_iNumPlayersConnected;
+
+	reset();
+
 	for (int i = 0; i < 333; i++)
 	{
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
         float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 52));
 		m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
+	}
+
+	m_iNumPlayersConnected = numPlayersConnected;
+	
+	while (m_iNumPlayersConnected > m_players.size())
+	{
+		m_players.push_back(new Player(4, 4, 0.4f, 0.4f));
 	}
 }
 
@@ -47,6 +58,7 @@ void GameSession::update(float deltaTime)
 
 void GameSession::reset()
 {
+	VectorUtil::cleanUpVectorOfPointers(m_popcornKernels);
     VectorUtil::cleanUpVectorOfPointers(m_players);
     
     m_iNumPlayersConnected = 0;

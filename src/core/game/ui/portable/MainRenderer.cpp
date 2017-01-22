@@ -36,6 +36,8 @@ m_demo(new TextureWrapper("main"))
 
 MainRenderer::~MainRenderer()
 {
+	delete m_sinWaveGpuProgramWrapper;
+
     destroyTexture(m_demo);
 }
 

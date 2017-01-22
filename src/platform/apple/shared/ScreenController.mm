@@ -97,7 +97,7 @@
     short musicId;
     while ((musicId = SOUND_MANAGER->getCurrentMusicId()) > MUSIC_NONE)
     {
-		if (musicId > MUSIC_SET_VOLUME)
+		if (musicId >= MUSIC_SET_VOLUME)
 		{
 			[self setMusicVolume:((musicId % 1000) / 100.0f)];
 		}
@@ -186,51 +186,51 @@
 {
     _appleSoundManager = [[AppleSoundManager alloc] init];
     
-    [_appleSoundManager loadSound:@"beep" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_dash1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_dashvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_hurt1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_hurt2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_hurtvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_KO" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_selected" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_storeheat" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Colonel_victory" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"heatempty" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"heatrelease" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"heatstore" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"kernelpop1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"kernelpop2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"kernelpop3" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_dash1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_dash2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_dashvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_hurt1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_hurt2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_hurtvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_KO" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_selected" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_storeheat" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Kobb_victory" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_dash1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_dashvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_hurt1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_hurt2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_hurtvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_KO" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_selected" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_storeheat" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Mazy_victory" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_dash1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_dash2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_dashvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_hurt1" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_hurt2" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_hurtvoice" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_KO" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_selected" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_storeheat" withExtension:@"wav" andNumCopies:4];
-    [_appleSoundManager loadSound:@"Orville_victory" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_beep" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Colonel_dash1" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Colonel_dashvoice" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Colonel_hurt1" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Colonel_hurt2" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Colonel_hurtvoice" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Colonel_KO" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Colonel_selected" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Colonel_storeheat" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Colonel_victory" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_heatempty" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_heatrelease" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_heatstore" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_kernelpop1" withExtension:@"wav" andNumCopies:6];
+    [_appleSoundManager loadSound:@"Sound_kernelpop2" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_kernelpop3" withExtension:@"wav" andNumCopies:6];
+    [_appleSoundManager loadSound:@"Sound_Kobb_dash1" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Kobb_dash2" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Kobb_dashvoice" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Kobb_hurt1" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Kobb_hurt2" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Kobb_hurtvoice" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Kobb_KO" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Kobb_selected" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Kobb_storeheat" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Kobb_victory" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Mazy_dash1" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Mazy_dashvoice" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Mazy_hurt1" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Mazy_hurt2" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Mazy_hurtvoice" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Mazy_KO" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Mazy_selected" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Mazy_storeheat" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Mazy_victory" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_dash1" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_dash2" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_dashvoice" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_hurt1" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Orville_hurt2" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Orville_hurtvoice" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Orville_KO" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_selected" withExtension:@"wav" andNumCopies:1];
+    [_appleSoundManager loadSound:@"Sound_Orville_storeheat" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_Orville_victory" withExtension:@"wav" andNumCopies:4];
     [_appleSoundManager loadSound:@"Sound_music_gamestart" withExtension:@"wav" andNumCopies:4];
     [_appleSoundManager loadSound:@"Sound_music_loseall" withExtension:@"wav" andNumCopies:4];
     [_appleSoundManager loadSound:@"Sound_music_startbattle" withExtension:@"wav" andNumCopies:4];

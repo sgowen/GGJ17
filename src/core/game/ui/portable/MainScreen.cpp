@@ -98,45 +98,65 @@ void MainScreen::update(float deltaTime)
         {
             case STICK_LEFT:
             {
-				GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 6, y * 6);
+                if (GAME_SESSION->isSessionLive())
+                {
+                    GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 6, y * 6);
+                }
                 continue;
             }
             case TRIGGER:
             {
-				if (x > 0)
-				{
-                    GAME_SESSION->getPlayers().at(playerIndex)->storeHeat(x, playerIndex);
-				}
-				else if (y > 0)
-				{
-                    GAME_SESSION->getPlayers().at(playerIndex)->releaseHeat(y, playerIndex);
-				}
-                else
+                if (GAME_SESSION->isSessionLive())
                 {
-                    GAME_SESSION->getPlayers().at(playerIndex)->noAction();
+                    if (x > 0)
+                    {
+                        GAME_SESSION->getPlayers().at(playerIndex)->storeHeat(x);
+                    }
+                    else if (y > 0)
+                    {
+                        GAME_SESSION->getPlayers().at(playerIndex)->releaseHeat(y);
+                    }
+                    else
+                    {
+                        GAME_SESSION->getPlayers().at(playerIndex)->noAction();
+                    }
                 }
 				continue;
             }
 			case A_BUTTON:
 			{
-                GAME_SESSION->getPlayers().at(playerIndex)->dash();
+                if (GAME_SESSION->isSessionLive())
+                {
+                    GAME_SESSION->getPlayers().at(playerIndex)->dash();
+                }
 				continue;
 			}
 			case START_BUTTON:
 			{
-                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
-                SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_gamestart);
+                SOUND_MANAGER->addSoundIdToPlayQueue(Sound_beep);
                 
-				GAME_SESSION->startGame();
+                if (!GAME_SESSION->isSessionLive())
+                {
+                    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
+                    SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_gamestart);
+                    
+                    GAME_SESSION->startGame();
+                }
                 
 				continue;
 			}
             case BACK_BUTTON:
             {
-                GAME_SESSION->reset();
+                if (GAME_SESSION->isSessionLive())
+                {
+                    SOUND_MANAGER->addSoundIdToPlayQueue(Sound_beep);
+                    
+                    GAME_SESSION->reset();
+                    
+                    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_menuloop);
+                    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
+                }
                 
-                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_menuloop);
-                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
                 continue;
             }
             default:

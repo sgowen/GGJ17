@@ -15,6 +15,9 @@
 #include "GameSession.h"
 #include "macros.h"
 #include "OverlapTester.h"
+#include "SoundManager.h"
+#include "SoundConstants.h"
+#include "Player.h"
 
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -48,7 +51,7 @@ void PopcornKernel::update(float deltaTime)
         
         if (m_fDelay < 0)
         {
-            m_fHeat += deltaTime / 4;
+            m_fHeat += deltaTime / 6;
         }
 
 		if (m_fHeat > 1)
@@ -118,13 +121,20 @@ void PopcornKernel::update(float deltaTime)
 	getPosition().set(x, y);
 }
 
-void PopcornKernel::acceptHeatTransfer(float heat)
+void PopcornKernel::acceptHeatTransfer(PopcornKernel* fromPopcornKernel, float heat)
 {
     m_fHeat += heat;
     if (m_fHeat > 1)
     {
         m_fHeat = 0;
 		pop();
+        
+        if (fromPopcornKernel
+            && fromPopcornKernel->getRTTI().derivesFrom(Player::rtti))
+        {
+            Player* fromPlayer = reinterpret_cast<Player *>(fromPopcornKernel);
+            fromPlayer->playKnockOutSound();
+        }
     }
 
 	m_hasReceivedHeatTransfer = true;
@@ -143,6 +153,15 @@ void PopcornKernel::pop()
     }
     
     m_isPopped = true;
+    
+    if (getRTTI().derivesFrom(Player::rtti))
+    {
+        SOUND_MANAGER->addSoundIdToPlayQueue(Sound_kernelpop1);
+    }
+    else
+    {
+        SOUND_MANAGER->addSoundIdToPlayQueue(Sound_kernelpop3);
+    }
     
 	NGRect explodeBounds = NGRect(
 		getMainBounds().getLeft() - getMainBounds().getWidth() * 2,
@@ -184,6 +203,8 @@ void PopcornKernel::onHit(PopcornKernel* explodingKernel)
 
 	m_fKnockedTime = 0;
 	m_isKnocked = true;
+    
+    playHurtSound();
 }
 
 void PopcornKernel::onPushed(PopcornKernel* kernel)

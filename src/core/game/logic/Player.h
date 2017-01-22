@@ -21,19 +21,32 @@ class Player : public PopcornKernel
     RTTI_DECL;
     
 public:
-    Player(float x, float y, float width, float height);
+    Player(int index, float x, float y, float width, float height);
     
     virtual void update(float deltaTime);
     
-    void storeHeat(float intensity, int playerIndex);
+    void storeHeat(float intensity);
     
-    void releaseHeat(float intensity, int playerIndex);
+    void releaseHeat(float intensity);
     
     void dash();
     
     void noAction();
     
+    int getIndex() { return m_iIndex; }
+    
+    void playDashSound();
+    
+    virtual void playHurtSound();
+    
+    void playStoreHeatSound();
+    
+    void playVictorySound();
+    
+    void playKnockOutSound();
+    
 private:
+    int m_iIndex;
     int m_iState;
     float m_fHeatManipIntensity;
     

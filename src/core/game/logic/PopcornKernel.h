@@ -20,7 +20,7 @@ public:
     
     virtual void update(float deltaTime);
     
-    void acceptHeatTransfer(float heat);
+    void acceptHeatTransfer(PopcornKernel* fromPopcornKernel, float heat);
     
     float getHeat();
     
@@ -31,6 +31,8 @@ public:
     void onHit(PopcornKernel* explodingKernel);
 
 	void onPushed(PopcornKernel* pushingKernel);
+    
+    virtual void playHurtSound() {}
     
 protected:
     float m_fClamp;

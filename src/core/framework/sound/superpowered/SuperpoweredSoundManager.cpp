@@ -160,7 +160,7 @@ void SuperpoweredSoundManager::loadMusic(int rawResourceId, const char *path, in
         delete m_music;
     }
     
-    m_music = new SuperpoweredSound(path, m_iSampleRate, rawResourceId, fileOffset, fileLength, 0.5f);
+    m_music = new SuperpoweredSound(path, m_iSampleRate, rawResourceId, fileOffset, fileLength, 1);
 }
 
 void SuperpoweredSoundManager::playMusic(float volume, bool isLooping)

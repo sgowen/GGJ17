@@ -24,6 +24,8 @@
 #include "Player.h"
 #include "SinWaveTextureGpuProgramWrapper.h"
 #include "MainGpuProgramWrapperFactory.h"
+#include "Circle.h"
+#include "CircleBatcher.h"
 
 MainRenderer::MainRenderer() : Renderer(),
 m_sinWaveGpuProgramWrapper(MAIN_GPU_PROGRAM_WRAPPER_FACTORY->createSinWaveTextureGpuProgramWrapper()),
@@ -59,8 +61,15 @@ void MainRenderer::mainDraw(float stateTime)
         
         m_spriteBatcher->beginBatch();
         
-        TextureRegion microwavePlate = ASSETS->findTextureRegion("Microwave_Plate");
-        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, microwavePlate);
+        TextureRegion microwavePlate = ASSETS->findTextureRegion("Microwave_Scene");
+        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwavePlate);
+        
+        TextureRegion microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
+        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwaveCover);
+        
+        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        
+        m_spriteBatcher->beginBatch();
         
         TextureRegion popcornTr = ASSETS->findTextureRegion("Popcorn", stateTime);
         TextureRegion poppedTr = ASSETS->findTextureRegion("Popped", stateTime);
@@ -74,6 +83,35 @@ void MainRenderer::mainDraw(float stateTime)
         
         for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
         {
+            Circle circ = Circle((*i)->getPosition().getX(), (*i)->getMainBounds().getBottom(), (*i)->getWidth() / 2, (*i)->getWidth() / 2);
+            Color circColor = Color(0, 0, 0, 1);
+            switch ((*i)->getIndex())
+            {
+                case 0:
+                    circColor.red = 0.47843137254902f;
+                    circColor.green = 0.44313725490196f;
+                    circColor.blue = 0.35294117647059f;
+                    break;
+                case 1:
+                    circColor.red = 0.63529411764706f;
+                    circColor.green = 0.1921568627451f;
+                    circColor.blue = 0.0078431372549f;
+                    break;
+                case 2:
+                    circColor.red = 0.50588235294118f;
+                    circColor.green = 0.50980392156863f;
+                    circColor.blue = 0.69803921568627f;
+                    break;
+                case 3:
+                    circColor.red = 0.9921568627451f;
+                    circColor.green = 0.64313725490196f;
+                    circColor.blue = 0.0078431372549f;
+                    break;
+                default:
+                    break;
+            }
+            m_circleBatcher->renderCircle(circ, circColor, *m_colorGpuProgramWrapper);
+            
             Color c = Color((*i)->getHeat(), 0, 0, 1);
             renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
         }

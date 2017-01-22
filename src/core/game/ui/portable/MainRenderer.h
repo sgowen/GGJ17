@@ -14,6 +14,9 @@
 class SinWaveTextureGpuProgramWrapper;
 struct TextureWrapper;
 
+class TextureRegion;
+class PopcornKernel;
+
 class MainRenderer : public Renderer
 {
 public:
@@ -27,6 +30,8 @@ private:
     SinWaveTextureGpuProgramWrapper* m_sinWaveGpuProgramWrapper;
     TextureWrapper* m_demo;
     TextureWrapper* m_scene;
+    
+    TextureRegion& calcTextureRegionForKernel(PopcornKernel* popcornKernel);
 };
 
 #endif /* defined(__ggj17__MainRenderer__) */

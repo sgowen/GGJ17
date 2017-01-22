@@ -79,17 +79,11 @@ void MainRenderer::mainDraw(float stateTime)
             Color c = Color((*i)->getHeat(), 0, 0, 1);
 
 			{
-				TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornCom", (*i)->getStateTime());
 				TextureRegion& poppedTr = ASSETS->findTextureRegion("Popped", (*i)->getStateTime());
 
-				renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTrCom, c);
+				renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : calcTextureRegionForKernel((*i)), c);
 			}
         }
-        
-        TextureRegion& popcornTr1 = ASSETS->findTextureRegion("Popcorn1", stateTime);
-        TextureRegion& popcornTr2 = ASSETS->findTextureRegion("Popcorn2", stateTime);
-        TextureRegion& popcornTr3 = ASSETS->findTextureRegion("Popcorn3", stateTime);
-        TextureRegion& popcornTr4 = ASSETS->findTextureRegion("Popcorn4", stateTime);
         
         for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
         {
@@ -130,22 +124,7 @@ void MainRenderer::mainDraw(float stateTime)
             else
             {
                 Color c = Color((*i)->getHeat(), 0, 0, 1);
-                switch ((*i)->getIndex())
-                {
-                    case 0:
-                        renderPhysicalEntityWithColor(*(*i), popcornTr1, c);
-                        break;
-                    case 1:
-                        renderPhysicalEntityWithColor(*(*i), popcornTr2, c);
-                        break;
-                    case 2:
-                        renderPhysicalEntityWithColor(*(*i), popcornTr3, c);
-                        break;
-                    case 3:
-                    default:
-                        renderPhysicalEntityWithColor(*(*i), popcornTr4, c);
-                        break;
-                }
+                renderPhysicalEntityWithColor(*(*i), calcTextureRegionForKernel((*i)), c);
             }
         }
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
@@ -248,6 +227,264 @@ void MainRenderer::mainDraw(float stateTime)
             }
             
             m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        }
+    }
+}
+
+TextureRegion& MainRenderer::calcTextureRegionForKernel(PopcornKernel* popcornKernel)
+{
+    if (popcornKernel->getRTTI().derivesFrom(Player::rtti))
+    {
+        Player* player = reinterpret_cast<Player *>(popcornKernel);
+        
+        float vX = player->getVelocity().getX();
+        float vY = player->getVelocity().getY();
+        if (vX > 1 && vY > 1)
+        {
+            // top right
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1TR", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2TR", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3TR", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4TR", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vX > 1 && vY < -1)
+        {
+            // bottom right
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1BR", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2BR", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3BR", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4BR", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vX < -1 && vY > 1)
+        {
+            // top left
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1TL", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2TL", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3TL", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4TL", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vX < -1 && vY < -1)
+        {
+            // bottom left
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1BL", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2BL", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3BL", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4BL", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vX > 1)
+        {
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1Right", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2Right", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3Right", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4Right", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vX < -1)
+        {
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1Left", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2Left", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3Left", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4Left", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        else if (vY > 1)
+        {
+            switch (player->getIndex())
+            {
+                case 0:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1Top", player->getStateTime());
+                    return tr;
+                }
+                case 1:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2Top", player->getStateTime());
+                    return tr;
+                }
+                case 2:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3Top", player->getStateTime());
+                    return tr;
+                }
+                case 3:
+                default:
+                {
+                    TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4Top", player->getStateTime());
+                    return tr;
+                }
+            }
+        }
+        
+        switch (player->getIndex())
+        {
+            case 0:
+            {
+                TextureRegion& tr = ASSETS->findTextureRegion("Popcorn1Down", player->getStateTime());
+                return tr;
+            }
+            case 1:
+            {
+                TextureRegion& tr = ASSETS->findTextureRegion("Popcorn2Down", player->getStateTime());
+                return tr;
+            }
+            case 2:
+            {
+                TextureRegion& tr = ASSETS->findTextureRegion("Popcorn3Down", player->getStateTime());
+                return tr;
+            }
+            case 3:
+            default:
+            {
+                TextureRegion& tr = ASSETS->findTextureRegion("Popcorn4Down", player->getStateTime());
+                return tr;
+            }
+        }
+    }
+    else
+    {
+        float vX = popcornKernel->getVelocity().getX();
+        float vY = popcornKernel->getVelocity().getY();
+        if (vX > 1)
+        {
+            TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornComRight", popcornKernel->getStateTime());
+            
+            return popcornTrCom;
+        }
+        else if (vX < -1)
+        {
+            TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornComLeft", popcornKernel->getStateTime());
+            
+            return popcornTrCom;
+        }
+        else if (vY > 1)
+        {
+            TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornComTop", popcornKernel->getStateTime());
+            
+            return popcornTrCom;
+        }
+        else
+        {
+            TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornComDown", popcornKernel->getStateTime());
+            
+            return popcornTrCom;
         }
     }
 }

@@ -34,8 +34,8 @@ m_renderer(new MainRenderer()),
 m_fStateTime(0),
 m_iRequestedUiAction(0)
 {
-	//SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_DEMO);
-    //SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
+	SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_menuloop);
+    SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
     
 #if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
 GAME_SESSION->setNumPlayersConnected(1);
@@ -124,12 +124,19 @@ void MainScreen::update(float deltaTime)
 			}
 			case START_BUTTON:
 			{
+                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_STOP);
+                SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_gamestart);
+                
 				GAME_SESSION->startGame();
+                
 				continue;
 			}
             case BACK_BUTTON:
             {
                 GAME_SESSION->reset();
+                
+                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_menuloop);
+                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
                 continue;
             }
             default:

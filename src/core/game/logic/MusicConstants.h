@@ -10,7 +10,8 @@
 #define __ggj17__MusicConstants__
 
 #define MUSIC_NONE 0 // Does Nothing
-#define MUSIC_LOAD_DEMO 1
+#define MUSIC_LOAD_battleloop 1
+#define MUSIC_LOAD_menuloop 2
 
 #define MUSIC_PLAY 1001 // Assuming music is loaded
 #define MUSIC_PLAY_LOOP 1002 // Assuming music is loaded

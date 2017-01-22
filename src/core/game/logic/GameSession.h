@@ -58,6 +58,9 @@ private:
     bool m_isSessionLive;
     int m_iWinningPlayerIndex;
     bool m_hasGameEnded;
+    bool m_startUpSoundHasPlayed;
+    bool m_battleMusicLoopStarted;
+    float m_fGameTime;
     
     // ctor, copy ctor, and assignment should be private in a Singleton
     GameSession();

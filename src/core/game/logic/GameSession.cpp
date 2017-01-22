@@ -16,6 +16,9 @@
 #include "EntityUtil.h"
 #include "Circle.h"
 #include "OverlapTester.h"
+#include "SoundManager.h"
+#include "SoundConstants.h"
+#include "MusicConstants.h"
 
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -67,19 +70,37 @@ void GameSession::startGame()
 	}
     
     m_isSessionLive = true;
-    m_fStateTime = 0;
-    m_iWinningPlayerIndex = -1;
-    m_fGameEndTime = 0;
-    m_hasGameEnded = false;
 }
 
 void GameSession::update(float deltaTime)
 {
+    if (!m_isSessionLive)
+    {
+        return;
+    }
+    
     m_fStateTime += deltaTime;
     
     if (m_fStateTime < 4)
     {
         return;
+    }
+    
+    if (!m_startUpSoundHasPlayed)
+    {
+        SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_battleloop);
+        SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_startbattle);
+        
+        m_startUpSoundHasPlayed = true;
+    }
+    
+    m_fGameTime += deltaTime;
+    if (!m_battleMusicLoopStarted
+        && m_fGameTime > 3.41644)
+    {
+        SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
+        
+        m_battleMusicLoopStarted = true;
     }
     
     if (m_hasGameEnded)
@@ -123,11 +144,15 @@ void GameSession::update(float deltaTime)
     {
         m_iWinningPlayerIndex = winningPlayerIndex;
         m_hasGameEnded = true;
+        
+        SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_victory);
     }
     else if (numKernelsAlive == 0)
     {
         m_iWinningPlayerIndex = -1;
         m_hasGameEnded = true;
+        
+        SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_loseall);
     }
 }
 
@@ -146,6 +171,9 @@ void GameSession::reset()
     m_iWinningPlayerIndex = -1;
     m_fGameEndTime = 0;
     m_hasGameEnded = false;
+    m_startUpSoundHasPlayed = false;
+    m_fGameTime = 0;
+    m_battleMusicLoopStarted = false;
     
 #if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
     setNumPlayersConnected(1);
@@ -182,7 +210,7 @@ int GameSession::getNumPlayersConnected()
     return m_iNumPlayersConnected;
 }
 
-GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0), m_fStateTime(0), m_isSessionLive(false), m_iWinningPlayerIndex(-1), m_hasGameEnded(false), m_fGameEndTime(0)
+GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0), m_fStateTime(0), m_isSessionLive(false), m_iWinningPlayerIndex(-1), m_hasGameEnded(false), m_fGameEndTime(0), m_startUpSoundHasPlayed(false), m_fGameTime(0), m_battleMusicLoopStarted(false)
 {
     // Empty
 }

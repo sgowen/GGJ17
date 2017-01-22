@@ -93,7 +93,7 @@ void Player::storeHeat(float intensity, int playerIndex)
     m_fStateTime = 0;
     
     int storeHeatSoundId = playerIndex * 10000;
-    storeHeatSoundId += SOUND_STORE_HEAT * 1000;
+    storeHeatSoundId += Sound_heatstore * 1000;
     storeHeatSoundId += intensity * 100;
     SOUND_MANAGER->addSoundIdToPlayQueue(storeHeatSoundId);
 }
@@ -118,7 +118,7 @@ void Player::releaseHeat(float intensity, int playerIndex)
         m_fStateTime = 0;
         
         int releaseHeatSoundId = playerIndex * 10000;
-        releaseHeatSoundId += SOUND_RELEASE_HEAT * 1000;
+        releaseHeatSoundId += Sound_heatrelease * 1000;
         releaseHeatSoundId += intensity * 100;
         SOUND_MANAGER->addSoundIdToPlayQueue(releaseHeatSoundId);
     }

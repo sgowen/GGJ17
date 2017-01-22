@@ -27,9 +27,13 @@ void MainAssetsMapper::mapAssets()
     
     ASSETS->getTextureRegionMap()["Glare"] = new TextureRegion("main", 0, 1988, 288, 302, TEXTURE_SIZE_4096);
     
-    ASSETS->getTextureRegionMap()["Popcorn"] = new TextureRegion("main", 0, 3200, 264, 332, TEXTURE_SIZE_4096);
+    ASSETS->getAnimationsMap()["PopcornCom"] = new Animation("main", 2574, 704, 144, 144, 144, 432, TEXTURE_SIZE_4096, true, 0.1f, 3);
+    ASSETS->getAnimationsMap()["Popcorn1"] = new Animation("main", 3438, 704, 144, 144, 144, 432, TEXTURE_SIZE_4096, true, 0.1f, 3);
+    ASSETS->getAnimationsMap()["Popcorn2"] = new Animation("main", 3004, 704, 144, 144, 144, 432, TEXTURE_SIZE_4096, true, 0.1f, 3);
+    ASSETS->getAnimationsMap()["Popcorn3"] = new Animation("main", 3224, 704, 144, 144, 144, 432, TEXTURE_SIZE_4096, true, 0.1f, 3);
+    ASSETS->getAnimationsMap()["Popcorn4"] = new Animation("main", 2788, 704, 144, 144, 144, 432, TEXTURE_SIZE_4096, true, 0.1f, 3);
     
-    ASSETS->getTextureRegionMap()["Popped"] = new TextureRegion("main", 266, 3200, 264, 332, TEXTURE_SIZE_4096);
+    ASSETS->getAnimationsMap()["Popped"] = new Animation("main", 0, 3350, 256, 256, 2048, 512, TEXTURE_SIZE_4096, true, 0.1f, 13);
     
     ASSETS->getAnimationsMap()["Start_Button"] = new Animation("demo", 448, 2442, 312, 68, 626, 68, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
     
@@ -38,6 +42,6 @@ void MainAssetsMapper::mapAssets()
     ASSETS->getTextureRegionMap()["GameOver_Menu"] = new TextureRegion("main", 0, 2688, 1024, 512, TEXTURE_SIZE_4096);
     ASSETS->getTextureRegionMap()["GameOver_Rematch"] = new TextureRegion("main", 1024, 2688, 1024, 512, TEXTURE_SIZE_4096);
     
-    ASSETS->getTextureRegionMap()["Microwave_Scene"] = new TextureRegion("main", 2048, 2048, 2048, 2048, TEXTURE_SIZE_4096);
-    ASSETS->getTextureRegionMap()["Microwave_Cover"] = new TextureRegion("main", 1282, 3200, 736, 684, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Microwave_Scene"] = new TextureRegion("scene", 0, 0, 2048, 2048, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Microwave_Cover"] = new TextureRegion("scene", 2052, 0, 736, 684, TEXTURE_SIZE_4096);
 }

@@ -29,11 +29,13 @@
 
 MainRenderer::MainRenderer() : Renderer(),
 m_sinWaveGpuProgramWrapper(MAIN_GPU_PROGRAM_WRAPPER_FACTORY->createSinWaveTextureGpuProgramWrapper()),
-m_demo(new TextureWrapper("main"))
+m_demo(new TextureWrapper("main")),
+m_scene(new TextureWrapper("scene"))
 {
     ASSETS->init(new MainAssetsMapper());
     
     loadTextureSync(m_demo, "main");
+    loadTextureSync(m_scene, "scene");
 }
 
 MainRenderer::~MainRenderer()
@@ -41,6 +43,7 @@ MainRenderer::~MainRenderer()
 	delete m_sinWaveGpuProgramWrapper;
 
     destroyTexture(m_demo);
+    destroyTexture(m_scene);
 }
 
 void MainRenderer::mainDraw(float stateTime)
@@ -67,19 +70,24 @@ void MainRenderer::mainDraw(float stateTime)
         TextureRegion microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
         m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwaveCover);
         
-        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        m_spriteBatcher->endBatch(*m_scene->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         
         m_spriteBatcher->beginBatch();
         
-        TextureRegion popcornTr = ASSETS->findTextureRegion("Popcorn", stateTime);
+        TextureRegion popcornTrCom = ASSETS->findTextureRegion("PopcornCom", stateTime);
         TextureRegion poppedTr = ASSETS->findTextureRegion("Popped", stateTime);
         
         for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
         {
             Color c = Color((*i)->getHeat(), 0, 0, 1);
             
-            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
+            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTrCom, c);
         }
+        
+        TextureRegion popcornTr1 = ASSETS->findTextureRegion("Popcorn1", stateTime);
+        TextureRegion popcornTr2 = ASSETS->findTextureRegion("Popcorn2", stateTime);
+        TextureRegion popcornTr3 = ASSETS->findTextureRegion("Popcorn3", stateTime);
+        TextureRegion popcornTr4 = ASSETS->findTextureRegion("Popcorn4", stateTime);
         
         for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
         {
@@ -103,17 +111,39 @@ void MainRenderer::mainDraw(float stateTime)
                     circColor.blue = 0.69803921568627f;
                     break;
                 case 3:
+                default:
                     circColor.red = 0.9921568627451f;
                     circColor.green = 0.64313725490196f;
                     circColor.blue = 0.0078431372549f;
                     break;
-                default:
-                    break;
             }
             m_circleBatcher->renderCircle(circ, circColor, *m_colorGpuProgramWrapper);
             
-            Color c = Color((*i)->getHeat(), 0, 0, 1);
-            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
+            if ((*i)->isPopped())
+            {
+                Color c = Color(1, 1, 1, 1);
+                renderPhysicalEntityWithColor(*(*i), poppedTr, c);
+            }
+            else
+            {
+                Color c = Color((*i)->getHeat(), 0, 0, 1);
+                switch ((*i)->getIndex())
+                {
+                    case 0:
+                        renderPhysicalEntityWithColor(*(*i), popcornTr1, c);
+                        break;
+                    case 1:
+                        renderPhysicalEntityWithColor(*(*i), popcornTr2, c);
+                        break;
+                    case 2:
+                        renderPhysicalEntityWithColor(*(*i), popcornTr3, c);
+                        break;
+                    case 3:
+                    default:
+                        renderPhysicalEntityWithColor(*(*i), popcornTr4, c);
+                        break;
+                }
+            }
         }
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
     }

@@ -129,6 +129,8 @@
 		BB31DB461E244F6300364974 /* MainScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31DA7D1E244F6300364974 /* MainScreen.cpp */; };
 		BB31DB471E244F6300364974 /* MainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31DA7F1E244F6300364974 /* MainRenderer.cpp */; };
 		BB31DB481E244F6300364974 /* MainRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB31DA7F1E244F6300364974 /* MainRenderer.cpp */; };
+		BB3541D81E34C83F007FF02F /* scene.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3541D71E34C83F007FF02F /* scene.png */; };
+		BB3541D91E34C83F007FF02F /* scene.png in Resources */ = {isa = PBXBuildFile; fileRef = BB3541D71E34C83F007FF02F /* scene.png */; };
 		BB3BB5D41E2C21B500153E81 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB3BB5D21E2C21B500153E81 /* Renderer.cpp */; };
 		BB3BB5D51E2C21B500153E81 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB3BB5D21E2C21B500153E81 /* Renderer.cpp */; };
 		BB40F60E1A1F9A9F004C7562 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB12EDD71A1CF6F1006D385B /* libc++.dylib */; };
@@ -556,6 +558,7 @@
 		BB31DB881E244FC700364974 /* FrameBufferToScreenVertexShader.hlsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FrameBufferToScreenVertexShader.hlsl; sourceTree = "<group>"; };
 		BB31DB8A1E244FC700364974 /* TexturePixelShader.hlsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TexturePixelShader.hlsl; sourceTree = "<group>"; };
 		BB31DB8B1E244FC700364974 /* TextureVertexShader.hlsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextureVertexShader.hlsl; sourceTree = "<group>"; };
+		BB3541D71E34C83F007FF02F /* scene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene.png; sourceTree = "<group>"; };
 		BB3BB5D21E2C21B500153E81 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		BB3BB5D31E2C21B500153E81 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		BB44C30A1DB0303F003E633F /* GGJ17.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGJ17.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1446,6 +1449,7 @@
 		BB44C3B01DB03276003E633F /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				BB3541D71E34C83F007FF02F /* scene.png */,
 				BB315CF71E33E55F00A8279B /* main.png */,
 			);
 			path = textures;
@@ -1882,6 +1886,7 @@
 				BBEFFCB71E3477B600AA5661 /* Sound_music_loseall.wav in Resources */,
 				BBEFFC651E34743700AA5661 /* Sound_Kobb_dash1.wav in Resources */,
 				BB31DB011E244F6300364974 /* frame_buffer_to_screen_shader.vsh in Resources */,
+				BB3541D81E34C83F007FF02F /* scene.png in Resources */,
 				BBEFFC771E34743700AA5661 /* Sound_Kobb_victory.wav in Resources */,
 				BB44C3441DB0323F003E633F /* InfoPlist.strings in Resources */,
 				BBEFFC671E34743700AA5661 /* Sound_Kobb_dash2.wav in Resources */,
@@ -1993,6 +1998,7 @@
 				BBEFFC941E34743700AA5661 /* Sound_Orville_hurt2.wav in Resources */,
 				BBEFFC7A1E34743700AA5661 /* Sound_Mazy_dash1.wav in Resources */,
 				BB315CF91E33E55F00A8279B /* main.png in Resources */,
+				BB3541D91E34C83F007FF02F /* scene.png in Resources */,
 				BBEFFC961E34743700AA5661 /* Sound_Orville_hurtvoice.wav in Resources */,
 				BBEFFC841E34743700AA5661 /* Sound_Mazy_KO.wav in Resources */,
 				BBEFFC761E34743700AA5661 /* Sound_Kobb_storeheat.wav in Resources */,

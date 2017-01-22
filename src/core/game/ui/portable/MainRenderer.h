@@ -26,6 +26,7 @@ public:
 private:
     SinWaveTextureGpuProgramWrapper* m_sinWaveGpuProgramWrapper;
     TextureWrapper* m_demo;
+    TextureWrapper* m_scene;
 };
 
 #endif /* defined(__ggj17__MainRenderer__) */

@@ -31,5 +31,9 @@ void MainAssetsMapper::mapAssets()
     
     ASSETS->getTextureRegionMap()["Popped"] = new TextureRegion("main", 266, 3200, 264, 332, TEXTURE_SIZE_4096);
     
-//    ASSETS->getAnimationsMap()["Sonic_Idle"] = new Animation("demo", 34, 48, 32, 40, 204, 40, TEXTURE_SIZE_512, true, 0.1f, 6, 0, 2);
+    ASSETS->getTextureRegionMap()["Microwave_Plate"] = new TextureRegion("main", 2052, 624, 428, 198, TEXTURE_SIZE_4096);
+    
+    ASSETS->getAnimationsMap()["Start_Button"] = new Animation("demo", 2048, 2448, 312, 68, 626, 68, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
+    
+    ASSETS->getAnimationsMap()["Zero_Clock"] = new Animation("demo", 2048, 2048, 314, 132, 630, 132, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
 }

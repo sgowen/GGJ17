@@ -15,7 +15,8 @@ typedef enum
 	STICK_RIGHT,
     TRIGGER,
 	A_BUTTON,
-	START_BUTTON
+	START_BUTTON,
+    BACK_BUTTON
 } GamePad_Event_Type;
 
 #endif /* defined(__noctisgames__GamePadEventType__) */

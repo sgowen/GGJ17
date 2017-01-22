@@ -43,106 +43,140 @@ MainRenderer::~MainRenderer()
 
 void MainRenderer::mainDraw(float stateTime)
 {
-    m_sinWaveGpuProgramWrapper->setOffset(stateTime / 8);
-    
     m_rendererHelper->clearFramebufferWithColor(0, 0, 0, 1);
     
-    m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
-    
-    m_fillNGRectBatcher->beginBatch();
+    if (GAME_SESSION->isSessionLive())
     {
-        NGRect r = NGRect(0, 0, CAM_WIDTH, CAM_HEIGHT);
-        static Color c = Color(0, 1, 0, 1);
-        m_fillNGRectBatcher->renderNGRect(r, c);
-    }
-    
-    m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
-    
-    if (m_demo->gpuTextureWrapper)
-    {
-        m_spriteBatcher->beginBatch();
-        
+        float out = 0;
+        if (GAME_SESSION->getStateTime() < 3)
         {
-            static TextureRegion tr = ASSETS->findTextureRegion("Microwave");
-            m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, tr);
+            out = 3 - GAME_SESSION->getStateTime();
         }
         
-        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        m_rendererHelper->updateMatrix(-CAM_WIDTH * out, CAM_WIDTH + CAM_WIDTH * out, -CAM_HEIGHT * out, CAM_HEIGHT + CAM_HEIGHT * out);
+        
+        m_sinWaveGpuProgramWrapper->setOffset(stateTime / 12);
         
         m_spriteBatcher->beginBatch();
         
-        {
-            TextureRegion tr = ASSETS->findTextureRegion("Logo", stateTime);
-            m_spriteBatcher->drawSprite(CAM_WIDTH * 0.39599609375f, CAM_HEIGHT * 0.50453720508167f, CAM_WIDTH * 0.470703125f, CAM_HEIGHT * 0.56261343012704f, 0, tr);
-        }
-        
-        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
-        
-        m_spriteBatcher->beginBatch();
-        {
-            static TextureRegion tr = ASSETS->findTextureRegion("Glare");
-            m_spriteBatcher->drawSprite(CAM_WIDTH / 4 - 0.5f, CAM_HEIGHT * 2 / 3, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.27404718693285f, 0, tr);
-        }
-        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
-        
-        m_spriteBatcher->beginBatch();
-        {
-            int numPlayers = GAME_SESSION->getNumPlayersConnected();
-            switch (numPlayers)
-            {
-                case 0:
-                {
-                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad0");
-                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
-                }
-                    break;
-                case 1:
-                {
-                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad1");
-                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
-                }
-                    break;
-                case 2:
-                {
-                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad2");
-                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
-                }
-                    break;
-                case 3:
-                {
-                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad3");
-                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
-                }
-                    break;
-                case 4:
-                {
-                    static TextureRegion tr = ASSETS->findTextureRegion("NumPad4");
-                    m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT - 3, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
-                }
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        TextureRegion microwavePlate = ASSETS->findTextureRegion("Microwave_Plate");
+        m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, microwavePlate);
         
         TextureRegion popcornTr = ASSETS->findTextureRegion("Popcorn", stateTime);
         TextureRegion poppedTr = ASSETS->findTextureRegion("Popped", stateTime);
         
-        m_spriteBatcher->beginBatch();
-		for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
-		{
+        for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
+        {
             Color c = Color((*i)->getHeat(), 0, 0, 1);
             
             renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
-		}
-
-		for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
-		{
+        }
+        
+        for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
+        {
             Color c = Color((*i)->getHeat(), 0, 0, 1);
             renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTr, c);
-		}
+        }
         m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+    }
+    else
+    {
+        m_rendererHelper->updateMatrix(0, CAM_WIDTH, 0, CAM_HEIGHT);
+        
+        m_fillNGRectBatcher->beginBatch();
+        {
+            NGRect r = NGRect(0, 0, CAM_WIDTH, CAM_HEIGHT);
+            static Color c = Color(0, 1, 0, 1);
+            m_fillNGRectBatcher->renderNGRect(r, c);
+        }
+        
+        m_fillNGRectBatcher->endBatch(*m_colorGpuProgramWrapper);
+        
+        if (m_demo->gpuTextureWrapper)
+        {
+            m_spriteBatcher->beginBatch();
+            
+            {
+                static TextureRegion tr = ASSETS->findTextureRegion("Microwave");
+                m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT, 0, tr);
+            }
+            
+            m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+            
+            m_spriteBatcher->beginBatch();
+            
+            {
+                TextureRegion tr = ASSETS->findTextureRegion("Logo", stateTime);
+                m_spriteBatcher->drawSprite(CAM_WIDTH * 0.39599609375f, CAM_HEIGHT * 0.50453720508167f, CAM_WIDTH * 0.470703125f, CAM_HEIGHT * 0.56261343012704f, 0, tr);
+            }
+            
+            m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+            
+            m_spriteBatcher->beginBatch();
+            {
+                static TextureRegion tr = ASSETS->findTextureRegion("Glare");
+                m_spriteBatcher->drawSprite(CAM_WIDTH / 4 - 0.5f, CAM_HEIGHT * 2 / 3, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.27404718693285f, 0, tr);
+            }
+            
+            {
+                int numPlayers = GAME_SESSION->getNumPlayersConnected();
+                float startButtonTime = 0;
+                if (numPlayers > 0)
+                {
+                    startButtonTime = stateTime;
+                }
+                
+                TextureRegion tr = ASSETS->findTextureRegion("Start_Button", startButtonTime);
+                m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.12704174228675f, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.06170598911071f, 0, tr);
+            }
+            
+            {
+                TextureRegion tr = ASSETS->findTextureRegion("Zero_Clock", stateTime);
+                m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.87295825771325f, CAM_WIDTH * 0.140625f, CAM_HEIGHT * 0.11978221415608f, 0, tr);
+            }
+            m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+            
+            m_spriteBatcher->beginBatch();
+            {
+                int numPlayers = GAME_SESSION->getNumPlayersConnected();
+                switch (numPlayers)
+                {
+                    case 0:
+                    {
+                        static TextureRegion tr = ASSETS->findTextureRegion("NumPad0");
+                        m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.6016333938294f, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                    }
+                        break;
+                    case 1:
+                    {
+                        static TextureRegion tr = ASSETS->findTextureRegion("NumPad1");
+                        m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.6016333938294f, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                    }
+                        break;
+                    case 2:
+                    {
+                        static TextureRegion tr = ASSETS->findTextureRegion("NumPad2");
+                        m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.6016333938294f, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                    }
+                        break;
+                    case 3:
+                    {
+                        static TextureRegion tr = ASSETS->findTextureRegion("NumPad3");
+                        m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.6016333938294f, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                    }
+                        break;
+                    case 4:
+                    {
+                        static TextureRegion tr = ASSETS->findTextureRegion("NumPad4");
+                        m_spriteBatcher->drawSprite(CAM_WIDTH * 0.876953125f, CAM_HEIGHT * 0.6016333938294f, CAM_WIDTH * 0.1484375f, CAM_HEIGHT * 0.23411978221416f, 0, tr);
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            m_spriteBatcher->endBatch(*m_demo->gpuTextureWrapper, *m_textureGpuProgramWrapper);
+        }
     }
 }

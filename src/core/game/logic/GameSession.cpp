@@ -29,6 +29,11 @@ GameSession* GameSession::getInstance()
 
 void GameSession::startGame()
 {
+    if (m_isSessionLive)
+    {
+        return;
+    }
+    
 	/* initialize random seed: */
 	srand((unsigned int)time(0));
 
@@ -60,13 +65,75 @@ void GameSession::startGame()
 	{
 		m_players.push_back(new Player(4, 4, 0.4f, 0.4f));
 	}
+    
+    m_isSessionLive = true;
+    m_fStateTime = 0;
+    m_iWinningPlayerIndex = -1;
+    m_fGameEndTime = 0;
+    m_hasGameEnded = false;
 }
 
 void GameSession::update(float deltaTime)
 {
-	EntityUtil::updateAndClean(m_popcornKernels, deltaTime);
-	EntityUtil::update(m_players, deltaTime);
+    m_fStateTime += deltaTime;
+    
+    if (m_fStateTime < 4)
+    {
+        return;
+    }
+    
+    if (m_hasGameEnded)
+    {
+        m_fGameEndTime += deltaTime;
+        
+        if (m_iWinningPlayerIndex > -1)
+        {
+            Player* player = m_players.at(m_iWinningPlayerIndex);
+            player->update(deltaTime);
+        }
+        
+        return;
+    }
+    
+    EntityUtil::updateAndClean(m_popcornKernels, deltaTime);
+    EntityUtil::update(m_players, deltaTime);
+    
+    int winningPlayerIndex = -1;
+    int numKernelsAlive = 0;
+    for (int i = 0; i < m_players.size(); i++)
+    {
+        Player* player = m_players.at(i);
+        if (!player->isPopped())
+        {
+            winningPlayerIndex = i;
+            numKernelsAlive++;
+        }
+    }
+    
+    for (int i = 0; i < m_popcornKernels.size(); i++)
+    {
+        PopcornKernel* popcornKernel = m_popcornKernels.at(i);
+        if (!popcornKernel->isPopped())
+        {
+            numKernelsAlive++;
+        }
+    }
+    
+    if (numKernelsAlive == 1)
+    {
+        m_iWinningPlayerIndex = winningPlayerIndex;
+        m_hasGameEnded = true;
+    }
+    else if (numKernelsAlive == 0)
+    {
+        m_iWinningPlayerIndex = -1;
+        m_hasGameEnded = true;
+    }
 }
+
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#endif
 
 void GameSession::reset()
 {
@@ -74,6 +141,15 @@ void GameSession::reset()
     VectorUtil::cleanUpVectorOfPointers(m_players);
     
     m_iNumPlayersConnected = 0;
+    m_isSessionLive = false;
+    m_fStateTime = 0;
+    m_iWinningPlayerIndex = -1;
+    m_fGameEndTime = 0;
+    m_hasGameEnded = false;
+    
+#if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
+    setNumPlayersConnected(1);
+#endif
 }
 
 std::vector<PopcornKernel *>& GameSession::getPopcornKernels()
@@ -106,7 +182,7 @@ int GameSession::getNumPlayersConnected()
     return m_iNumPlayersConnected;
 }
 
-GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0)
+GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0), m_fStateTime(0), m_isSessionLive(false), m_iWinningPlayerIndex(-1), m_hasGameEnded(false), m_fGameEndTime(0)
 {
     // Empty
 }

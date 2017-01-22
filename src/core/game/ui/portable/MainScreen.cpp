@@ -127,6 +127,11 @@ void MainScreen::update(float deltaTime)
 				GAME_SESSION->startGame();
 				continue;
 			}
+            case BACK_BUTTON:
+            {
+                GAME_SESSION->reset();
+                continue;
+            }
             default:
                 break;
         }

@@ -173,7 +173,14 @@ void Game::Update(DX::StepTimer const& timer)
             
 			if (gamePadState.IsViewPressed())
 			{
-				PostQuitMessage(0);
+                if (GAME_SESSION->isSessionLive())
+                {
+                    INPUT_MANAGER->onGamePadInput(BACK_BUTTON, i, 0, 0);
+                }
+                else
+                {
+                    PostQuitMessage(0);
+                }
 			}
 
 			m_buttons.Update(gamePadState);

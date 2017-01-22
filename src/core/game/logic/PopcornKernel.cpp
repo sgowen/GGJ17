@@ -180,7 +180,7 @@ void PopcornKernel::onHit(PopcornKernel* explodingKernel)
     float cos = cosf(radians);
     float sin = sinf(radians);
     
-    m_velocity.set(cos * (2 - dist), sin * (2 - dist));
+    m_velocity.set(cos * (2 - dist) * 2, sin * (2 - dist) * 2);
 
 	m_fKnockedTime = 0;
 	m_isKnocked = true;

@@ -38,11 +38,26 @@ public:
     
     int getNumPlayersConnected();
     
+    bool isSessionLive() { return m_isSessionLive; }
+    
+    float getStateTime() { return m_fStateTime; }
+    
+    int getWinningPlayerIndex() { return m_iWinningPlayerIndex; }
+    
+    bool hasGameEnded() { return m_hasGameEnded; }
+    
+    float getGameEndTime() { return m_fGameEndTime; }
+    
 private:
     std::vector<PopcornKernel *> m_popcornKernels; // TODO, randomly generate this using a file named "popcorn.bag"
     std::vector<Player *> m_players;
     Circle* m_circle;
     int m_iNumPlayersConnected;
+    float m_fStateTime;
+    float m_fGameEndTime;
+    bool m_isSessionLive;
+    int m_iWinningPlayerIndex;
+    bool m_hasGameEnded;
     
     // ctor, copy ctor, and assignment should be private in a Singleton
     GameSession();

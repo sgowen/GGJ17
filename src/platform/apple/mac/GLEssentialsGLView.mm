@@ -429,6 +429,12 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink,
                     INPUT_MANAGER->onGamePadInput(START_BUTTON, 0, 0, 0);
                 }
                     return;
+                case 'X':
+                case 'x':
+                {
+                    INPUT_MANAGER->onGamePadInput(BACK_BUTTON, 0, 0, 0);
+                }
+                    return;
                 default:
                     break;
             }

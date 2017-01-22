@@ -474,14 +474,57 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="music_demo.wav">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </Media>
-    <Media Include="sound_release.wav" />
-    <Media Include="sound_store.wav" />
+    <Media Include="Sound_beep.wav" />
+    <Media Include="Sound_Colonel_dash1.wav" />
+    <Media Include="Sound_Colonel_dashvoice.wav" />
+    <Media Include="Sound_Colonel_hurt1.wav" />
+    <Media Include="Sound_Colonel_hurt2.wav" />
+    <Media Include="Sound_Colonel_hurtvoice.wav" />
+    <Media Include="Sound_Colonel_KO.wav" />
+    <Media Include="Sound_Colonel_selected.wav" />
+    <Media Include="Sound_Colonel_storeheat.wav" />
+    <Media Include="Sound_Colonel_victory.wav" />
+    <Media Include="Sound_heatempty.wav" />
+    <Media Include="Sound_heatrelease.wav" />
+    <Media Include="Sound_heatstore.wav" />
+    <Media Include="Sound_kernelpop1.wav" />
+    <Media Include="Sound_kernelpop2.wav" />
+    <Media Include="Sound_kernelpop3.wav" />
+    <Media Include="Sound_Kobb_dash1.wav" />
+    <Media Include="Sound_Kobb_dash2.wav" />
+    <Media Include="Sound_Kobb_dashvoice.wav" />
+    <Media Include="Sound_Kobb_hurt1.wav" />
+    <Media Include="Sound_Kobb_hurt2.wav" />
+    <Media Include="Sound_Kobb_hurtvoice.wav" />
+    <Media Include="Sound_Kobb_KO.wav" />
+    <Media Include="Sound_Kobb_selected.wav" />
+    <Media Include="Sound_Kobb_storeheat.wav" />
+    <Media Include="Sound_Kobb_victory.wav" />
+    <Media Include="Sound_Mazy_dash1.wav" />
+    <Media Include="Sound_Mazy_dashvoice.wav" />
+    <Media Include="Sound_Mazy_hurt1.wav" />
+    <Media Include="Sound_Mazy_hurt2.wav" />
+    <Media Include="Sound_Mazy_hurtvoice.wav" />
+    <Media Include="Sound_Mazy_KO.wav" />
+    <Media Include="Sound_Mazy_selected.wav" />
+    <Media Include="Sound_Mazy_storeheat.wav" />
+    <Media Include="Sound_Mazy_victory.wav" />
+    <Media Include="Sound_music_battleloop.wav" />
+    <Media Include="Sound_music_gamestart.wav" />
+    <Media Include="Sound_music_loseall.wav" />
+    <Media Include="Sound_music_menuloop.wav" />
+    <Media Include="Sound_music_startbattle.wav" />
+    <Media Include="Sound_music_victory.wav" />
+    <Media Include="Sound_Orville_dash1.wav" />
+    <Media Include="Sound_Orville_dash2.wav" />
+    <Media Include="Sound_Orville_dashvoice.wav" />
+    <Media Include="Sound_Orville_hurt1.wav" />
+    <Media Include="Sound_Orville_hurt2.wav" />
+    <Media Include="Sound_Orville_hurtvoice.wav" />
+    <Media Include="Sound_Orville_KO.wav" />
+    <Media Include="Sound_Orville_selected.wav" />
+    <Media Include="Sound_Orville_storeheat.wav" />
+    <Media Include="Sound_Orville_victory.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

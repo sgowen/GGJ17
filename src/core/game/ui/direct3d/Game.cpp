@@ -177,10 +177,6 @@ void Game::Update(DX::StepTimer const& timer)
                 {
                     INPUT_MANAGER->onGamePadInput(BACK_BUTTON, i, 0, 0);
                 }
-                else
-                {
-                    PostQuitMessage(0);
-                }
 			}
 
 			m_buttons.Update(gamePadState);
@@ -487,32 +483,39 @@ void Game::OnDeviceRestored()
 #pragma region Audio
 void Game::handleSound()
 {
-	short rawSoundId;
-	short playerIndex;
-	short soundId;
+	int rawSoundId;
+	int playerIndex;
+	int soundId;
 	while ((rawSoundId = SOUND_MANAGER->getCurrentSoundId()) > SOUND_NONE)
 	{
-		playerIndex = 0;
-		while (rawSoundId >= 10000)
+		if (rawSoundId > 10000)
 		{
-			rawSoundId -= 10000;
-			playerIndex++;
-		}
+			playerIndex = 0;
+			while (rawSoundId >= 10000)
+			{
+				rawSoundId -= 10000;
+				playerIndex++;
+			}
 
-		soundId = 0;
-		while (rawSoundId >= 1000)
+			soundId = 0;
+			while (rawSoundId >= 1000)
+			{
+				rawSoundId -= 1000;
+				soundId++;
+			}
+
+			playMultiSound(playerIndex, soundId, (rawSoundId / 100.0f));
+		}
+		else
 		{
-			rawSoundId -= 1000;
-			soundId++;
+			playSound(rawSoundId);
 		}
-
-		playMultiSound(playerIndex, soundId, (rawSoundId / 100.0f));
 	}
 }
 
 void Game::handleMusic()
 {
-	short musicId;
+	int musicId;
     while ((musicId = SOUND_MANAGER->getCurrentMusicId()) > MUSIC_NONE)
     {
 		if (musicId > MUSIC_SET_VOLUME)
@@ -526,8 +529,11 @@ void Game::handleMusic()
 		{
 			switch (musicId)
 			{
-			case MUSIC_LOAD_DEMO:
-				loadMusic(L"music_demo.wav");
+			case MUSIC_LOAD_battleloop:
+				loadMusic(L"Sound_music_battleloop.wav");
+				break;
+			case MUSIC_LOAD_menuloop:
+				loadMusic(L"Sound_music_menuloop.wav");
 				break;
 			case MUSIC_PLAY:
 				if (m_musicLoop)
@@ -576,7 +582,7 @@ void Game::playSound(int soundId)
 
 void Game::playMultiSound(int playerIndex, int soundId, float volume)
 {
-	int finalIndex = (soundId - 1) * 4 + playerIndex;
+	int finalIndex = (soundId - Sound_heatrelease) * 4 + playerIndex;
 	if (finalIndex < m_activeSounds.size())
 	{
 		if (m_activeSounds.at(finalIndex)->GetState() == PLAYING)
@@ -615,8 +621,55 @@ void Game::initSoundEngine()
 	m_audEngine = std::make_unique<AudioEngine>(eflags);
 	m_retryAudio = false;
 
-	loadMultiSound(L"sound_store.wav");
-	loadMultiSound(L"sound_release.wav");
+	loadSound(L"Sound_beep.wav");
+	loadSound(L"Sound_Colonel_dash1.wav");
+	loadSound(L"Sound_Colonel_dashvoice.wav");
+	loadSound(L"Sound_Colonel_hurt1.wav");
+	loadSound(L"Sound_Colonel_hurt2.wav");
+	loadSound(L"Sound_Colonel_hurtvoice.wav");
+	loadSound(L"Sound_Colonel_KO.wav");
+	loadSound(L"Sound_Colonel_selected.wav");
+	loadSound(L"Sound_Colonel_storeheat.wav");
+	loadSound(L"Sound_Colonel_victory.wav");
+	loadSound(L"Sound_heatempty.wav");
+	loadMultiSound(L"Sound_heatrelease.wav");
+	loadMultiSound(L"Sound_heatstore.wav");
+	loadSound(L"Sound_kernelpop1.wav");
+	loadSound(L"Sound_kernelpop2.wav");
+	loadSound(L"Sound_kernelpop3.wav");
+	loadSound(L"Sound_Kobb_dash1.wav");
+	loadSound(L"Sound_Kobb_dash2.wav");
+	loadSound(L"Sound_Kobb_dashvoice.wav");
+	loadSound(L"Sound_Kobb_hurt1.wav");
+	loadSound(L"Sound_Kobb_hurt2.wav");
+	loadSound(L"Sound_Kobb_hurtvoice.wav");
+	loadSound(L"Sound_Kobb_KO.wav");
+	loadSound(L"Sound_Kobb_selected.wav");
+	loadSound(L"Sound_Kobb_storeheat.wav");
+	loadSound(L"Sound_Kobb_victory.wav");
+	loadSound(L"Sound_Mazy_dash1.wav");
+	loadSound(L"Sound_Mazy_dashvoice.wav");
+	loadSound(L"Sound_Mazy_hurt1.wav");
+	loadSound(L"Sound_Mazy_hurt2.wav");
+	loadSound(L"Sound_Mazy_hurtvoice.wav");
+	loadSound(L"Sound_Mazy_KO.wav");
+	loadSound(L"Sound_Mazy_selected.wav");
+	loadSound(L"Sound_Mazy_storeheat.wav");
+	loadSound(L"Sound_Mazy_victory.wav");
+	loadSound(L"Sound_Orville_dash1.wav");
+	loadSound(L"Sound_Orville_dash2.wav");
+	loadSound(L"Sound_Orville_dashvoice.wav");
+	loadSound(L"Sound_Orville_hurt1.wav");
+	loadSound(L"Sound_Orville_hurt2.wav");
+	loadSound(L"Sound_Orville_hurtvoice.wav");
+	loadSound(L"Sound_Orville_KO.wav");
+	loadSound(L"Sound_Orville_selected.wav");
+	loadSound(L"Sound_Orville_storeheat.wav");
+	loadSound(L"Sound_Orville_victory.wav");
+	loadSound(L"Sound_music_gamestart.wav");
+	loadSound(L"Sound_music_loseall.wav");
+	loadSound(L"Sound_music_startbattle.wav");
+	loadSound(L"Sound_music_victory.wav");
 }
 
 void Game::loadSound(const wchar_t* waveFileName)

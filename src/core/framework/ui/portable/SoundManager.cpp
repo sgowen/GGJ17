@@ -14,28 +14,28 @@ SoundManager* SoundManager::getInstance()
     return instance;
 }
 
-short SoundManager::getCurrentMusicId()
+int SoundManager::getCurrentMusicId()
 {
-    short musicId = getFirstMusicId();
+    int musicId = getFirstMusicId();
     eraseFirstMusicId();
     
     return musicId;
 }
 
-short SoundManager::getCurrentSoundId()
+int SoundManager::getCurrentSoundId()
 {
-    short playThisSound = getFirstSoundId();
+    int playThisSound = getFirstSoundId();
     eraseFirstSoundId();
     
     return playThisSound;
 }
 
-short SoundManager::getFirstSoundId()
+int SoundManager::getFirstSoundId()
 {
     return m_sSoundIds.size() > 0 ? m_sSoundIds.front() : 0;
 }
 
-void SoundManager::addSoundIdToPlayQueue(short soundId)
+void SoundManager::addSoundIdToPlayQueue(int soundId)
 {
     if (m_sSoundIds.size() < MAX_SOUNDS_TO_PLAY_PER_FRAME)
     {
@@ -43,7 +43,7 @@ void SoundManager::addSoundIdToPlayQueue(short soundId)
     }
 }
 
-void SoundManager::forceAddSoundIdToPlayQueue(short soundId)
+void SoundManager::forceAddSoundIdToPlayQueue(int soundId)
 {
     m_sSoundIds.push_back(soundId);
 }
@@ -56,12 +56,12 @@ void SoundManager::eraseFirstSoundId()
     }
 }
 
-short SoundManager::getFirstMusicId()
+int SoundManager::getFirstMusicId()
 {
     return m_sMusicIds.size() > 0 ? m_sMusicIds.front() : 0;
 }
 
-void SoundManager::addMusicIdToPlayQueue(short musicId)
+void SoundManager::addMusicIdToPlayQueue(int musicId)
 {
     m_sMusicIds.push_back(musicId);
 }

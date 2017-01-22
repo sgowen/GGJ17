@@ -62,6 +62,7 @@ private:
     bool m_battleMusicLoopStarted;
     float m_fGameTime;
     bool m_hasPlayedVictorySound;
+	bool m_hasPlayedPlayerVictorySound;
     
     // ctor, copy ctor, and assignment should be private in a Singleton
     GameSession();

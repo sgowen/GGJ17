@@ -127,7 +127,7 @@ void Player::releaseHeat(float intensity)
     
     if (m_fHeat < 0.4f)
     {
-        // Not enough heat
+		SOUND_MANAGER->addSoundIdToPlayQueue(Sound_heatempty);
     }
     else
     {
@@ -158,7 +158,7 @@ void Player::dash()
     
     m_iState = PLAYER_STATE_DASHING;
     m_fStateTime = 0;
-    m_fHeat += 0.1f;
+    m_fHeat += 0.01f;
     getVelocity().mul(3);
     
     playDashSound();
@@ -248,6 +248,11 @@ void Player::playDashSound()
 
 void Player::playHurtSound()
 {
+	if (m_isPopped)
+	{
+		return;
+	}
+
     int r = rand() % 2;
     
     switch (m_iIndex)

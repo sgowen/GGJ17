@@ -44,7 +44,7 @@ void GameSession::startGame()
 
 	reset();
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 252; i++)
 	{
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
@@ -58,7 +58,7 @@ void GameSession::startGame()
 			pos = Vector2D(x, y);
 		}
 
-        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 54));
+        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 24));
 		m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
 	}
 
@@ -67,7 +67,20 @@ void GameSession::startGame()
 	while (m_iNumPlayersConnected > m_players.size())
 	{
         int index = m_players.size();
-		m_players.push_back(new Player(index, 4, 4, 0.4f, 0.4f));
+
+		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+
+		Vector2D pos = Vector2D(x, y);
+		while (!OverlapTester::isPointInCircle(pos, *m_circle))
+		{
+			x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+			y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+
+			pos = Vector2D(x, y);
+		}
+
+		m_players.push_back(new Player(index, x, y, 0.4f, 0.4f));
 	}
     
     m_isSessionLive = true;
@@ -99,18 +112,47 @@ void GameSession::update(float deltaTime)
     {
         m_fGameEndTime += deltaTime;
         
-        if (m_iWinningPlayerIndex > -1)
-        {
-            Player* player = m_players.at(m_iWinningPlayerIndex);
-            player->update(deltaTime);
-            
-            if (!m_hasPlayedVictorySound)
-            {
-                player->playVictorySound();
-                
-                m_hasPlayedVictorySound = true;
-            }
-        }
+		if (m_fGameEndTime > 2)
+		{
+			if (m_iWinningPlayerIndex > -1)
+			{
+				Player* player = m_players.at(m_iWinningPlayerIndex);
+				player->update(deltaTime);
+
+				if (!m_hasPlayedPlayerVictorySound)
+				{
+					player->playVictorySound();
+
+					m_hasPlayedPlayerVictorySound = true;
+				}
+			}
+		}
+		else if (m_fGameEndTime < 1)
+		{
+			if (m_iWinningPlayerIndex > -1)
+			{
+				Player* player = m_players.at(m_iWinningPlayerIndex);
+				player->update(deltaTime);
+
+				if (!m_hasPlayedVictorySound)
+				{
+					SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_victory);
+					SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
+
+					m_hasPlayedVictorySound = true;
+				}
+			}
+			else
+			{
+				if (!m_hasPlayedVictorySound)
+				{
+					SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_loseall);
+					SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
+
+					m_hasPlayedVictorySound = true;
+				}
+			}
+		}
         
         return;
     }
@@ -141,22 +183,17 @@ void GameSession::update(float deltaTime)
         }
     }
     
-    if (numKernelsAlive == 1)
+    if (numKernelsAlive == 1
+		&& numPlayersAlive == 1)
     {
         m_iWinningPlayerIndex = winningPlayerIndex;
         m_hasGameEnded = true;
-        
-        SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_victory);
-        SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
     }
     else if (numKernelsAlive == 0
              || numPlayersAlive == 0)
     {
         m_iWinningPlayerIndex = -1;
         m_hasGameEnded = true;
-        
-        SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_loseall);
-        SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
     }
 }
 
@@ -179,6 +216,7 @@ void GameSession::reset()
     m_fGameTime = 0;
     m_battleMusicLoopStarted = false;
     m_hasPlayedVictorySound = false;
+	m_hasPlayedPlayerVictorySound = false;
     
 #if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
     setNumPlayersConnected(1);
@@ -218,7 +256,7 @@ int GameSession::getNumPlayersConnected()
     return m_iNumPlayersConnected;
 }
 
-GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0), m_fStateTime(0), m_isSessionLive(false), m_iWinningPlayerIndex(-1), m_hasGameEnded(false), m_fGameEndTime(0), m_startUpSoundHasPlayed(false), m_fGameTime(0), m_battleMusicLoopStarted(false), m_hasPlayedVictorySound(false)
+GameSession::GameSession() : m_circle(new Circle(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH, CAM_HEIGHT)), m_iNumPlayersConnected(0), m_fStateTime(0), m_isSessionLive(false), m_iWinningPlayerIndex(-1), m_hasGameEnded(false), m_fGameEndTime(0), m_startUpSoundHasPlayed(false), m_fGameTime(0), m_battleMusicLoopStarted(false), m_hasPlayedVictorySound(false), m_hasPlayedPlayerVictorySound(false)
 {
     // Empty
 }

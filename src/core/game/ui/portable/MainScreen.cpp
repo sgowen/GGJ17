@@ -98,15 +98,17 @@ void MainScreen::update(float deltaTime)
         {
             case STICK_LEFT:
             {
-                if (GAME_SESSION->isSessionLive())
+                if (GAME_SESSION->isSessionLive()
+					&& GAME_SESSION->getStateTime() > 4)
                 {
-                    GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 6, y * 6);
+                    GAME_SESSION->getPlayers().at(playerIndex)->getAcceleration().set(x * 12, y * 12);
                 }
                 continue;
             }
             case TRIGGER:
             {
-                if (GAME_SESSION->isSessionLive())
+                if (GAME_SESSION->isSessionLive()
+					&& GAME_SESSION->getStateTime() > 4)
                 {
                     if (x > 0)
                     {
@@ -125,7 +127,8 @@ void MainScreen::update(float deltaTime)
             }
 			case A_BUTTON:
 			{
-                if (GAME_SESSION->isSessionLive())
+                if (GAME_SESSION->isSessionLive()
+					&& GAME_SESSION->getStateTime() > 4)
                 {
                     GAME_SESSION->getPlayers().at(playerIndex)->dash();
                 }

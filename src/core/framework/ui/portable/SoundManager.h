@@ -20,21 +20,21 @@ class SoundManager
 public:
 	static SoundManager* getInstance();
     
-    short getCurrentMusicId();
+    int getCurrentMusicId();
     
-    short getCurrentSoundId();
+    int getCurrentSoundId();
     
-    short getFirstSoundId();
+    int getFirstSoundId();
     
-    void addSoundIdToPlayQueue(short soundId);
+    void addSoundIdToPlayQueue(int soundId);
     
-    void forceAddSoundIdToPlayQueue(short soundId);
+    void forceAddSoundIdToPlayQueue(int soundId);
     
     void eraseFirstSoundId();
     
-    short getFirstMusicId();
+    int getFirstMusicId();
     
-    void addMusicIdToPlayQueue(short musicId);
+    void addMusicIdToPlayQueue(int musicId);
     
     void eraseFirstMusicId();
     
@@ -47,8 +47,8 @@ public:
     void setSoundEnabled(bool isSoundEnabled);
 
 private:
-    std::vector<short> m_sSoundIds;
-    std::vector<short> m_sMusicIds;
+    std::vector<int> m_sSoundIds;
+    std::vector<int> m_sMusicIds;
     bool m_isMusicEnabled;
     bool m_isSoundEnabled;
     

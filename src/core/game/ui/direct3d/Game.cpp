@@ -93,8 +93,29 @@ void Game::Initialize(IUnknown* window, int width, int height, float dpi, DXGI_M
 #if defined(_DEBUG)
 		OutputDebugStringW(L"File opened successfully\n");
 #endif
+    
+    
+//    testfile=rand(1300);  %make testfile data
+//    n=0;
+//    
+//    for i=1:3:length(testfile) %stepsize 3
+//        
+//        if testfile(i)*testfile(i+1)*testfile(i+2)~=0
+//            
+//            
+//            n=n+1
+//            x(n)=round(mod(testfile(i)*1000,16));
+//    y(n)=round(mod(testfile(i+1)*1000,09));
+//    d(n)=round(mod(testfile(i+2)*1000,52));
+//    
+//    end
+//    if n>350
+//        break;
+//    end
+//    
+//    end
 }
-
+    
 void Game::OnNewAudioDevice()
 {
 	m_retryAudio = true;

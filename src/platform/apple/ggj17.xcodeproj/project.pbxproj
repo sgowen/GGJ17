@@ -193,6 +193,8 @@
 		BB44CB961DB05486003E633F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB44CB951DB05486003E633F /* QuartzCore.framework */; };
 		BB44CB9A1DB054B8003E633F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB44CB991DB054B8003E633F /* Foundation.framework */; };
 		BB44CB9E1DB054F9003E633F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BB44CB9D1DB054F9003E633F /* libz.tbd */; };
+		BB45AE8E1E3542490091C4C5 /* Sound_beep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB45AE8D1E3542490091C4C5 /* Sound_beep2.wav */; };
+		BB45AE8F1E3542490091C4C5 /* Sound_beep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = BB45AE8D1E3542490091C4C5 /* Sound_beep2.wav */; };
 		BB66EC201C0E575E006DE4F5 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB66EC1F1C0E575D006DE4F5 /* OpenAL.framework */; };
 		BB7305E2189C6BFA009F6DF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7305E1189C6BFA009F6DF4 /* AudioToolbox.framework */; };
 		BB7305E4189C6C06009F6DF4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7305E3189C6C06009F6DF4 /* AVFoundation.framework */; };
@@ -634,6 +636,7 @@
 		BB44CB991DB054B8003E633F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		BB44CB9D1DB054F9003E633F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		BB451A3618C30E810093E559 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BB45AE8D1E3542490091C4C5 /* Sound_beep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound_beep2.wav; sourceTree = "<group>"; };
 		BB66EC1F1C0E575D006DE4F5 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		BB7305E1189C6BFA009F6DF4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		BB7305E3189C6C06009F6DF4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1656,6 +1659,7 @@
 		BBADAEB51E2EC7660093EB2A /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				BB45AE8D1E3542490091C4C5 /* Sound_beep2.wav */,
 				BBEFFCB11E3477B600AA5661 /* Sound_music_gamestart.wav */,
 				BBEFFCB21E3477B600AA5661 /* Sound_music_loseall.wav */,
 				BBEFFCB31E3477B600AA5661 /* Sound_music_startbattle.wav */,
@@ -1928,6 +1932,7 @@
 				BBEFFC4B1E34743700AA5661 /* Sound_Colonel_hurt1.wav in Resources */,
 				BBEFFC711E34743700AA5661 /* Sound_Kobb_KO.wav in Resources */,
 				BBEFFC611E34743700AA5661 /* Sound_kernelpop2.wav in Resources */,
+				BB45AE8E1E3542490091C4C5 /* Sound_beep2.wav in Resources */,
 				BBEFFC631E34743700AA5661 /* Sound_kernelpop3.wav in Resources */,
 				BB44C3461DB0323F003E633F /* MainStoryboard_iPad.storyboard in Resources */,
 				BBEFFC831E34743700AA5661 /* Sound_Mazy_KO.wav in Resources */,
@@ -1944,6 +1949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBEFFC861E34743700AA5661 /* Sound_Mazy_selected.wav in Resources */,
+				BB45AE8F1E3542490091C4C5 /* Sound_beep2.wav in Resources */,
 				BBEFFC661E34743700AA5661 /* Sound_Kobb_dash1.wav in Resources */,
 				BBEFFC8E1E34743700AA5661 /* Sound_Orville_dash2.wav in Resources */,
 				BBEFFC9E1E34743700AA5661 /* Sound_Orville_victory.wav in Resources */,

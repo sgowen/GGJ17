@@ -190,15 +190,27 @@ void GameSession::update(float deltaTime)
     
     if (m_fStateTime < 4)
     {
+        if (m_fStateTime < (4 - 1.80768f))
+        {
+            return;
+        }
+        
+        if (!m_startUpSoundHasPlayed)
+        {
+            SOUND_MANAGER->addSoundIdToPlayQueue(Sound_beep2);
+            
+            m_startUpSoundHasPlayed = true;
+        }
+        
         return;
     }
     
-    if (!m_startUpSoundHasPlayed)
+    if (!m_battleMusicLoopStarted)
     {
         SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_battleloop);
         SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
         
-        m_startUpSoundHasPlayed = true;
+        m_battleMusicLoopStarted = true;
     }
     
     if (m_hasGameEnded)

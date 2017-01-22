@@ -235,6 +235,7 @@
     [_appleSoundManager loadSound:@"Sound_music_loseall" withExtension:@"wav" andNumCopies:4];
     [_appleSoundManager loadSound:@"Sound_music_startbattle" withExtension:@"wav" andNumCopies:4];
     [_appleSoundManager loadSound:@"Sound_music_victory" withExtension:@"wav" andNumCopies:4];
+    [_appleSoundManager loadSound:@"Sound_beep2" withExtension:@"wav" andNumCopies:1];
 }
 
 @end

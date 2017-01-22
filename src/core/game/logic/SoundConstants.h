@@ -61,5 +61,6 @@
 #define SOUND_loseall 47
 #define SOUND_startbattle 48
 #define SOUND_victory 49
+#define Sound_beep2 50
 
 #endif /* defined(__ggj17__SoundConstants__) */

@@ -16,23 +16,7 @@
 
 Player::Player(int index, float x, float y, float width, float height) : PopcornKernel(x, y, width, height, 0), m_iIndex(index), m_iState(PLAYER_STATE_NONE), m_fHeatManipIntensity(0)
 {
-    switch (m_iIndex)
-    {
-        case 0:
-            SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Colonel_selected);
-            break;
-        case 1:
-            SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Kobb_selected);
-            break;
-        case 2:
-            SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Mazy_selected);
-            break;
-        case 3:
-            SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Orville_selected);
-            break;
-        default:
-            break;
-    }
+    // Empty
 }
 
 void Player::update(float deltaTime)
@@ -167,7 +151,6 @@ void Player::dash()
 void Player::noAction()
 {
     m_iState = PLAYER_STATE_NONE;
-    m_fStateTime = 0;
     m_fClamp = 3;
 }
 

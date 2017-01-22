@@ -204,6 +204,9 @@
     <Image Include="..\..\..\..\..\assets\textures\main.png">
       <Filter>Assets\textures</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\assets\textures\scene.png">
+      <Filter>Assets\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest">

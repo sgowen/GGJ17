@@ -64,30 +64,32 @@ void MainRenderer::mainDraw(float stateTime)
         
         m_spriteBatcher->beginBatch();
         
-        TextureRegion microwavePlate = ASSETS->findTextureRegion("Microwave_Scene");
+        TextureRegion& microwavePlate = ASSETS->findTextureRegion("Microwave_Scene");
         m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwavePlate);
         
-        TextureRegion microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
+        TextureRegion& microwaveCover = ASSETS->findTextureRegion("Microwave_Cover");
         m_spriteBatcher->drawSprite(CAM_WIDTH / 2, CAM_HEIGHT / 2, CAM_WIDTH / 2, CAM_HEIGHT, 0, microwaveCover);
         
         m_spriteBatcher->endBatch(*m_scene->gpuTextureWrapper, *m_textureGpuProgramWrapper);
         
         m_spriteBatcher->beginBatch();
         
-        TextureRegion popcornTrCom = ASSETS->findTextureRegion("PopcornCom", stateTime);
-        TextureRegion poppedTr = ASSETS->findTextureRegion("Popped", stateTime);
-        
         for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
         {
             Color c = Color((*i)->getHeat(), 0, 0, 1);
-            
-            renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTrCom, c);
+
+			{
+				TextureRegion& popcornTrCom = ASSETS->findTextureRegion("PopcornCom", (*i)->getStateTime());
+				TextureRegion& poppedTr = ASSETS->findTextureRegion("Popped", (*i)->getStateTime());
+
+				renderPhysicalEntityWithColor(*(*i), (*i)->isPopped() ? poppedTr : popcornTrCom, c);
+			}
         }
         
-        TextureRegion popcornTr1 = ASSETS->findTextureRegion("Popcorn1", stateTime);
-        TextureRegion popcornTr2 = ASSETS->findTextureRegion("Popcorn2", stateTime);
-        TextureRegion popcornTr3 = ASSETS->findTextureRegion("Popcorn3", stateTime);
-        TextureRegion popcornTr4 = ASSETS->findTextureRegion("Popcorn4", stateTime);
+        TextureRegion& popcornTr1 = ASSETS->findTextureRegion("Popcorn1", stateTime);
+        TextureRegion& popcornTr2 = ASSETS->findTextureRegion("Popcorn2", stateTime);
+        TextureRegion& popcornTr3 = ASSETS->findTextureRegion("Popcorn3", stateTime);
+        TextureRegion& popcornTr4 = ASSETS->findTextureRegion("Popcorn4", stateTime);
         
         for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
         {
@@ -122,6 +124,7 @@ void MainRenderer::mainDraw(float stateTime)
             if ((*i)->isPopped())
             {
                 Color c = Color(1, 1, 1, 1);
+				TextureRegion& poppedTr = ASSETS->findTextureRegion("Popped", (*i)->getStateTime());
                 renderPhysicalEntityWithColor(*(*i), poppedTr, c);
             }
             else

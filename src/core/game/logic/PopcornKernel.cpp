@@ -25,12 +25,12 @@
 
 PopcornKernel::PopcornKernel(float x, float y, float width, float height, float delay) : PhysicalEntity(x, y, width, height), m_fClamp(3), m_fHeat(0), m_fDelay(delay), m_isPopped(false), m_isKnocked(false), m_fKnockedTime(0), m_hasReceivedHeatTransfer(false), m_isPushed(false)
 {
-    // Empty
+	m_fStateTime = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 2));
 }
 
 void PopcornKernel::update(float deltaTime)
 {
-    float xPre = getPosition().getX();
+	float xPre = getPosition().getX();
     float yPre = getPosition().getY();
     
     PhysicalEntity::update(deltaTime);
@@ -153,6 +153,7 @@ void PopcornKernel::pop()
     }
     
     m_isPopped = true;
+	
     
     if (getRTTI().derivesFrom(Player::rtti))
     {
@@ -201,6 +202,7 @@ void PopcornKernel::onHit(PopcornKernel* explodingKernel)
     
     m_velocity.set(cos * (2 - dist) * 2, sin * (2 - dist) * 2);
 
+	
 	m_fKnockedTime = 0;
 	m_isKnocked = true;
     
@@ -210,9 +212,11 @@ void PopcornKernel::onHit(PopcornKernel* explodingKernel)
 void PopcornKernel::onPushed(PopcornKernel* kernel)
 {
 	m_velocity.set(kernel->getVelocity().getX() / 3, kernel->getVelocity().getY() / 3);
-	m_acceleration.set(-kernel->getVelocity().getX() / 3, -kernel->getVelocity().getY() / 3);
+	m_acceleration.set(-kernel->getVelocity().getX() / 4, -kernel->getVelocity().getY() / 4);
 
 	m_isPushed = true;
+
+	
 }
 
 RTTI_IMPL(PopcornKernel, PhysicalEntity);

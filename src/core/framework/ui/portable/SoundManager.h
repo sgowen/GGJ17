@@ -13,7 +13,7 @@
 
 #define SOUND_MANAGER (SoundManager::getInstance())
 
-#define MAX_SOUNDS_TO_PLAY_PER_FRAME 3
+#define MAX_SOUNDS_TO_PLAY_PER_FRAME 4
 
 class SoundManager
 {

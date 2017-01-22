@@ -582,7 +582,7 @@ void Game::playSound(int soundId)
 
 void Game::playMultiSound(int playerIndex, int soundId, float volume)
 {
-	int finalIndex = (soundId - Sound_heatrelease) * 4 + playerIndex;
+	int finalIndex = (soundId - 2) * 4 + playerIndex -1;
 	if (finalIndex < m_activeSounds.size())
 	{
 		if (m_activeSounds.at(finalIndex)->GetState() == PLAYING)

@@ -237,12 +237,44 @@ void GameSession::setNumPlayersConnected(int numPlayers)
 {
     m_iNumPlayersConnected = numPlayers;
 
+	bool playSounds = false;
+	if (m_iNumPlayersConnected > m_players.size())
+	{
+		playSounds = true;
+	}
+
+	if (m_iNumPlayersConnected < m_players.size())
+	{
+		VectorUtil::cleanUpVectorOfPointers(m_players);
+	}
+
 	while (m_iNumPlayersConnected > m_players.size())
 	{
         int index = m_players.size();
 		m_players.push_back(new Player(index, 4, 4, 0.4f, 0.4f));
-        
-        SOUND_MANAGER->addSoundIdToPlayQueue(Sound_beep);
+
+		if (!playSounds)
+		{
+			continue;
+		}
+
+		switch (index)
+		{
+		case 0:
+			SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Colonel_selected);
+			break;
+		case 1:
+			SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Kobb_selected);
+			break;
+		case 2:
+			SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Mazy_selected);
+			break;
+		case 3:
+			SOUND_MANAGER->addSoundIdToPlayQueue(Sound_Orville_selected);
+			break;
+		default:
+			break;
+		}
 	}
 }
 

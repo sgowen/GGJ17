@@ -24,6 +24,12 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
+// For file reading
+#include <iostream>
+#include <fstream>
+#include <math.h>
+#include <string>
+
 GameSession* GameSession::getInstance()
 {
     static GameSession *instance = new GameSession();
@@ -43,24 +49,111 @@ void GameSession::startGame()
 	int numPlayersConnected = m_iNumPlayersConnected;
 
 	reset();
+    
+    bool areKernelsSpawned = false;
+#if defined _WIN32
+    using namespace std;
+    
+    FILE *file = NULL;
+    if ((file = fopen("random_data.dat", "rb")) != NULL)
+    {
+        //    testfile=rand(1300);  %make testfile data
+        //    n=0;
+        //
+        //    for i=1:3:length(testfile) %stepsize 3
+        //
+        //        if testfile(i)*testfile(i+1)*testfile(i+2)~=0
+        //
+        //
+        //            n=n+1
+        //            x(n)=round(mod(testfile(i)*1000,16));
+        //    y(n)=round(mod(testfile(i+1)*1000,09));
+        //    d(n)=round(mod(testfile(i+2)*1000,52));
+        //
+        //    end
+        //    if n>350
+        //        break;
+        //    end
+        //
+        //    end
+        
+        //    long int x[351];  //arrays for results
+        //    long int y[351];
+        //    long int d[351];
+        //
+        //    int n,i; //temp vars
+        //    char q1,q2,q3;  // temp char storage
+        //
+        //
+        //    for (i=0;i<350;i++)  //preload array in case file doesn't open.
+        //    {
+        //
+        //       	x[i]=rand()%16+1;
+        //        y[i]=rand()%9+1;
+        //        d[i]=rand()%52+1;
+        //        //cout<<"x "<<x[i]<<" y "<<y[i]<<" d "<<d[i]<<endl<<endl;
+        //
+        //    }
+        //
+        //
+        //    fstream file("file.txt", ios::in | ios::out | ios::binary);
+        //
+        //    file.seekg(2);
+        //
+        //    for (i=0;i<350;i++)
+        //    {
+        //
+        //        file.read((&q1), 1);
+        //        file.read((&q2), 1);
+        //        file.read((&q3), 1);
+        //
+        //        //cout<<q1<<" "<<q2<<" "<<q3<<endl;
+        //
+        //        if (q1*q2*q3!=0)
+        //        {
+        //
+        //            x[i]=(q1*255)%16+1;
+        //            y[i]=(q2*255)%9+1;
+        //            d[i]=(q3*255)%52+1;
+        //
+        //            cout<<"x "<<x[i]<<" y "<<y[i]<<" d "<<d[i]<<endl<<endl;
+        //
+        //        }
+        //        else
+        //        {
+        //
+        //            x[i]=rand()%16+1;
+        //            y[i]=rand()%9+1;
+        //            d[i]=rand()%52+1;
+        //
+        //        }
+        //
+        //    }
+        
+        areKernelsSpawned = true;
+    }
+#endif
 
-	for (int i = 0; i < 252; i++)
-	{
-		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
-		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
-
-		Vector2D pos = Vector2D(x, y);
-		while (!OverlapTester::isPointInCircle(pos, *m_circle))
-		{
-			x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
-			y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
-
-			pos = Vector2D(x, y);
-		}
-
-        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 24));
-		m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
-	}
+    if (!areKernelsSpawned)
+    {
+        for (int i = 0; i < 252; i++)
+        {
+            float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+            float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+            
+            Vector2D pos = Vector2D(x, y);
+            while (!OverlapTester::isPointInCircle(pos, *m_circle))
+            {
+                x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+                y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+                
+                pos = Vector2D(x, y);
+            }
+            
+            float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 24));
+            m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
+        }
+    }
 
 	m_iNumPlayersConnected = numPlayersConnected;
 	

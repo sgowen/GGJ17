@@ -39,12 +39,33 @@ void Player::update(float deltaTime)
     }
     else if (m_iState == PLAYER_STATE_STORING_HEAT)
     {
-        m_fHeat += m_fHeatManipIntensity * deltaTime / 4;
+		m_fHeat += m_fHeatManipIntensity *deltaTime / 4;
     }
     else if (m_iState == PLAYER_STATE_RELEASING_HEAT)
     {
         handleHeatRelease();
     }
+
+	if (m_isKnocked)
+	{
+		clampVelocity = false;
+		m_fKnockedTime += m_fStateTime;
+		if (m_fKnockedTime > 1)
+		{
+			m_fKnockedTime = 0;
+			m_isKnocked = false;
+		}
+	}
+
+	for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
+	{
+		if ((*i) != this
+			&& OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds()))
+		{
+			(*i)->onPushed(this);
+			break;
+		}
+	}
     
     if (clampVelocity)
     {
@@ -131,11 +152,17 @@ void Player::noAction()
 
 void Player::handleHeatRelease()
 {
+	NGRect transferBounds = NGRect(
+		getMainBounds().getLeft() - getMainBounds().getWidth() / 2,
+		getMainBounds().getBottom() - getMainBounds().getHeight() / 2,
+		getMainBounds().getWidth() * 2,
+		getMainBounds().getHeight() * 2);
+
     float heatToTransfer = m_fHeat * m_fHeatManipIntensity;
     
     for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
     {
-        if (OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds())
+        if (OverlapTester::doNGRectsOverlap(transferBounds, (*i)->getMainBounds())
             && !(*i)->isPopped())
         {
             (*i)->acceptHeatTransfer(heatToTransfer);
@@ -150,7 +177,7 @@ void Player::handleHeatRelease()
     for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
     {
         if ((*i) != this
-            && OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds())
+            && OverlapTester::doNGRectsOverlap(transferBounds, (*i)->getMainBounds())
             && !(*i)->isPopped())
         {
             (*i)->acceptHeatTransfer(heatToTransfer);

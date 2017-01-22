@@ -29,12 +29,18 @@ public:
     void pop();
     
     void onHit(PopcornKernel* explodingKernel);
+
+	void onPushed(PopcornKernel* pushingKernel);
     
 protected:
     float m_fClamp;
     float m_fHeat;
 	float m_fDelay;
     bool m_isPopped;
+	float m_fKnockedTime;
+	bool m_isKnocked;
+	bool m_hasReceivedHeatTransfer;
+	bool m_isPushed;
 };
 
 #endif /* PopcornKernel_hpp */

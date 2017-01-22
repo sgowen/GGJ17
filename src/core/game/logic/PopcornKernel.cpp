@@ -20,7 +20,7 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-PopcornKernel::PopcornKernel(float x, float y, float width, float height, float delay) : PhysicalEntity(x, y, width, height), m_fClamp(3), m_fHeat(0), m_fDelay(delay), m_isPopped(false)
+PopcornKernel::PopcornKernel(float x, float y, float width, float height, float delay) : PhysicalEntity(x, y, width, height), m_fClamp(3), m_fHeat(0), m_fDelay(delay), m_isPopped(false), m_isKnocked(false), m_fKnockedTime(0), m_hasReceivedHeatTransfer(false), m_isPushed(false)
 {
     // Empty
 }
@@ -32,28 +32,82 @@ void PopcornKernel::update(float deltaTime)
     
     PhysicalEntity::update(deltaTime);
 
+	if (m_isPopped)
+	{
+		m_fHeat = 0;
+	}
+
     if (!m_isPopped)
     {
+		if (m_hasReceivedHeatTransfer)
+		{
+			m_fDelay = -1;
+		}
+
         m_fDelay -= deltaTime;
         
         if (m_fDelay < 0)
         {
             m_fHeat += deltaTime / 4;
-            
-            if (m_fHeat > 1)
-            {
-                m_fHeat = 0;
-                pop();
-            }
-            
-            m_fHeat = clamp(m_fHeat, 1, 0);
         }
+
+		if (m_fHeat > 1)
+		{
+			m_fHeat = 0;
+			pop();
+		}
+
+		m_fHeat = clamp(m_fHeat, 1, 0);
     }
+
+	if (m_isPushed)
+	{
+		if (m_velocity.getX() < 0
+			&& m_acceleration.getX() < 0)
+		{
+			m_velocity.setX(0);
+			m_acceleration.setX(0);
+		}
+		
+		if (m_velocity.getX() > 0
+			&& m_acceleration.getX() > 0)
+		{
+			m_velocity.setX(0);
+			m_acceleration.setX(0);
+		}
+
+		if (m_velocity.getY() < 0
+			&& m_acceleration.getY() < 0)
+		{
+			m_velocity.setY(0);
+			m_acceleration.setY(0);
+		}
+
+		if (m_velocity.getY() > 0
+			&& m_acceleration.getY() > 0)
+		{
+			m_velocity.setY(0);
+			m_acceleration.setY(0);
+		}
+	}
     
-    if (!OverlapTester::isPointInCircle(getPosition(), GAME_SESSION->getBoundingCircle()))
-    {
-        getPosition().set(xPre, yPre);
-    }
+	if (m_velocity.len() > 0)
+	{
+		if (!OverlapTester::isPointInCircle(getPosition(), GAME_SESSION->getBoundingCircle()))
+		{
+			getPosition().set(xPre, yPre);
+		}
+	}
+
+	for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
+	{
+		if ((*i) != this
+			&& OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds()))
+		{
+			(*i)->onPushed(this);
+			break;
+		}
+	}
     
     float x = getPosition().getX();
     float y = getPosition().getY();
@@ -70,8 +124,10 @@ void PopcornKernel::acceptHeatTransfer(float heat)
     if (m_fHeat > 1)
     {
         m_fHeat = 0;
-        m_isPopped = true;
+		pop();
     }
+
+	m_hasReceivedHeatTransfer = true;
 }
 
 float PopcornKernel::getHeat()
@@ -88,10 +144,15 @@ void PopcornKernel::pop()
     
     m_isPopped = true;
     
+	NGRect explodeBounds = NGRect(
+		getMainBounds().getLeft() - getMainBounds().getWidth() * 2,
+		getMainBounds().getBottom() - getMainBounds().getHeight() * 2,
+		getMainBounds().getWidth() * 5,
+		getMainBounds().getHeight() * 5);
     for (std::vector<PopcornKernel *>::iterator i = GAME_SESSION->getPopcornKernels().begin(); i != GAME_SESSION->getPopcornKernels().end(); i++)
     {
         if ((*i) != this
-            && OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds()))
+            && OverlapTester::doNGRectsOverlap(explodeBounds, (*i)->getMainBounds()))
         {
             (*i)->onHit(this);
         }
@@ -99,7 +160,8 @@ void PopcornKernel::pop()
     
     for (std::vector<Player *>::iterator i = GAME_SESSION->getPlayers().begin(); i != GAME_SESSION->getPlayers().end(); i++)
     {
-        if (OverlapTester::doNGRectsOverlap(getMainBounds(), (*i)->getMainBounds()))
+        if ((*i) != this
+			&& OverlapTester::doNGRectsOverlap(explodeBounds, (*i)->getMainBounds()))
         {
             (*i)->onHit(this);
         }
@@ -108,16 +170,28 @@ void PopcornKernel::pop()
 
 void PopcornKernel::onHit(PopcornKernel* explodingKernel)
 {
-    float dist = explodingKernel->getPosition().dist(getPosition());
-    dist = clamp(dist, 2, 0);
-    Vector2D explodingKernelPos = explodingKernel->getPosition().cpy();
-    float angle = explodingKernelPos.sub(m_position.getX(), m_position.getY()).angle();
+    float dist = explodingKernel->getPosition().cpy().dist(getPosition());
+    dist = clamp(dist, 4, 0);
+	Vector2D subjectKernelPos = getPosition().cpy(); 
+	Vector2D explodingKernelPos = explodingKernel->getPosition().cpy();
+    float angle = subjectKernelPos.sub(explodingKernelPos.getX(), explodingKernelPos.getY()).angle();
 
     float radians = DEGREES_TO_RADIANS(angle);
     float cos = cosf(radians);
     float sin = sinf(radians);
     
     m_velocity.set(cos * (2 - dist), sin * (2 - dist));
+
+	m_fKnockedTime = 0;
+	m_isKnocked = true;
+}
+
+void PopcornKernel::onPushed(PopcornKernel* kernel)
+{
+	m_velocity.set(kernel->getVelocity().getX() / 3, kernel->getVelocity().getY() / 3);
+	m_acceleration.set(-kernel->getVelocity().getX() / 3, -kernel->getVelocity().getY() / 3);
+
+	m_isPushed = true;
 }
 
 RTTI_IMPL(PopcornKernel, PhysicalEntity);

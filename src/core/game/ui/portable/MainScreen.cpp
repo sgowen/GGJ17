@@ -107,12 +107,7 @@ void MainScreen::update(float deltaTime)
 				{
                     GAME_SESSION->getPlayers().at(playerIndex)->storeHeat(x, playerIndex);
 				}
-                else
-                {
-                    GAME_SESSION->getPlayers().at(playerIndex)->noAction();
-                }
-
-				if (y > 0)
+				else if (y > 0)
 				{
                     GAME_SESSION->getPlayers().at(playerIndex)->releaseHeat(y, playerIndex);
 				}

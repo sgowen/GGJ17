@@ -15,6 +15,7 @@
 #include "ScreenConstants.h"
 #include "EntityUtil.h"
 #include "Circle.h"
+#include "OverlapTester.h"
 
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -35,11 +36,21 @@ void GameSession::startGame()
 
 	reset();
 
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		float x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
 		float y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
-        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 52));
+
+		Vector2D pos = Vector2D(x, y);
+		while (!OverlapTester::isPointInCircle(pos, *m_circle))
+		{
+			x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_WIDTH));
+			y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / CAM_HEIGHT));
+
+			pos = Vector2D(x, y);
+		}
+
+        float delay = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / 56));
 		m_popcornKernels.push_back(new PopcornKernel(x, y, 0.4f, 0.4f, delay));
 	}
 

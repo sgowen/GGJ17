@@ -124,7 +124,7 @@ void MainScreen::update(float deltaTime)
 			}
 			case START_BUTTON:
 			{
-                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_STOP);
+                SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PAUSE);
                 SOUND_MANAGER->addSoundIdToPlayQueue(SOUND_gamestart);
                 
 				GAME_SESSION->startGame();

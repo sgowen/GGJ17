@@ -88,7 +88,7 @@
             soundId++;
         }
         
-        [self playSound:soundId];
+        [self playSound:rawSoundId];
     }
 }
 

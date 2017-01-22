@@ -33,7 +33,13 @@ void MainAssetsMapper::mapAssets()
     
     ASSETS->getTextureRegionMap()["Microwave_Plate"] = new TextureRegion("main", 2052, 624, 428, 198, TEXTURE_SIZE_4096);
     
-    ASSETS->getAnimationsMap()["Start_Button"] = new Animation("demo", 2048, 2448, 312, 68, 626, 68, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
+    ASSETS->getAnimationsMap()["Start_Button"] = new Animation("demo", 448, 2442, 312, 68, 626, 68, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
     
-    ASSETS->getAnimationsMap()["Zero_Clock"] = new Animation("demo", 2048, 2048, 314, 132, 630, 132, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
+    ASSETS->getAnimationsMap()["Zero_Clock"] = new Animation("demo", 448, 2042, 314, 132, 630, 132, TEXTURE_SIZE_4096, true, 0.1f, 2, 0, 2);
+ 
+    ASSETS->getTextureRegionMap()["GameOver_Menu"] = new TextureRegion("main", 0, 2688, 1024, 512, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["GameOver_Rematch"] = new TextureRegion("main", 1024, 2688, 1024, 512, TEXTURE_SIZE_4096);
+    
+    ASSETS->getTextureRegionMap()["Microwave_Scene"] = new TextureRegion("main", 2048, 2048, 2048, 2048, TEXTURE_SIZE_4096);
+    ASSETS->getTextureRegionMap()["Microwave_Cover"] = new TextureRegion("main", 1282, 3200, 736, 684, TEXTURE_SIZE_4096);
 }

@@ -297,10 +297,6 @@ void GameSession::update(float deltaTime)
 	}
 }
 
-#ifdef __APPLE__
-#include "TargetConditionals.h"
-#endif
-
 void GameSession::reset()
 {
 	VectorUtil::cleanUpVectorOfPointers(m_popcornKernels);
@@ -317,10 +313,6 @@ void GameSession::reset()
 	m_battleMusicLoopStarted = false;
 	m_hasPlayedVictorySound = false;
 	m_hasPlayedPlayerVictorySound = false;
-
-#if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
-	setNumPlayersConnected(1);
-#endif
 }
 
 std::vector<PopcornKernel *>& GameSession::getPopcornKernels()
@@ -341,7 +333,7 @@ void GameSession::setNumPlayersConnected(int numPlayers)
 	if (m_iNumPlayersConnected > m_players.size())
 	{
 		playSounds = true;
-}
+    }
 
 	if (m_iNumPlayersConnected < m_players.size())
 	{

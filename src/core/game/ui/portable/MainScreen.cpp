@@ -24,10 +24,6 @@
 #include "GameSession.h"
 #include "Player.h"
 
-#ifdef __APPLE__
-#include "TargetConditionals.h"
-#endif
-
 MainScreen::MainScreen() : IScreen(),
 m_deviceHelper(DEVICE_HELPER_FACTORY->createDeviceHelper()),
 m_renderer(new MainRenderer()),
@@ -36,10 +32,6 @@ m_iRequestedUiAction(0)
 {
 	SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_LOAD_menuloop);
     SOUND_MANAGER->addMusicIdToPlayQueue(MUSIC_PLAY_LOOP);
-    
-#if defined TARGET_OS_IPHONE || defined TARGET_OS_OSX || defined __ANDROID__
-GAME_SESSION->setNumPlayersConnected(1);
-#endif
 }
 
 MainScreen::~MainScreen()

@@ -23,6 +23,9 @@
 		BB09CE361DBD46B3006A3E49 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBCCA8461DB3469500452FA1 /* CoreMedia.framework */; };
 		BB09CE3A1DBD4701006A3E49 /* AppleSoundManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB09CE391DBD4701006A3E49 /* AppleSoundManager.mm */; };
 		BB09CE3C1DBD4701006A3E49 /* AppleSoundManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB09CE391DBD4701006A3E49 /* AppleSoundManager.mm */; };
+		BB0EDF261E3A932C00ACDB81 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB0EDF251E3A932C00ACDB81 /* IOKit.framework */; };
+		BB0EDF361E3A95DD00ACDB81 /* ButtonState.m in Sources */ = {isa = PBXBuildFile; fileRef = BB0EDF331E3A95DD00ACDB81 /* ButtonState.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BB0EDF371E3A95DD00ACDB81 /* JoystickPaneController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB0EDF351E3A95DD00ACDB81 /* JoystickPaneController.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BB12EDD21A1CF6D1006D385B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB12EDD11A1CF6D1006D385B /* MediaPlayer.framework */; };
 		BB12EDD41A1CF6D9006D385B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB12EDD31A1CF6D9006D385B /* QuartzCore.framework */; };
 		BB315CF81E33E55F00A8279B /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = BB315CF71E33E55F00A8279B /* main.png */; };
@@ -374,6 +377,7 @@
 		BBEFFCBA1E3477B600AA5661 /* Sound_music_startbattle.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFCB31E3477B600AA5661 /* Sound_music_startbattle.wav */; };
 		BBEFFCBB1E3477B600AA5661 /* Sound_music_victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFCB41E3477B600AA5661 /* Sound_music_victory.wav */; };
 		BBEFFCBC1E3477B600AA5661 /* Sound_music_victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = BBEFFCB41E3477B600AA5661 /* Sound_music_victory.wav */; };
+		BBFF8B141E3AB52F0045043C /* libddhid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFF8B131E3AB52F0045043C /* libddhid.a */; };
 		BEDBEB10667F7565A72E937B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05945F36F017190884FC7FB9 /* AssetsLibrary.framework */; };
 		EF21A84F90D23B88CD7E3542 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFF3C8B3638A1D58F89D067F /* SystemConfiguration.framework */; };
 		FE1ACF4F5D764720ED51C8A8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7422774349EFDC9E550FC8B5 /* CoreText.framework */; };
@@ -436,6 +440,11 @@
 		BB09CDFC1DBD3779006A3E49 /* SuperpoweredWhoosh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperpoweredWhoosh.h; sourceTree = "<group>"; };
 		BB09CE381DBD4701006A3E49 /* AppleSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleSoundManager.h; sourceTree = "<group>"; };
 		BB09CE391DBD4701006A3E49 /* AppleSoundManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppleSoundManager.mm; sourceTree = "<group>"; };
+		BB0EDF251E3A932C00ACDB81 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = DEVELOPER_DIR; };
+		BB0EDF321E3A95DD00ACDB81 /* ButtonState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonState.h; sourceTree = "<group>"; };
+		BB0EDF331E3A95DD00ACDB81 /* ButtonState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonState.m; sourceTree = "<group>"; };
+		BB0EDF341E3A95DD00ACDB81 /* JoystickPaneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoystickPaneController.h; sourceTree = "<group>"; };
+		BB0EDF351E3A95DD00ACDB81 /* JoystickPaneController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JoystickPaneController.mm; sourceTree = "<group>"; };
 		BB12EDD11A1CF6D1006D385B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		BB12EDD31A1CF6D9006D385B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB12EDD71A1CF6F1006D385B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -834,6 +843,21 @@
 		BBEFFCB21E3477B600AA5661 /* Sound_music_loseall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound_music_loseall.wav; sourceTree = "<group>"; };
 		BBEFFCB31E3477B600AA5661 /* Sound_music_startbattle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound_music_startbattle.wav; sourceTree = "<group>"; };
 		BBEFFCB41E3477B600AA5661 /* Sound_music_victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sound_music_victory.wav; sourceTree = "<group>"; };
+		BBFF8B131E3AB52F0045043C /* libddhid.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libddhid.a; sourceTree = "<group>"; };
+		BBFF8B151E3AB54A0045043C /* DDHidAppleMikey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidAppleMikey.h; sourceTree = "<group>"; };
+		BBFF8B161E3AB54A0045043C /* DDHidAppleRemote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidAppleRemote.h; sourceTree = "<group>"; };
+		BBFF8B171E3AB54A0045043C /* DDHidDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidDevice.h; sourceTree = "<group>"; };
+		BBFF8B181E3AB54A0045043C /* DDHidElement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidElement.h; sourceTree = "<group>"; };
+		BBFF8B191E3AB54A0045043C /* DDHidEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidEvent.h; sourceTree = "<group>"; };
+		BBFF8B1A1E3AB54A0045043C /* DDHidJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidJoystick.h; sourceTree = "<group>"; };
+		BBFF8B1B1E3AB54A0045043C /* DDHidKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidKeyboard.h; sourceTree = "<group>"; };
+		BBFF8B1C1E3AB54A0045043C /* DDHidKeyboardBarcodeScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidKeyboardBarcodeScanner.h; sourceTree = "<group>"; };
+		BBFF8B1D1E3AB54A0045043C /* DDHidLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidLib.h; sourceTree = "<group>"; };
+		BBFF8B1E1E3AB54A0045043C /* DDHidMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidMouse.h; sourceTree = "<group>"; };
+		BBFF8B1F1E3AB54A0045043C /* DDHidQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidQueue.h; sourceTree = "<group>"; };
+		BBFF8B201E3AB54A0045043C /* DDHidUsage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidUsage.h; sourceTree = "<group>"; };
+		BBFF8B211E3AB54A0045043C /* DDHidUsageTables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHidUsageTables.h; sourceTree = "<group>"; };
+		BBFF8B221E3AB54A0045043C /* NSDictionary+DDHidExtras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DDHidExtras.h"; sourceTree = "<group>"; };
 		FFF3C8B3638A1D58F89D067F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -870,6 +894,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0EDF261E3A932C00ACDB81 /* IOKit.framework in Frameworks */,
+				BBFF8B141E3AB52F0045043C /* libddhid.a in Frameworks */,
 				BB09CE361DBD46B3006A3E49 /* CoreMedia.framework in Frameworks */,
 				BBCCA9001DB36F0F00452FA1 /* AVFoundation.framework in Frameworks */,
 				BBCCA8FD1DB36EB600452FA1 /* OpenAL.framework in Frameworks */,
@@ -995,6 +1021,28 @@
 				BB09CDD61DBD3779006A3E49 /* SuperpoweredUSBAudio.h */,
 			);
 			path = AndroidIO;
+			sourceTree = "<group>";
+		};
+		BB0EDF271E3A936D00ACDB81 /* DDHidLib */ = {
+			isa = PBXGroup;
+			children = (
+				BBFF8B151E3AB54A0045043C /* DDHidAppleMikey.h */,
+				BBFF8B161E3AB54A0045043C /* DDHidAppleRemote.h */,
+				BBFF8B171E3AB54A0045043C /* DDHidDevice.h */,
+				BBFF8B181E3AB54A0045043C /* DDHidElement.h */,
+				BBFF8B191E3AB54A0045043C /* DDHidEvent.h */,
+				BBFF8B1A1E3AB54A0045043C /* DDHidJoystick.h */,
+				BBFF8B1B1E3AB54A0045043C /* DDHidKeyboard.h */,
+				BBFF8B1C1E3AB54A0045043C /* DDHidKeyboardBarcodeScanner.h */,
+				BBFF8B1D1E3AB54A0045043C /* DDHidLib.h */,
+				BBFF8B1E1E3AB54A0045043C /* DDHidMouse.h */,
+				BBFF8B1F1E3AB54A0045043C /* DDHidQueue.h */,
+				BBFF8B201E3AB54A0045043C /* DDHidUsage.h */,
+				BBFF8B211E3AB54A0045043C /* DDHidUsageTables.h */,
+				BBFF8B221E3AB54A0045043C /* NSDictionary+DDHidExtras.h */,
+				BBFF8B131E3AB52F0045043C /* libddhid.a */,
+			);
+			path = DDHidLib;
 			sourceTree = "<group>";
 		};
 		BB31D9961E244F6300364974 /* framework */ = {
@@ -1373,6 +1421,10 @@
 		BB44C31E1DB030B3003E633F /* mac */ = {
 			isa = PBXGroup;
 			children = (
+				BB0EDF321E3A95DD00ACDB81 /* ButtonState.h */,
+				BB0EDF331E3A95DD00ACDB81 /* ButtonState.m */,
+				BB0EDF341E3A95DD00ACDB81 /* JoystickPaneController.h */,
+				BB0EDF351E3A95DD00ACDB81 /* JoystickPaneController.mm */,
 				BB44C31F1DB030B3003E633F /* AppDelegate.h */,
 				BB44C3201DB030B3003E633F /* AppDelegate.m */,
 				BB44C3211DB030B3003E633F /* Assets.xcassets */,
@@ -1461,6 +1513,7 @@
 		BB44C4F61DB03A7C003E633F /* 3rdparty */ = {
 			isa = PBXGroup;
 			children = (
+				BB0EDF271E3A936D00ACDB81 /* DDHidLib */,
 				BB44C4F71DB03A7C003E633F /* libpng */,
 				BB44C5FF1DB03A7D003E633F /* rapidjson */,
 				BB09CDD21DBD3779006A3E49 /* Superpowered */,
@@ -1550,6 +1603,7 @@
 				BB44CB101DB04E9D003E633F /* CoreVideo.framework */,
 				BB44CB991DB054B8003E633F /* Foundation.framework */,
 				BB44CB931DB05479003E633F /* GLKit.framework */,
+				BB0EDF251E3A932C00ACDB81 /* IOKit.framework */,
 				BB44CB9D1DB054F9003E633F /* libz.tbd */,
 				BBCCA8FC1DB36EB600452FA1 /* OpenAL.framework */,
 				BB44CB0E1DB04E81003E633F /* OpenGL.framework */,
@@ -2145,6 +2199,7 @@
 				BB31DB141E244F6300364974 /* TransitionProgram.cpp in Sources */,
 				BB31DA981E244F6300364974 /* Triangle.cpp in Sources */,
 				BB31DAFA1E244F6300364974 /* platform_file_utils.c in Sources */,
+				BB0EDF361E3A95DD00ACDB81 /* ButtonState.m in Sources */,
 				BB44CB0A1DB04C83003E633F /* GLEssentialsWindowController.mm in Sources */,
 				BB31DB101E244F6300364974 /* texture.c in Sources */,
 				BB44C3621DB03267003E633F /* SaveData.m in Sources */,
@@ -2188,6 +2243,7 @@
 				BB31DB441E244F6300364974 /* MainAssetsMapper.cpp in Sources */,
 				BBEFFB581E33E9A500AA5661 /* Player.cpp in Sources */,
 				BBAD14661E2B104F0087C160 /* EntityUtil.cpp in Sources */,
+				BB0EDF371E3A95DD00ACDB81 /* JoystickPaneController.mm in Sources */,
 				BBAD146B1E2B13810087C160 /* SuperpoweredSoundCollection.cpp in Sources */,
 				BB44CB8D1DB053C0003E633F /* pngwrite.c in Sources */,
 				BBD9BB751E2C0C3E00951B30 /* OpenGLTextureLoader.cpp in Sources */,
